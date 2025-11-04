@@ -6,34 +6,94 @@ using UnityEngine;
 
 public class CraftingManager : MonoBehaviour
 {
-    // TODO: Make a more robust version, this is hacky
-    public List<Texture> itemTextures;
+    const int INVENTORY_DEPTH = -2;
+    public GameObject craftingItemPrefab;
+    private Vector3 OFFSCREEN = new Vector3(-20, -20, INVENTORY_DEPTH);
+
+    // Items displayed in inventory
+    private Dictionary<ItemType, CraftingItem> craftingItems = new Dictionary<ItemType, CraftingItem>();
+    private CraftingItem heldItem = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Create each item display
+        foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
+        {
+            GameObject newItem = Instantiate(craftingItemPrefab,
+                OFFSCREEN, Quaternion.identity);
+            newItem.transform.SetParent(transform);
+
+            CraftingItem craftingComponent = newItem.GetComponent<CraftingItem>();
+
+            if (craftingComponent == null)
+            {
+                Logger.Log("Crafting item prefab is missing component", LogLevel.error);
+                break;
+            }
+
+            craftingComponent.SetSprite(GameManager.GetSprite(itemType));
+
+            craftingItems[itemType] = craftingComponent;
+        }
         
+        // Register some console variables
+		DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Place inventory items along the screen
+        PlaceInventory();
 
+        DragInventory();
     }
 
-    void OnGUI()
+    private void PlaceInventory()
     {
-        // This version sucks
-        Dictionary<ItemType, int> itemCounts = PlayerManager.instance.inventory;
-        int pos = 1;
-        foreach (ItemType itemType in itemCounts.Keys)
+        // First, move everything off screen
+        foreach (CraftingItem craftingItem in craftingItems.Values)
         {
-            GUI.color = Color.white;
-            GUI.Label(new Rect(60 * pos, 60, 32, 32), itemTextures[(int)itemType]);
-            GUI.color = Color.black;
-            GUI.Label(new Rect(60 * pos + 10, 90, 50, 50), itemCounts[itemType].ToString());
-            pos += 1;
+            craftingItem.transform.position = OFFSCREEN;
         }
 
+        // Then, place player known items
+        Dictionary<ItemType, int> itemCounts = PlayerManager.instance.inventory;
+        int pos = 0;
+        foreach (ItemType itemType in itemCounts.Keys)
+        {
+            craftingItems[itemType].SetPosition(new Vector2(1 + 2 * pos, -2));
+            craftingItems[itemType].SetCount(itemCounts[itemType]);
+            pos += 1;
+        }
+    }
+
+    private void DragInventory()
+    {
+        Vector2 mousePos = GameManager.GetMousePos();
+        // Clicking down
+        if (Input.GetMouseButtonDown(0))
+        {
+            // TODO: heldItem should be separate from item Display
+            foreach (CraftingItem craftingItem in craftingItems.Values)
+            {
+                if ((craftingItem.GetPosition() - mousePos).sqrMagnitude < 1)
+                {
+                    heldItem = craftingItem;
+                    break;
+                }
+            }
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            heldItem = null;
+        }
+
+        if (heldItem != null)
+        {
+            DebugManager.DisplayDebug("Here");
+            heldItem.SetDragPosition(mousePos);
+        }
     }
 }

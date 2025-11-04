@@ -303,6 +303,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemTextures.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5806832fc57567147bd30b0965ee3750, type: 3}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: b3a16f037aa4f9a4a8971428c80f3ae8, type: 3}
     - target: {fileID: 2718239770905555459, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -366,6 +382,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 462174247}
     m_Modifications:
+    - target: {fileID: 815288738217431122, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 815288738217431122, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 815288738217431122, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 815288738217431122, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 4290900520193200509, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
       propertyPath: m_Name
       value: CraftingMenuPrefab
@@ -425,6 +457,10 @@ PrefabInstance:
     - target: {fileID: 6630681657042558505, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8898506794839005376, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.07
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

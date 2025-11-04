@@ -29,5 +29,13 @@ public static class Logger
             if (level >= LogLevel.error) Debug.LogError(message);
             else Debug.Log(message);
         }
+
+        // Kill on fatal: only in editor
+#if UNITY_EDITOR
+        if (level == LogLevel.fatal)
+        {
+            Application.Quit();
+        }
+#endif
     }
 }

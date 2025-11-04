@@ -57,6 +57,19 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    public static void RemoveItem(ItemType itemType)
+    {
+        if (!instance.inventory.ContainsKey(itemType))
+        {
+            Logger.Log("Failed to remove item since it didn't exist", LogLevel.error);
+        }
+        instance.inventory[itemType] -= 1;
+        if (instance.inventory[itemType] <= 0)
+        {
+            instance.inventory.Remove(itemType);
+        }
+    }
+
     private void Update()
     {
         HandlePlayerClick();
