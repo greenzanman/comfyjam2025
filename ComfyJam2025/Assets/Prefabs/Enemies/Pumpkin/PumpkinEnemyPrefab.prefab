@@ -48,6 +48,7 @@ MonoBehaviour:
   dropPrefabs:
   - {fileID: 5428936690741754182, guid: 5a747517db82a4b42acfc5aa21e42294, type: 3}
   - {fileID: 5428936690741754182, guid: e9b1eb4535f48b74e9a8ff31e243278c, type: 3}
+  - {fileID: 5428936690741754182, guid: 14cec5a1b58522b4d8f8eacf9fe18b96, type: 3}
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0
