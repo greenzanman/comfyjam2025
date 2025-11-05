@@ -98,4 +98,9 @@ public class EnemyManager : MonoBehaviour
         return result;
     }
 
+    // TODO: Move this into being delegate based
+    public static HashSet<EnemyBase> GetEnemies()
+    {
+        return enemies;
+    }
 }

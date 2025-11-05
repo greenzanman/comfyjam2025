@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -5,6 +6,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // TODO: Make a more robust version, this is hacky
+    public List<Sprite> itemSprites;
     public static GameManager instance;
     public static CenterStation centerStation;
     private Vector3 mousePos;
@@ -14,6 +17,12 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
+        // Check itemTextures validity
+        if (itemSprites.Count != Enum.GetNames(typeof(ItemType)).Length)
+        {
+            Logger.Log("Item textures not properly assigned for all items", LogLevel.fatal);
+        }
+
         Logger.Log("GameManager registered", LogLevel.info);
     }
 
@@ -21,6 +30,11 @@ public class GameManager : MonoBehaviour
     {
         Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePos = new Vector3(mouseWorldPos.x, mouseWorldPos.y, 0);
+    }
+
+    public static Sprite GetSprite(ItemType itemType)
+    {
+        return instance.itemSprites[(int)itemType];
     }
 
     public static float GetTimeDilation()

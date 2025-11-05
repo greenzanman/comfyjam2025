@@ -25,7 +25,7 @@ public class EnemyDropBase : MonoBehaviour
         // TODO: Make this not suck
         if (Input.GetMouseButtonDown(0))
         {
-            if ((GameManager.GetMousePos() - transform.position).sqrMagnitude < 1)
+            if ((GameManager.GetMousePos() - transform.position).sqrMagnitude < 4)
             {
                 Pickup();
                 Destroy(gameObject);
