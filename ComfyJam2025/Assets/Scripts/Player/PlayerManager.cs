@@ -15,7 +15,6 @@ public enum ItemType
 {
     Stem = 0, // TODO: HACKY ENUMS
     Rind = 1,
-    Leaf
 }
 
 public enum SpellType
@@ -67,22 +66,28 @@ public class PlayerManager : MonoBehaviour
                 continue;
             }
             spellPrefabMapping.Add(spellInfo.spellType, spellPrefab);
-            
+        }    
         // Initialize inventory set
         // InitializeItems();
+        
     }
     private void InitializeItems() {
         foreach (ItemData itemData in possibleItems) {
             inventory.Add(itemData.itemType, 0);
-            instance.OnItemChange.Invoke(itemData.itemType);
+            //instance.OnItemChange.Invoke(itemData.itemType);
         }
     }
     // Increase inventory amount of one item by 1
     public static void AddItem(ItemType itemType) {
 
-        if (instance.inventory.ContainsKey(itemType)) {
+        if (instance.inventory.ContainsKey(itemType))
+        {
             instance.inventory[itemType] += 1;
-            instance.OnItemChange.Invoke(itemType);
+            //instance.OnItemChange.Invoke(itemType);
+        }
+        else
+        {
+            instance.inventory[itemType] = 1;
         }
     }
 

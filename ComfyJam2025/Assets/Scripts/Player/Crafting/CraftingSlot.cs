@@ -31,14 +31,14 @@ public class CraftingSlot : MonoBehaviour
     {
         spriteRenderer.sprite = newSprite;
         // Hacky fix
-        transform.localScale = new Vector3(3, 3, 3);
+        transform.localScale = Vector3.one * 2;
         hasItem = true;
     }
 
     public void ClearSprite()
     {
         spriteRenderer.sprite = emptySprite;
-        transform.localScale = Vector3.one;
+        transform.localScale = new Vector3(2, 2, 2);
 
         hasItem = false;
     }

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class CraftingManager : MonoBehaviour
 {
-    const int INVENTORY_DEPTH = -2;
+    const int INVENTORY_DEPTH = 0;
     public GameObject craftingItemPrefab;
-    private Vector3 OFFSCREEN = new Vector3(-20, -20, INVENTORY_DEPTH);
+    private Vector3 OFFSCREEN = new Vector3(-40, -40, INVENTORY_DEPTH);
 
     // Items displayed in inventory
     private Dictionary<ItemType, CraftingItem> craftingItems = new Dictionary<ItemType, CraftingItem>();
@@ -71,7 +71,7 @@ public class CraftingManager : MonoBehaviour
         foreach (ItemType itemType in itemCounts.Keys)
         {
 
-            craftingItems[itemType].SetPosition(new Vector2(1 + 2 * pos, -2));
+            craftingItems[itemType].SetPosition(new Vector2(2 + 4 * pos, -2-4));
             craftingItems[itemType].SetCount(itemCounts[itemType]);
             pos += 1;
         }
@@ -86,7 +86,7 @@ public class CraftingManager : MonoBehaviour
             // TODO: heldItem should be separate from item Display
             foreach (CraftingItem craftingItem in craftingItems.Values)
             {
-                if ((craftingItem.GetPosition() - mousePos).sqrMagnitude < 1)
+                if ((craftingItem.GetPosition() - mousePos).sqrMagnitude < 4)
                 {
                     heldItem = craftingItem;
                     break;
@@ -100,7 +100,7 @@ public class CraftingManager : MonoBehaviour
                 // Check if its near a slot
                 foreach (CraftingSlot slot in craftingSlots)
                 {
-                    if (utils.FlatSqrDistance(slot.transform.position, mousePos) < 1)
+                    if (utils.FlatSqrDistance(slot.transform.position, mousePos) < 4)
                     {
                         UpdateSlot(slot, heldItem);
                         break;
@@ -114,6 +114,52 @@ public class CraftingManager : MonoBehaviour
         {
             DebugManager.DisplayDebug("Here");
             heldItem.SetDragPosition(mousePos);
+        }
+    }
+
+
+    // TODO: Reset all slots when crafting is closed
+
+    private void UpdateSlot(CraftingSlot slot, CraftingItem addedItem)
+    {
+        // TODO: They're gone for good once placed?
+        // Add back item it it held one
+        // if (slot.hasItem)
+        // {
+        //     PlayerManager.AddItem(slot.itemType);
+        // }
+
+
+        slot.SetSprite(GameManager.GetSprite(addedItem.GetItemType()));
+        slot.itemType = addedItem.GetItemType();
+        // Remove used item
+        PlayerManager.RemoveItem(addedItem.GetItemType());
+        CheckRecipes();
+    }
+
+    // Currently, just crafts the moment they're all filled
+    private void CheckRecipes()
+    {
+        // Currently, just checks that there's a total of three ingredients
+        int ingredientCount = 0;
+        foreach (CraftingSlot slot in craftingSlots)
+        {
+            if (slot.hasItem)
+                ingredientCount++;
+        }
+
+        if (ingredientCount == 3)
+        {
+            // Close crafting window
+            PlayerManager.instance.SetCraftingState(false);
+
+            PlayerManager.instance.AddSpell(SpellType.Test);
+
+            // Clear crafting
+            foreach (CraftingSlot slot in craftingSlots)
+            {
+                slot.ClearSprite();
+            }
         }
     }
 }
