@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 using UnityEngine.Events;
 
 public enum PlayerState
@@ -29,6 +30,10 @@ public class PlayerManager : MonoBehaviour
     public List<ItemData> possibleItems;
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
     [HideInInspector] public UnityEvent<ItemType> OnItemChange; // for inventory ui
+
+    [Header("TEMP VFX")]
+    public List<VisualEffect> vfxs;
+    private const string VFX_EVENT_NAME = "OnAbilityCasted";
 
     private void Awake()
     {
@@ -78,6 +83,9 @@ public class PlayerManager : MonoBehaviour
             EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), 1);
             if (closestEnemy)
             {
+                VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
+                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/2.5f), 0f);
+                randomVfx.SendEvent(VFX_EVENT_NAME);
                 closestEnemy.TakeDamage(1);
             }
         }
