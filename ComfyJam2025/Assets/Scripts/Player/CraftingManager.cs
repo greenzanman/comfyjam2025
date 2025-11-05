@@ -116,49 +116,4 @@ public class CraftingManager : MonoBehaviour
             heldItem.SetDragPosition(mousePos);
         }
     }
-
-    // TODO: Reset all slots when crafting is closed
-
-    private void UpdateSlot(CraftingSlot slot, CraftingItem addedItem)
-    {
-        // TODO: They're gone for good once placed?
-        // Add back item it it held one
-        // if (slot.hasItem)
-        // {
-        //     PlayerManager.AddItem(slot.itemType);
-        // }
-
-
-        slot.SetSprite(GameManager.GetSprite(addedItem.GetItemType()));
-        slot.itemType = addedItem.GetItemType();
-        // Remove used item
-        PlayerManager.RemoveItem(addedItem.GetItemType());
-        CheckRecipes();
-    }
-
-    // Currently, just crafts the moment they're all filled
-    private void CheckRecipes()
-    {
-        // Currently, just checks that there's a total of three ingredients
-        int ingredientCount = 0;
-        foreach (CraftingSlot slot in craftingSlots)
-        {
-            if (slot.hasItem)
-                ingredientCount++;
-        }
-
-        if (ingredientCount == 3)
-        {
-            // Close crafting window
-            PlayerManager.instance.SetCraftingState(false);
-
-            PlayerManager.instance.AddSpell(SpellType.Test);
-
-            // Clear crafting
-            foreach (CraftingSlot slot in craftingSlots)
-            {
-                slot.ClearSprite();
-            }
-        }
-    }
 }
