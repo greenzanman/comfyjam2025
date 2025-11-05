@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68ac7f0646b9c743a300ed18bc7daac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 1.25
   dropPrefabs:
   - {fileID: 5428936690741754182, guid: 5a747517db82a4b42acfc5aa21e42294, type: 3}
   - {fileID: 5428936690741754182, guid: e9b1eb4535f48b74e9a8ff31e243278c, type: 3}

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PumpkinBase : EnemyBase
 {
-    private float moveSpeed = 0.2f;
+    [SerializeField] private float moveSpeed = 0.5f;
 
     public List<GameObject> dropPrefabs;
 
