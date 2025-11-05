@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum PlayerState
 {
@@ -13,7 +14,8 @@ public enum PlayerState
 public enum ItemType
 {
     Stem = 0, // TODO: HACKY ENUMS
-    Rind = 1
+    Rind = 1,
+    Leaf
 }
 
 public class PlayerManager : MonoBehaviour
@@ -24,7 +26,9 @@ public class PlayerManager : MonoBehaviour
 
     private CraftingManager craftingManager;
 
+    public List<ItemData> possibleItems;
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
+    [HideInInspector] public UnityEvent<ItemType> OnItemChange; // for inventory ui
 
     private void Awake()
     {
@@ -42,21 +46,22 @@ public class PlayerManager : MonoBehaviour
             Logger.Log("Failed to find crafting manager attached to player manager.", LogLevel.fatal);
         }
         craftingManager.gameObject.SetActive(false);
+        InitializeItems();
     }
-
+    private void InitializeItems() {
+        foreach (ItemData itemData in possibleItems) {
+            inventory.Add(itemData.itemType, 0);
+            instance.OnItemChange.Invoke(itemData.itemType);
+        }
+    }
     // Increase inventory amount of one item by 1
-    public static void AddItem(ItemType itemType)
-    {
-        if (instance.inventory.ContainsKey(itemType))
-        {
+    public static void AddItem(ItemType itemType) {
+
+        if (instance.inventory.ContainsKey(itemType)) {
             instance.inventory[itemType] += 1;
-        }
-        else
-        {
-            instance.inventory[itemType] = 1;
+            instance.OnItemChange.Invoke(itemType);
         }
     }
-
     private void Update()
     {
         HandlePlayerClick();

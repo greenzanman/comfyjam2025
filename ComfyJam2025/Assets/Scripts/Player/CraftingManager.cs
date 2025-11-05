@@ -21,7 +21,7 @@ public class CraftingManager : MonoBehaviour
 
     }
 
-    void OnGUI()
+   /* void OnGUI()
     {
         // This version sucks
         Dictionary<ItemType, int> itemCounts = PlayerManager.instance.inventory;
@@ -35,5 +35,5 @@ public class CraftingManager : MonoBehaviour
             pos += 1;
         }
 
-    }
+    }*/
 }
