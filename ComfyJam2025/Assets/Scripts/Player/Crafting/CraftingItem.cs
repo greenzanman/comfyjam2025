@@ -8,6 +8,7 @@ public class CraftingItem : MonoBehaviour
 {
     TextMeshProUGUI text;
     Transform dragComponent;
+    private ItemType itemType;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,16 @@ public class CraftingItem : MonoBehaviour
 
         SpriteRenderer dragRenderer = transform.Find("DragComponent").GetComponent<SpriteRenderer>();
         dragRenderer.sprite = newSprite;
+    }
+
+    public void SetItemType(ItemType inItemType)
+    {
+        itemType = inItemType;
+    }
+
+    public ItemType GetItemType()
+    {
+        return itemType;
     }
 
     public void SetPosition(Vector2 newPosition)

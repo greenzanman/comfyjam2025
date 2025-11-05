@@ -15,7 +15,7 @@ public enum LogLevel
 public static class Logger
 {
 
-    private static LogLevel logLevel = LogLevel.debug;
+    private static LogLevel logLevel = LogLevel.info;
 
     /// <summary>
     /// Displays a given message if its severity level is at least the log level.

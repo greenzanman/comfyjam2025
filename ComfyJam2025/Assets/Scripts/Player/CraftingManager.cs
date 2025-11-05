@@ -14,6 +14,8 @@ public class CraftingManager : MonoBehaviour
     private Dictionary<ItemType, CraftingItem> craftingItems = new Dictionary<ItemType, CraftingItem>();
     private CraftingItem heldItem = null;
 
+    private List<CraftingSlot> craftingSlots = new List<CraftingSlot>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +35,14 @@ public class CraftingManager : MonoBehaviour
             }
 
             craftingComponent.SetSprite(GameManager.GetSprite(itemType));
+            craftingComponent.SetItemType(itemType);
 
             craftingItems[itemType] = craftingComponent;
         }
+
+        craftingSlots.Add(transform.Find("CraftingSlot1").GetComponent<CraftingSlot>());
+        craftingSlots.Add(transform.Find("CraftingSlot2").GetComponent<CraftingSlot>());
+        craftingSlots.Add(transform.Find("CraftingSlot3").GetComponent<CraftingSlot>());
         
         // Register some console variables
 		DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
@@ -63,6 +70,7 @@ public class CraftingManager : MonoBehaviour
         int pos = 0;
         foreach (ItemType itemType in itemCounts.Keys)
         {
+
             craftingItems[itemType].SetPosition(new Vector2(1 + 2 * pos, -2));
             craftingItems[itemType].SetCount(itemCounts[itemType]);
             pos += 1;
@@ -87,6 +95,18 @@ public class CraftingManager : MonoBehaviour
         }
         if (Input.GetMouseButtonUp(0))
         {
+            if (heldItem != null)
+            {
+                // Check if its near a slot
+                foreach (CraftingSlot slot in craftingSlots)
+                {
+                    if (utils.FlatSqrDistance(slot.transform.position, mousePos) < 1)
+                    {
+                        UpdateSlot(slot, heldItem);
+                        break;
+                    }
+                }
+            }
             heldItem = null;
         }
 
@@ -94,6 +114,51 @@ public class CraftingManager : MonoBehaviour
         {
             DebugManager.DisplayDebug("Here");
             heldItem.SetDragPosition(mousePos);
+        }
+    }
+
+    // TODO: Reset all slots when crafting is closed
+
+    private void UpdateSlot(CraftingSlot slot, CraftingItem addedItem)
+    {
+        // TODO: They're gone for good once placed?
+        // Add back item it it held one
+        // if (slot.hasItem)
+        // {
+        //     PlayerManager.AddItem(slot.itemType);
+        // }
+
+
+        slot.SetSprite(GameManager.GetSprite(addedItem.GetItemType()));
+        slot.itemType = addedItem.GetItemType();
+        // Remove used item
+        PlayerManager.RemoveItem(addedItem.GetItemType());
+        CheckRecipes();
+    }
+
+    // Currently, just crafts the moment they're all filled
+    private void CheckRecipes()
+    {
+        // Currently, just checks that there's a total of three ingredients
+        int ingredientCount = 0;
+        foreach (CraftingSlot slot in craftingSlots)
+        {
+            if (slot.hasItem)
+                ingredientCount++;
+        }
+
+        if (ingredientCount == 3)
+        {
+            // Close crafting window
+            PlayerManager.instance.SetCraftingState(false);
+
+            PlayerManager.instance.AddSpell(SpellType.Test);
+
+            // Clear crafting
+            foreach (CraftingSlot slot in craftingSlots)
+            {
+                slot.ClearSprite();
+            }
         }
     }
 }
