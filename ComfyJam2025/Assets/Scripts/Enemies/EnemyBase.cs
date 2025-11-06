@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour
     private CenterStation centerStation;
 
     private Color HEALTH_COLOR = Color.red;
+    private Color POS_COLOR = new Color(0, 0, 1, 0.3f);
 
     private void Start()
     {
@@ -65,6 +66,14 @@ public class EnemyBase : MonoBehaviour
                 new Vector3(transform.position.x, -transform.position.y, 0));
             EditorGUI.DrawRect(new Rect(screenPos.x - 30, screenPos.y - 50,
                 60 * health / maxHealth, 10), HEALTH_COLOR);
+        }
+        if (DebugManager.GetConsoleVar("DrawEnemyPos") == 1)
+        { 
+            // TODO: Fix this weird workaround
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(
+                new Vector3(transform.position.x, -transform.position.y, 0));
+            EditorGUI.DrawRect(new Rect(screenPos.x -5, screenPos.y - 5,
+                10, 10), POS_COLOR);
         }
     }
 }

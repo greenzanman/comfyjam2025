@@ -21,7 +21,7 @@ public class TestSpell : SpellBase
         // Damage all enemies
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
         {
-            if (utils.FlatSqrDistance(enemy.transform.position, GameManager.GetMousePos()) < 9)
+            if (utils.FlatSqrDistance(enemy.transform.position, GameManager.GetMousePos()) < 25)
             {
                 hitEnemies.Add(enemy);
             }

@@ -23,7 +23,8 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         // Register some console variables
-		DebugManager.RegisterConsoleVar("DrawEnemyHealth", 1);
+		DebugManager.RegisterConsoleVar("DrawEnemyHealth", 0);
+		DebugManager.RegisterConsoleVar("DrawEnemyPos", 1);
     }
 
     private void Update()

@@ -43,7 +43,10 @@ public class CraftingManager : MonoBehaviour
         craftingSlots.Add(transform.Find("CraftingSlot1").GetComponent<CraftingSlot>());
         craftingSlots.Add(transform.Find("CraftingSlot2").GetComponent<CraftingSlot>());
         craftingSlots.Add(transform.Find("CraftingSlot3").GetComponent<CraftingSlot>());
-        
+
+        // Place items
+        // PlaceItems();
+
         // Register some console variables
 		DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
     }
@@ -55,6 +58,14 @@ public class CraftingManager : MonoBehaviour
         PlaceInventory();
 
         DragInventory();
+    }
+
+    // Calculates and places initial positions of the inventory
+    private void PlaceItems()
+    {
+        float screenHeight = Camera.main.orthographicSize;
+        float screenWidth = screenHeight * Camera.main.aspect;
+        Logger.Log(screenWidth.ToString(), LogLevel.error);
     }
 
     private void PlaceInventory()
@@ -71,8 +82,10 @@ public class CraftingManager : MonoBehaviour
         foreach (ItemType itemType in itemCounts.Keys)
         {
 
-            craftingItems[itemType].SetPosition(new Vector2(2 + 4 * pos, -2-4));
+            craftingItems[itemType].SetPosition(new Vector2(2 + 5 * pos, 5 + (int)(pos / 5) * 3));
             craftingItems[itemType].SetCount(itemCounts[itemType]);
+            if (heldItem != null && heldItem.GetItemType() == itemType)
+                craftingItems[itemType].SetCount(itemCounts[itemType] - 1);
             pos += 1;
         }
     }

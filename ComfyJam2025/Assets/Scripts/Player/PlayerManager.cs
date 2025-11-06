@@ -28,7 +28,12 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerState playerState = PlayerState.Idle;
 
+    private const float ZAP_RADIUS = 4;
     private CraftingManager craftingManager;
+    private Vector2 CRAFTING_POSITION = new Vector2(22, -16);
+    private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -15);
+    private int CRAFTING_WIDTH = 4;
+    private Transform craftingButton;
 
     public List<ItemData> possibleItems;
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
@@ -54,6 +59,12 @@ public class PlayerManager : MonoBehaviour
             Logger.Log("Failed to find crafting manager attached to player manager.", LogLevel.fatal);
         }
         craftingManager.gameObject.SetActive(false);
+
+        craftingButton = transform.Find("InventoryButton");
+        if (craftingButton == null)
+        {
+            Logger.Log("Inventory button is missing.", LogLevel.fatal);
+        }
 
         // Build spellPrefabMapping
         spellPrefabMapping = new Dictionary<SpellType, GameObject>();
@@ -112,17 +123,28 @@ public class PlayerManager : MonoBehaviour
     private void HandlePlayerClick()
     {
 
-        // Pulling up crafting
-        if (Input.GetKeyDown(KeyCode.C))
+        // Pulling up or down crafting
+        if ((playerState == PlayerState.Idle || playerState == PlayerState.Crafting) &&
+            IsMouseOnInventoryButton())
         {
-            if (playerState == PlayerState.Idle)
+            craftingButton.position = CRAFTING_POSITION_BUMP;
+
+            if (Input.GetMouseButtonDown(0))
             {
-                SetCraftingState(true);
+                if (playerState == PlayerState.Idle)
+                {
+                    SetCraftingState(true);
+                }
+                else if (playerState == PlayerState.Crafting)
+                {
+                    SetCraftingState(false);
+                }
+                return;
             }
-            else if (playerState == PlayerState.Crafting)
-            {
-                SetCraftingState(false);
-            }
+        }
+        else
+        {
+            craftingButton.position = CRAFTING_POSITION;
         }
 
         // Basic zaps
@@ -131,12 +153,12 @@ public class PlayerManager : MonoBehaviour
             DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
 
             // Find closest enemy within a region
-            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), 1);
+            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), ZAP_RADIUS);
             if (closestEnemy)
             {
                 closestEnemy.TakeDamage(1);
             }
-        }
+        } // Casting spell
         else if (playerState == PlayerState.Casting)
         {
             currentSpell.Aim();
@@ -148,6 +170,16 @@ public class PlayerManager : MonoBehaviour
                 DebugManager.DisplayDebug("Casting:" + GameManager.GetMousePos().ToString());
             }
         }
+    }
+
+    // If mouse is on the inventory button
+    private bool IsMouseOnInventoryButton()
+    {
+        Vector2 mousePos = GameManager.GetMousePos();
+        return mousePos.x < CRAFTING_POSITION.x + CRAFTING_WIDTH &&
+        mousePos.x > CRAFTING_POSITION.x - CRAFTING_WIDTH &&
+        mousePos.y < CRAFTING_POSITION.y + CRAFTING_WIDTH &&
+        mousePos.y > CRAFTING_POSITION.y - CRAFTING_WIDTH;
     }
 
     public void SetCraftingState(bool state)
