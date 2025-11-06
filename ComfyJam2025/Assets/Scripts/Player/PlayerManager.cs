@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -30,8 +31,8 @@ public class PlayerManager : MonoBehaviour
 
     private const float ZAP_RADIUS = 4;
     private CraftingManager craftingManager;
-    private Vector2 CRAFTING_POSITION = new Vector2(22, -16);
-    private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -15);
+    private Vector2 CRAFTING_POSITION = new Vector2(22, -17);
+    private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -16);
     private int CRAFTING_WIDTH = 4;
     private Transform craftingButton;
 
@@ -118,6 +119,31 @@ public class PlayerManager : MonoBehaviour
     private void Update()
     {
         HandlePlayerClick();
+
+
+#if UNITY_EDITOR
+        PlayerHacks();
+#endif
+    }
+
+    private void PlayerHacks()
+    {
+        // Add ingredients
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
+            {
+                AddItem(itemType);
+            }
+        }
+        // Kill all enemies
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            foreach (EnemyBase enemy in EnemyManager.GetEnemies().ToList())
+            {
+                enemy.TakeDamage(9999);
+            }
+        }
     }
 
     private void HandlePlayerClick()
