@@ -6,6 +6,18 @@ using UnityEngine;
 
 public class CraftingManager : MonoBehaviour
 {
+    private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
+        ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.Test),
+        ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall)
+    };
+
+    private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
+    {
+        return (int)Math.Pow(3, (int)item1) + (int)Math.Pow(3, (int)item2) + (int)Math.Pow(3, (int)item3);
+    }
+
+    private Dictionary<int, SpellType> spellDict;
+
     const int INVENTORY_DEPTH = 0;
     public GameObject craftingItemPrefab;
     private Vector3 OFFSCREEN = new Vector3(-40, -40, INVENTORY_DEPTH);
@@ -44,11 +56,23 @@ public class CraftingManager : MonoBehaviour
         craftingSlots.Add(transform.Find("CraftingSlot2").GetComponent<CraftingSlot>());
         craftingSlots.Add(transform.Find("CraftingSlot3").GetComponent<CraftingSlot>());
 
-        // Place items
-        // PlaceItems();
+        // Fill spell dict
+        spellDict = new Dictionary<int, SpellType>();
+        foreach ((ItemType, ItemType, ItemType, SpellType) recipe in spellRecipes)
+        {
+            int hash = ConvertItemsToInt(recipe.Item1, recipe.Item2, recipe.Item3);
+            if (spellDict.ContainsKey(hash))
+            {
+                Logger.Log($"Recieved duplicate recipe for {recipe.Item4}", LogLevel.error);
+            }
+            else
+            {
+                spellDict[hash] = recipe.Item4;
+            }
+        }
 
         // Register some console variables
-		DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
+        DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
     }
 
     // Update is called once per frame
@@ -113,7 +137,7 @@ public class CraftingManager : MonoBehaviour
                 // Check if its near a slot
                 foreach (CraftingSlot slot in craftingSlots)
                 {
-                    if (utils.FlatSqrDistance(slot.transform.position, mousePos) < 4)
+                    if (utils.FlatSqrDistance(slot.transform.position, mousePos) < 9)
                     {
                         UpdateSlot(slot, heldItem);
                         break;
@@ -166,7 +190,7 @@ public class CraftingManager : MonoBehaviour
             // Close crafting window
             PlayerManager.instance.SetCraftingState(false);
 
-            PlayerManager.instance.AddSpell(SpellType.Test);
+            PlayerManager.instance.AddSpell(GetSpell());
 
             // Clear crafting
             foreach (CraftingSlot slot in craftingSlots)
@@ -174,5 +198,23 @@ public class CraftingManager : MonoBehaviour
                 slot.ClearSprite();
             }
         }
+    }
+
+    private SpellType GetSpell()
+    {
+        // Assumes all slots have items
+        int hash = ConvertItemsToInt(craftingSlots[0].itemType,
+            craftingSlots[1].itemType, craftingSlots[2].itemType);
+
+        if (spellDict.ContainsKey(hash))
+        {
+            return spellDict[hash];
+        }
+        else
+        {
+            return SpellType.Dud;
+        }
+
+        // TODO: Return a 'dud' spell
     }
 }

@@ -20,7 +20,9 @@ public enum ItemType
 
 public enum SpellType
 {
-    Test = 0
+    Dud = -1,
+    Test = 0,
+    FireWall = 1,
 }
 
 public class PlayerManager : MonoBehaviour
@@ -75,6 +77,12 @@ public class PlayerManager : MonoBehaviour
             if (!spellInfo)
             {
                 Logger.Log($"Recieved spell prefab without a spell base: {spellPrefab.name}", LogLevel.error);
+                continue;
+            }
+            if (spellPrefabMapping.ContainsKey(spellInfo.spellType))
+            {
+                
+                Logger.Log($"Recieved duplicates for spell type {spellInfo.spellType}", LogLevel.error);
                 continue;
             }
             spellPrefabMapping.Add(spellInfo.spellType, spellPrefab);

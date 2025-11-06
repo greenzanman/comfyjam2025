@@ -51,9 +51,9 @@ public class EnemyDropBase : MonoBehaviour
                     Destroy(gameObject);
                 break;
             case DropState.picking:
-                spriteRenderer.color = new Color(1, 1, 1, 1 - age);
-                transform.position += Vector3.up * GameManager.GetDeltaTime();
-                if (age >= 1)
+                spriteRenderer.color = new Color(1, 1, 1, 1 - 2 * age);
+                transform.position += Vector3.up * GameManager.GetDeltaTime() * 2;
+                if (age >= 0.5)
                     Destroy(gameObject);
                 break;
         }
