@@ -12,8 +12,11 @@ public class EnemyBase : MonoBehaviour
 
     private CenterStation centerStation;
 
-    private Color HEALTH_COLOR = Color.red;
+    private Color HEALTH_COLOR = new Color(1, 0, 0, 0.5f);
     private Color POS_COLOR = new Color(0, 0, 1, 0.3f);
+    private Color tintColor;
+    private Color currentTint = Color.white;
+    private float freezeTimer = 0;
 
     private void Start()
     {
@@ -32,8 +35,39 @@ public class EnemyBase : MonoBehaviour
 
     private void Update()
     {
-        Think();
+        tintColor = Color.white;
+        if (freezeTimer > 0)
+        {
+            tintColor.r = 0;
+            freezeTimer -= GameManager.GetDeltaTime();
+        }
+        else
+        {
+            Think();
+        }
+        if (currentTint != tintColor)
+        {
+            currentTint = tintColor;
+            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+            {
+                renderer.color = currentTint;
+            }
+        }
     }
+
+    public virtual void Freeze(float freezeDuration)
+    {
+        if (freezeDuration > 0)
+        {
+            freezeTimer = Mathf.Max(freezeTimer, freezeDuration);
+        }
+        else
+        {
+            freezeTimer = freezeDuration;
+        }
+    }
+
+
     public virtual void TakeDamage(float damageAmount, DamageType damageType = DamageType.None)
     {
         health -= damageAmount;
@@ -41,6 +75,17 @@ public class EnemyBase : MonoBehaviour
         {
             Die();
         }
+
+        // Damage types
+        if (damageType == DamageType.Fire) // Fire unfreezes
+        {
+            freezeTimer = 0;
+        }
+    }
+
+    public virtual Vector2 GetPosition()
+    {
+        return transform.position;
     }
 
     // Contains majority of ai thoughts for a given enemy, overrided for a given unit

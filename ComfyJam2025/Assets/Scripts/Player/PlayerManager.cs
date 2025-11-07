@@ -23,6 +23,7 @@ public enum SpellType
     Dud = -1,
     Test = 0,
     FireWall = 1,
+CircleFreeze = 2,
 }
 
 public class PlayerManager : MonoBehaviour

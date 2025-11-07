@@ -8,7 +8,8 @@ public class CraftingManager : MonoBehaviour
 {
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
         ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.Test),
-        ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall)
+        ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall),
+        ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze)
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
