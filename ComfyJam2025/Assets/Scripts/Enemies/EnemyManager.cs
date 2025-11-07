@@ -10,7 +10,7 @@ public class EnemyManager : MonoBehaviour
 
     // Simplistic 'spawn every x' enemies
     private float enemySpawnTimer = 0;
-    private float ENEMY_SPAWN_RATE = 4f;
+    private float ENEMY_SPAWN_RATE = 2f;
 
     private static HashSet<EnemyBase> enemies = new HashSet<EnemyBase>();
     void Awake()

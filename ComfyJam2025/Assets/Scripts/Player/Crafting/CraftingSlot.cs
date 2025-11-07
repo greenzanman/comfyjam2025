@@ -38,7 +38,7 @@ public class CraftingSlot : MonoBehaviour
     public void ClearSprite()
     {
         spriteRenderer.sprite = emptySprite;
-        transform.localScale = new Vector3(2, 2, 2);
+        transform.localScale = new Vector3(3, 3, 3);
 
         hasItem = false;
     }

@@ -320,7 +320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -331,7 +331,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -362,7 +362,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: itemSprites.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: itemSprites.Array.data[0]
@@ -372,9 +372,13 @@ PrefabInstance:
       propertyPath: itemSprites.Array.data[1]
       value: 
       objectReference: {fileID: -858227669, guid: cce4501c9c0cd294d9808d49f80ecc04, type: 3}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 647acade3edcdcc40b5994e0538d8a73, type: 3}
     - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: spellPrefabs.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: spellPrefabs.Array.data[0]
@@ -392,6 +396,14 @@ PrefabInstance:
       propertyPath: spellPrefabs.Array.data[3]
       value: 
       objectReference: {fileID: 2276436687671920102, guid: 10d799ac5d3adf64fa799a0e8a49ea57, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: a2df5d4d8939ae24f90e64a5ae204e2a, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 8fd0f83bdf86fc74f8360362ec121f05, type: 3}
     - target: {fileID: 866704262789863740, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -631,7 +643,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: -794335796, guid: 26065f2200aecce459575790978dcb84, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1

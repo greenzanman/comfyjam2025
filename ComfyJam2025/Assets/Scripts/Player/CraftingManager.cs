@@ -9,7 +9,9 @@ public class CraftingManager : MonoBehaviour
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
         ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.Test),
         ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall),
-        ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze)
+        ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze),
+        ( ItemType.Rind, ItemType.Stem, ItemType.Rind, SpellType.FireCone),
+        ( ItemType.Feather, ItemType.Feather, ItemType.Feather, SpellType.Graveyard)
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
@@ -150,7 +152,6 @@ public class CraftingManager : MonoBehaviour
 
         if (heldItem != null)
         {
-            DebugManager.DisplayDebug("Here");
             heldItem.SetDragPosition(mousePos);
         }
     }

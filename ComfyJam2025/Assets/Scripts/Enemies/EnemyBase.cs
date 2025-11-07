@@ -17,7 +17,7 @@ public class EnemyBase : MonoBehaviour
     private Color tintColor;
     private Color currentTint = Color.white;
     private float freezeTimer = 0;
-
+    private const float MELT_DAMAGE = 2;
     private void Start()
     {
         // Register with manager
@@ -70,17 +70,20 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void TakeDamage(float damageAmount, DamageType damageType = DamageType.None)
     {
+
+        // Damage types
+        if (damageType == DamageType.Fire) // Fire unfreezes
+        {
+            if (freezeTimer > 0) health -= MELT_DAMAGE;
+            freezeTimer = 0;
+        }
+        
         health -= damageAmount;
         if (health <= 0)
         {
             Die();
         }
 
-        // Damage types
-        if (damageType == DamageType.Fire) // Fire unfreezes
-        {
-            freezeTimer = 0;
-        }
     }
 
     public virtual Vector2 GetPosition()

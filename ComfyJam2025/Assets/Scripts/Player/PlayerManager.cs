@@ -16,6 +16,7 @@ public enum ItemType
 {
     Stem = 0, // TODO: HACKY ENUMS
     Rind = 1,
+    Feather = 2,
 }
 
 public enum SpellType
@@ -23,7 +24,9 @@ public enum SpellType
     Dud = -1,
     Test = 0,
     FireWall = 1,
-CircleFreeze = 2,
+    CircleFreeze = 2,
+    FireCone = 3,
+    Graveyard = 4,
 }
 
 public class PlayerManager : MonoBehaviour
@@ -46,6 +49,8 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> spellPrefabs;
     private Dictionary<SpellType, GameObject> spellPrefabMapping; // Internal mapping of prefabs for each spell
 
+    // Small buffer to prevent accidentally doubleclicking
+    private float spellBuffer = 0;
     private SpellBase currentSpell;
     private void Awake()
     {
@@ -197,8 +202,9 @@ public class PlayerManager : MonoBehaviour
         else if (playerState == PlayerState.Casting)
         {
             currentSpell.Aim();
+            spellBuffer = Mathf.Max(0, spellBuffer - Time.deltaTime); // This doesn't matter on slowdown
 
-            if (Input.GetMouseButtonDown(0))
+            if (spellBuffer <= 0 && Input.GetMouseButtonDown(0))
             {
                 currentSpell.Cast();
                 playerState = PlayerState.Idle;
@@ -250,5 +256,7 @@ public class PlayerManager : MonoBehaviour
         playerState = PlayerState.Casting;
 
         Logger.Log($"Casting spell: {currentSpell.name}", LogLevel.info);
+
+        spellBuffer = 0.2f;
     }
 }

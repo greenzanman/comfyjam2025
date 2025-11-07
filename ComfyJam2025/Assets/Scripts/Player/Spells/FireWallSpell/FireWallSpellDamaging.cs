@@ -19,7 +19,6 @@ public class FireWallSpellDamaging : MonoBehaviour
     {
         // Destroy after a time
         age += GameManager.GetDeltaTime();
-        DebugManager.DisplayDebug(age.ToString());
         if (age > FIREWALL_LIFETIME)
         {
             Destroy(gameObject);
