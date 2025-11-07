@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8246782266617736804}
   - component: {fileID: 8648958460100512249}
   m_Layer: 0
-  m_Name: Spark
+  m_Name: Big Explosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42,7 +42,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 151361467847442127}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: e7e84004a8543784489378d53b194444, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: dad8f607d35ee8e4782febc668b6607b, type: 3}
   m_InitialEventName: OnPlay
   m_InitialEventNameOverriden: 0
   m_StartSeed: 0
@@ -54,6 +54,9 @@ VisualEffect:
       m_Array:
       - m_Value: 5
         m_Name: AreaSize
+        m_Overridden: 0
+      - m_Value: 10
+        m_Name: Size
         m_Overridden: 0
     m_Vector2f:
       m_Array: []

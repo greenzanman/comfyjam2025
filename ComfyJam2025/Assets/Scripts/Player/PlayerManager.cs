@@ -84,7 +84,7 @@ public class PlayerManager : MonoBehaviour
             if (closestEnemy)
             {
                 VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
-                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/2.5f), 0f);
+                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/2.75f), 0f);
                 randomVfx.SendEvent(VFX_EVENT_NAME);
                 closestEnemy.TakeDamage(1);
             }
