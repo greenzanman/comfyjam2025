@@ -8,7 +8,7 @@ public class EnemyBase : MonoBehaviour
 {
     public float health { get; protected set; }
 
-    protected float maxHealth = 4;
+    [SerializeField] protected float maxHealth = 4;
 
     private CenterStation centerStation;
 
@@ -18,6 +18,10 @@ public class EnemyBase : MonoBehaviour
     private Color currentTint = Color.white;
     private float freezeTimer = 0;
     private const float MELT_DAMAGE = 2;
+    private Vector2 windDirection;
+    private float windDuration;
+    private const float WIND_RATIO = 9;
+    [SerializeField] private float density = 1;
     private void Start()
     {
         // Register with manager
@@ -36,6 +40,13 @@ public class EnemyBase : MonoBehaviour
     private void Update()
     {
         tintColor = Color.white;
+        if (windDuration > 0)
+        {
+            windDuration -= GameManager.GetDeltaTime();
+            Vector2 windForce = windDirection * GameManager.GetDeltaTime() / density * WIND_RATIO;
+            transform.position += new Vector3(windForce.x, windForce.y, 0);
+        }
+
         if (freezeTimer > 0)
         {
             tintColor.r = 0;
@@ -67,6 +78,11 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    public virtual void Blow(Vector2 windDirection, float windDuration)
+    {
+        this.windDirection = windDirection;
+        this.windDuration = windDuration;
+    }
 
     public virtual void TakeDamage(float damageAmount, DamageType damageType = DamageType.None)
     {
@@ -77,7 +93,7 @@ public class EnemyBase : MonoBehaviour
             if (freezeTimer > 0) health -= MELT_DAMAGE;
             freezeTimer = 0;
         }
-        
+
         health -= damageAmount;
         if (health <= 0)
         {

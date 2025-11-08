@@ -27,6 +27,8 @@ public enum SpellType
     CircleFreeze = 2,
     FireCone = 3,
     Graveyard = 4,
+    WindPush = 5,
+    WindRotate = 6,
 }
 
 public class PlayerManager : MonoBehaviour
