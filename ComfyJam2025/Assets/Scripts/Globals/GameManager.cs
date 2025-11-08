@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        Logger.Log("GameManager registered", LogLevel.info);
+        //Logger.Log("GameManager registered", LogLevel.info);
     }
 
     void Update()

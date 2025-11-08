@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7eb8ca1de860118469a5bc5e7dddda9e, type: 3}
-  m_Name: Pumpkin Stem
+  m_Name: Pumpkin Rind
   m_EditorClassIdentifier: 
-  itemType: 0
-  itemSprite: {fileID: 21300000, guid: 5806832fc57567147bd30b0965ee3750, type: 3}
+  itemType: 1
+  itemSprite: {fileID: -45436861, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}

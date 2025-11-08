@@ -24,7 +24,7 @@ public class DebugManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        Logger.Log("DebugManager registered", LogLevel.info);
+        //Logger.Log("DebugManager registered", LogLevel.info);
     }
 
     void Update()

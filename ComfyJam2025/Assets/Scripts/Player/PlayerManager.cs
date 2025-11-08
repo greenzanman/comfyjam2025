@@ -12,13 +12,6 @@ public enum PlayerState
     Casting,    // Spell is ready, cannot craft
 }
 
-public enum ItemType
-{
-    Stem = 0, // TODO: HACKY ENUMS
-    Rind = 1,
-    Leaf
-}
-
 public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
@@ -40,7 +33,7 @@ public class PlayerManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        Logger.Log("PlayerManager registered", LogLevel.info);
+        //Logger.Log("PlayerManager registered", LogLevel.info);
     }
 
     private void Start()

@@ -7,11 +7,6 @@ public class EnemyDropBase : MonoBehaviour
     public ItemType itemType;
 
     private float lifetime = 15;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
@@ -37,4 +32,17 @@ public class EnemyDropBase : MonoBehaviour
     {
         PlayerManager.AddItem(itemType);
     }
+}
+public enum ItemType {
+    NONE,
+    RIND,
+    GREEN_LEAF,
+    ORANGE_LEAF,
+    RED_MUSH,
+    BLUE_MUSH,
+    GREEN_MUSH,
+    SUNFLOWER,
+    ANTLER,
+    ACORN,
+    FEATHER
 }

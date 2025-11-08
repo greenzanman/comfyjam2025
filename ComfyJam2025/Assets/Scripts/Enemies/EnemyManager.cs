@@ -19,6 +19,7 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private float waveDowntime = 5f;
     [SerializeField] private TextMeshProUGUI waveTimerText;
     [SerializeField] private TextMeshProUGUI waveStateText;
+    [SerializeField] private ParticleSystem enemyWavePS;
 
     public enum WaveState {
         SPAWNING_ENEMIES,
@@ -33,7 +34,7 @@ public class EnemyManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        Logger.Log("EnemyManager registered", LogLevel.info);
+        //Logger.Log("EnemyManager registered", LogLevel.info);
     }
 
     private void Start()
@@ -46,9 +47,11 @@ public class EnemyManager : MonoBehaviour
     {
         switch(waveState) {
             case WaveState.SPAWNING_ENEMIES:
+                enemyWavePS.Play();
                 HandleEnemySpawning();
                 break;
             case WaveState.DOWNTIME:
+                enemyWavePS.Stop();
                 HandleWaveDownTime();
                 break;
         }

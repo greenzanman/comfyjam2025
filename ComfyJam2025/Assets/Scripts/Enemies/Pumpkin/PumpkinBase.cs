@@ -6,12 +6,12 @@ public class PumpkinBase : EnemyBase
 {
     [SerializeField] private float moveSpeed = 0.5f;
 
-    public List<GameObject> dropPrefabs;
-
+    [SerializeField] private GameObject itemDropBasePrefab;
+    public List<ItemData> possibleDrops;
    
     protected override void InitializeEnemy()
     {
-        Logger.Log($"Initializing {name}", LogLevel.debug);
+        //Logger.Log($"Initializing {name}", LogLevel.debug);
         //maxHealth = 10;
         health = maxHealth;
     }
@@ -28,10 +28,12 @@ public class PumpkinBase : EnemyBase
     protected override void Die()
     {
         // Find random drop
-        if (dropPrefabs.Count > 0)
+        if (possibleDrops.Count > 0)
         {
-            Instantiate(dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
-                transform.position, Quaternion.identity);
+            ItemData selectedItem = possibleDrops[(int)(UnityEngine.Random.value * possibleDrops.Count)];
+            GameObject drop = Instantiate(itemDropBasePrefab, transform.position, Quaternion.identity);
+            drop.GetComponentInChildren<SpriteRenderer>().sprite = selectedItem.itemSprite;
+            drop.GetComponent<EnemyDropBase>().itemType = selectedItem.itemType;
         }
         base.Die();
     }
