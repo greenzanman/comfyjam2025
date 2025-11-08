@@ -7,6 +7,7 @@ public class FireConeSpell : SpellBase
 {
     private PolygonCollider2D coneCollider;
     private Transform AimHighlight;
+    [SerializeField] private float damage = 5;
     public void Start()
     {
         AimHighlight = transform.Find("AimingRect");
@@ -32,7 +33,7 @@ public class FireConeSpell : SpellBase
         {
             if (coneCollider.OverlapPoint(enemy.GetPosition()))
             {
-                enemy.TakeDamage(5, DamageType.Fire);
+                enemy.TakeDamage(damage, DamageType.Fire);
             }
         }
         // Create firewall

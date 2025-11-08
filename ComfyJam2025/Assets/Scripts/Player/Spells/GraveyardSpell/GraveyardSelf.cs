@@ -6,7 +6,7 @@ public class GraveyardSelf : MonoBehaviour
 {
     public GameObject gremlinPrefab;
     private float age;
-    const float LIFETIME = 20;
+    [SerializeField] private float lifetime = 20;
 
     private float gremlinTimer = 0;
     private const float TARGET_RADIUS = 15;
@@ -19,7 +19,7 @@ public class GraveyardSelf : MonoBehaviour
     void Update()
     {
         age += GameManager.GetDeltaTime();
-        if (age > LIFETIME)
+        if (age > lifetime)
             Destroy(gameObject);
 
         gremlinTimer -= GameManager.GetDeltaTime();

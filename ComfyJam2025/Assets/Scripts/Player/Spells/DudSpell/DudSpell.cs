@@ -5,6 +5,7 @@ using UnityEngine;
 public class DudSpell : SpellBase
 {
 
+    [SerializeField] private float damage = 1;
     private Transform AimHighlight;
     public void Start()
     {
@@ -30,7 +31,7 @@ public class DudSpell : SpellBase
         // TODO: Fix this workaround for affecting hashset during iteration
         foreach (EnemyBase enemy in hitEnemies)
         {
-            enemy.TakeDamage(1);
+            enemy.TakeDamage(damage);
         }
         Destroy(gameObject);
     }

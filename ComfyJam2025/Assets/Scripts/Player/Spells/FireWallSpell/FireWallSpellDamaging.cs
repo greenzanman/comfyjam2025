@@ -5,9 +5,9 @@ using UnityEngine;
 public class FireWallSpellDamaging : MonoBehaviour
 {
     private BoxCollider2D wallCollider;
-    private const float FIREWALL_LIFETIME = 20;
+    [SerializeField] private float lifetime = 20;
     private float age = 0;
-    private const float DAMAGE_PER_SECOND = 1;
+    [SerializeField] private float damagePerSecond = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class FireWallSpellDamaging : MonoBehaviour
     {
         // Destroy after a time
         age += GameManager.GetDeltaTime();
-        if (age > FIREWALL_LIFETIME)
+        if (age > lifetime)
         {
             Destroy(gameObject);
         }
@@ -28,7 +28,7 @@ public class FireWallSpellDamaging : MonoBehaviour
         {
             if (wallCollider.OverlapPoint(enemy.GetPosition()))
             {
-                enemy.TakeDamage(DAMAGE_PER_SECOND * GameManager.GetDeltaTime(), DamageType.Fire);
+                enemy.TakeDamage(damagePerSecond * GameManager.GetDeltaTime(), DamageType.Fire);
             }
         }
     }

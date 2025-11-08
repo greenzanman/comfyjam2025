@@ -10,6 +10,7 @@ public class Gremlin : MonoBehaviour
     public EnemyBase target;
     float age = 0;
     SpriteRenderer spriteRenderer;
+    [SerializeField] private float damage = 2;
     int tries = 5;
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,7 @@ public class Gremlin : MonoBehaviour
             if (utils.FlatSqrDistance(transform.position, target.GetPosition()) < 1)
             {
                 // TODO: Play animation
-                target.TakeDamage(2);
+                target.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }
