@@ -29,6 +29,7 @@ public enum SpellType
     Graveyard = 4,
     WindPush = 5,
     WindRotate = 6,
+    BurnCircle = 7,
 }
 
 public class PlayerManager : MonoBehaviour

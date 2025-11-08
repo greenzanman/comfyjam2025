@@ -14,6 +14,7 @@ public class CraftingManager : MonoBehaviour
         ( ItemType.Feather, ItemType.Feather, ItemType.Feather, SpellType.Graveyard),
         ( ItemType.Feather, ItemType.Feather, ItemType.Stem, SpellType.WindPush),
         ( ItemType.Feather, ItemType.Feather, ItemType.Rind, SpellType.WindRotate),
+        ( ItemType.Feather, ItemType.Rind, ItemType.Rind, SpellType.BurnCircle),
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)

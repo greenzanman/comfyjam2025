@@ -21,7 +21,10 @@ public class EnemyBase : MonoBehaviour
     private Vector2 windDirection;
     private float windDuration;
     private const float WIND_RATIO = 9;
+    private float burnTimer = 0;
     [SerializeField] private float density = 1;
+
+    private bool isDead = false;
     private void Start()
     {
         // Register with manager
@@ -44,7 +47,18 @@ public class EnemyBase : MonoBehaviour
         {
             windDuration -= GameManager.GetDeltaTime();
             Vector2 windForce = windDirection * GameManager.GetDeltaTime() / density * WIND_RATIO;
+            if (freezeTimer > 0)
+                windForce /= 8;
             transform.position += new Vector3(windForce.x, windForce.y, 0);
+        }
+
+        if (burnTimer > 0)
+        {
+            burnTimer -= GameManager.GetDeltaTime();
+            TakeDamage(GameManager.GetDeltaTime(), DamageType.Fire);
+
+            tintColor.g = 0;
+            tintColor.b = 0;
         }
 
         if (freezeTimer > 0)
@@ -64,6 +78,12 @@ public class EnemyBase : MonoBehaviour
                 renderer.color = currentTint;
             }
         }
+
+        // Do death all at the same time
+        if (isDead)
+        {
+            Die();
+        }
     }
 
     public virtual void Freeze(float freezeDuration)
@@ -71,6 +91,7 @@ public class EnemyBase : MonoBehaviour
         if (freezeDuration > 0)
         {
             freezeTimer = Mathf.Max(freezeTimer, freezeDuration);
+            burnTimer = 0;
         }
         else
         {
@@ -82,6 +103,11 @@ public class EnemyBase : MonoBehaviour
     {
         this.windDirection = windDirection;
         this.windDuration = windDuration;
+    }
+
+    public virtual void Burn(float burnDuration)
+    {
+        burnTimer = Mathf.Max(burnTimer, burnDuration);
     }
 
     public virtual void TakeDamage(float damageAmount, DamageType damageType = DamageType.None)
@@ -97,7 +123,7 @@ public class EnemyBase : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
-            Die();
+            isDead = true;
         }
 
     }
