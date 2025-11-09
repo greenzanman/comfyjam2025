@@ -30,6 +30,9 @@ public enum SpellType
     WindPush = 5,
     WindRotate = 6,
     BurnCircle = 7,
+    Sunbeam = 8,
+    ZapSpell = 9,
+    BlowerSpell = 10,
 }
 
 public class PlayerManager : MonoBehaviour

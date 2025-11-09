@@ -9,6 +9,7 @@ public class EnemyBase : MonoBehaviour
     public float health { get; protected set; }
 
     [SerializeField] protected float maxHealth = 4;
+    protected DamageType killingType = DamageType.None;
 
     private CenterStation centerStation;
 
@@ -86,6 +87,12 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    public virtual void CopyState(EnemyBase otherEnemy)
+    {
+        freezeTimer = otherEnemy.freezeTimer;
+        burnTimer = otherEnemy.burnTimer;
+    }
+
     public virtual void Freeze(float freezeDuration)
     {
         if (freezeDuration > 0)
@@ -123,6 +130,7 @@ public class EnemyBase : MonoBehaviour
         health -= damageAmount;
         if (health <= 0)
         {
+            killingType = damageType;
             isDead = true;
         }
 

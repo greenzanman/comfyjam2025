@@ -7,14 +7,16 @@ using UnityEngine;
 public class CraftingManager : MonoBehaviour
 {
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
-        ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.Test),
+        ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.BurnCircle),
         ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall),
         ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze),
         ( ItemType.Rind, ItemType.Stem, ItemType.Rind, SpellType.FireCone),
         ( ItemType.Feather, ItemType.Feather, ItemType.Feather, SpellType.Graveyard),
         ( ItemType.Feather, ItemType.Feather, ItemType.Stem, SpellType.WindPush),
         ( ItemType.Feather, ItemType.Feather, ItemType.Rind, SpellType.WindRotate),
-        ( ItemType.Feather, ItemType.Rind, ItemType.Rind, SpellType.BurnCircle),
+        ( ItemType.Feather, ItemType.Rind, ItemType.Rind, SpellType.ZapSpell),
+        ( ItemType.Feather, ItemType.Rind, ItemType.Stem, SpellType.Sunbeam),
+        ( ItemType.Feather, ItemType.Stem, ItemType.Stem, SpellType.BlowerSpell),
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)

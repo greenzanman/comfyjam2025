@@ -7,7 +7,8 @@ public enum DamageType
 {
     None,
     Fire,
-    Ice
+    Ice,
+    Disintegrate
 }
 
 public abstract class SpellBase : MonoBehaviour

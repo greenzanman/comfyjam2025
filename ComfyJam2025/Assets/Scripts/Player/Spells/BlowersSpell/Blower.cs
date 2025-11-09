@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Gremlin : MonoBehaviour
+public class Blower : MonoBehaviour
 {
-    float moveSpeed = 2;
+    float moveSpeed = 6;
     float patience = 0.5f;
     public EnemyBase target;
+    public Vector2 basePos;
+    public Vector2 windDirection;
     float age = 0;
     SpriteRenderer spriteRenderer;
-    [SerializeField] private float damage = 2;
-    int tries = 5;
+    [SerializeField] private float targetRadius = 6;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,28 +29,34 @@ public class Gremlin : MonoBehaviour
 
         if (target == null)
         {
+            transform.position = Vector2.MoveTowards(transform.position, basePos, moveSpeed * GameManager.GetDeltaTime());
+
             // Try a few times to get a new target
             patience -= GameManager.GetDeltaTime();
             if (patience < 0)
             {
-                target = EnemyManager.GetClosestEnemy(transform.position, 6);
-                patience += 0.5f;
-                tries -= 1;
-                if (tries < 0)
-                    Destroy(gameObject);
-
+                target = EnemyManager.GetClosestEnemy(basePos, targetRadius);
+                patience += 0.25f;
             }
 
         }
         else
         {
+            if (utils.FlatSqrDistance(basePos, target.GetPosition()) > targetRadius * targetRadius)
+            {
+                target = null;
+                patience = 0f;
+                return;
+            }
+
             transform.position = Vector2.MoveTowards(transform.position, target.GetPosition(), moveSpeed * GameManager.GetDeltaTime());
 
             if (utils.FlatSqrDistance(transform.position, target.GetPosition()) < 1)
             {
                 // TODO: Play animation
-                target.TakeDamage(damage);
-                Destroy(gameObject);
+                target.Blow(windDirection, 0.75f);
+                patience = 1f;
+                target = null;
             }
         }
     }
