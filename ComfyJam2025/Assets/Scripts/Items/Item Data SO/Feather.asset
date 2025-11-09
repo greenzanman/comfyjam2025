@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Feather
   m_EditorClassIdentifier: 
   itemType: 10
+  dropChance: 0.4
   itemSprite: {fileID: -1895713645, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}

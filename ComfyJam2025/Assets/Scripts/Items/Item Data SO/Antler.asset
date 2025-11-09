@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Antler
   m_EditorClassIdentifier: 
   itemType: 8
+  dropChance: 0.5
   itemSprite: {fileID: -970996840, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}

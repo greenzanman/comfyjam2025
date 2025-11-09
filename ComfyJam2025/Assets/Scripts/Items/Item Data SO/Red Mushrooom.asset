@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Red Mushrooom
   m_EditorClassIdentifier: 
   itemType: 4
+  dropChance: 0.15
   itemSprite: {fileID: 1166200501, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}

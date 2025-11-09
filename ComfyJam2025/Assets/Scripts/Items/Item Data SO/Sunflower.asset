@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Sunflower
   m_EditorClassIdentifier: 
   itemType: 7
+  dropChance: 0.1
   itemSprite: {fileID: -799771934, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}

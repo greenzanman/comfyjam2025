@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
 
     private bool isOpen = false;
 
-    private void Awake() {
+    private void Start() {
         PlayerManager.instance.OnItemChange.AddListener(UpdateUI);
     }
 

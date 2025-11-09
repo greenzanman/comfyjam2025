@@ -34,13 +34,8 @@ public class PlayerManager : MonoBehaviour
             instance = this;
 
         //Logger.Log("PlayerManager registered", LogLevel.info);
-    }
-
-    private void Start()
-    {
         craftingManager = GetComponentInChildren<CraftingManager>();
-        if (craftingManager == null)
-        {
+        if (craftingManager == null) {
             Logger.Log("Failed to find crafting manager attached to player manager.", LogLevel.fatal);
         }
         craftingManager.gameObject.SetActive(false);
@@ -73,7 +68,7 @@ public class PlayerManager : MonoBehaviour
             DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
 
             // Find closest enemy within a region
-            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), 1);
+            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), 2f);
             if (closestEnemy)
             {
                 VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
