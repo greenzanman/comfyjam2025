@@ -516,7 +516,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614674}
   m_ExposedName: SpawnRate
   m_Exposed: 0
-  m_Order: 2
+  m_Order: 4
   m_Category: 
   m_Min:
     m_Type:
@@ -596,7 +596,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614677}
   m_ExposedName: Lifetime
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: 
   m_Min:
     m_Type:
@@ -676,7 +676,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614799}
   m_ExposedName: ParticleSize
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 3
   m_Category: 
   m_Min:
     m_Type:

@@ -55,9 +55,9 @@ VisualEffect:
       - m_Value: 5
         m_Name: AreaSize
         m_Overridden: 0
-      - m_Value: 10
+      - m_Value: 20
         m_Name: Size
-        m_Overridden: 0
+        m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
@@ -130,4 +130,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathDelay: 2
+  <DeathDelay>k__BackingField: 2

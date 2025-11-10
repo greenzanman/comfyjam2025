@@ -139,4 +139,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathDelay: 12
+  <DeathDelay>k__BackingField: 13

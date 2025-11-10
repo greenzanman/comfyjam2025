@@ -24,6 +24,8 @@ public class PlayerManager : MonoBehaviour
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
     [HideInInspector] public UnityEvent<ItemType> OnItemChange; // for inventory ui
 
+    [SerializeField] private float spellLocationOffset = 3f; 
+
     [Header("TEMP VFX")]
     public List<VisualEffect> vfxs;
     private const string VFX_EVENT_NAME = "OnAbilityCasted";
@@ -72,7 +74,7 @@ public class PlayerManager : MonoBehaviour
             if (closestEnemy)
             {
                 VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
-                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/2.75f), 0f);
+                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/spellLocationOffset), 0f);
                 randomVfx.SendEvent(VFX_EVENT_NAME);
                 closestEnemy.TakeDamage(1);
             }
