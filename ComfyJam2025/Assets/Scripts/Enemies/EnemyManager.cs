@@ -21,6 +21,9 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveStateText;
     [SerializeField] private ParticleSystem enemyWavePS;
 
+    [Header("DEBUG")]
+    public bool canSpawn = true;
+
     public enum WaveState {
         SPAWNING_ENEMIES,
         DOWNTIME
@@ -45,6 +48,8 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if (!canSpawn) return;
+
         switch(waveState) {
             case WaveState.SPAWNING_ENEMIES:
                 enemyWavePS.Play();
@@ -157,6 +162,20 @@ public class EnemyManager : MonoBehaviour
             float candDistance = (position - enemy.transform.position).sqrMagnitude;
             if (candDistance < closest)
             {
+                closest = candDistance;
+                result = enemy;
+            }
+        }
+        return result;
+    }
+    public static EnemyBase GetClosestEnemyExcludingSelf(EnemyBase self, Vector3 position, float cutoffDistance = Mathf.Infinity) {
+        EnemyBase result = null;
+        float closest = cutoffDistance * cutoffDistance;
+        // TODO: Reduce the calculations on this somehow, for large numbers
+        foreach (EnemyBase enemy in enemies) {
+            if (enemy == self) continue;
+            float candDistance = (position - enemy.transform.position).sqrMagnitude;
+            if (candDistance < closest) {
                 closest = candDistance;
                 result = enemy;
             }

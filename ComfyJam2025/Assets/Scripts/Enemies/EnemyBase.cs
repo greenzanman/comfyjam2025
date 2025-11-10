@@ -67,6 +67,7 @@ public class EnemyBase : MonoBehaviour
     }
     private void DetermineDroppedItem() {
         float weight = CalculateDropWeight(out ItemData maximumChanceItem);
+        Random.InitState(Random.Range(1000, 9999));
         float chance = Random.Range(0f, weight);
         ItemData selectedItem = maximumChanceItem;
 
