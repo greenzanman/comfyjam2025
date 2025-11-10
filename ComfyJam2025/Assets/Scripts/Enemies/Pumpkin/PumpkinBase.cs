@@ -3,25 +3,23 @@ using UnityEngine;
 
 public class PumpkinBase : EnemyBase
 {
-    private float moveSpeed = 1f;
+    [Header("Movement & Combat")]
+    [SerializeField] protected float moveSpeed = 1f;
+    [SerializeField] protected float attackRange = 0.5f;
+    [SerializeField] protected float attackSpeed = 2.0f;
+    [SerializeField] protected float attackDamage = 1f;
 
-    [SerializeField]
-    private float attackRange = 0.5f;   // distance to start attacking
-    
-    [SerializeField]
-    private float attackSpeed = 2.0f;   // seconds between attacks
-    
-    [SerializeField]
-    private float attackDamage = 1f;    // damage dealt each hit
-    
-    private float attackTimer = 0f;     // cooldown timer
+    protected float attackTimer = 0f;
+    protected Rigidbody2D rb;
 
+    [Header("Drops")]
     public List<GameObject> dropPrefabs;
 
     protected override void InitializeEnemy()
     {
         Logger.Log($"Initializing {name}", LogLevel.debug);
         health = maxHealth;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     protected override void Think()
@@ -29,19 +27,14 @@ public class PumpkinBase : EnemyBase
         CenterStation target = GameManager.centerStation;
         if (target == null) return;
 
-        // Find distance to player
-        Vector3 playerPos = PlayerManager.instance.transform.position;
-        float distance = Vector3.Distance(transform.position, playerPos);
+        float dt = GameManager.GetDeltaTime();
 
-        // Check if within attack range
+        Vector2 targetPos = target.transform.position;
+        float distance = Vector2.Distance(transform.position, targetPos);
+
         if (distance <= attackRange)
         {
-            // Stop moving
-            // Face player (optional)
-            // transform.LookAt(playerPos);
-
-            // Handle attack cooldown
-            attackTimer += GameManager.GetDeltaTime();
+            attackTimer += dt;
             if (attackTimer >= attackSpeed)
             {
                 AttackPlayer();
@@ -50,34 +43,35 @@ public class PumpkinBase : EnemyBase
         }
         else
         {
-            // Move toward target normally
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                target.transform.position,
-                moveSpeed * GameManager.GetDeltaTime());
-
-            // Reset attack timer so it doesn't "store up" attacks
-            attackTimer = 0f;
+            MoveTowardTarget(targetPos, dt);
         }
     }
 
-    private void AttackPlayer()
+    protected virtual void MoveTowardTarget(Vector2 targetPos, float dt)
     {
-        if (PlayerManager.instance == null) return;
-
-        PlayerManager.instance.TakeDamage(attackDamage);
-        Logger.Log($"Pumpkin attacked! Player health: {PlayerManager.instance.health}", LogLevel.info);
+        Vector2 pos = Vector2.MoveTowards(transform.position, targetPos, moveSpeed * dt);
+        if (rb) rb.MovePosition(pos);
+        else transform.position = pos;
+    }
+ 
+    protected virtual void AttackPlayer() 
+    { 
+        if (PlayerManager.instance == null) return; 
+        
+        PlayerManager.instance.TakeDamage(attackDamage); 
+        Logger.Log($"Pumpkin attacked! Player health: {PlayerManager.instance.health}", LogLevel.info); 
     }
 
     protected override void Die()
     {
-        if (dropPrefabs.Count > 0)
+        if (dropPrefabs != null && dropPrefabs.Count > 0)
         {
             Instantiate(
-                dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
+                dropPrefabs[Random.Range(0, dropPrefabs.Count)],
                 transform.position,
                 Quaternion.identity);
         }
+        
         base.Die();
     }
 }

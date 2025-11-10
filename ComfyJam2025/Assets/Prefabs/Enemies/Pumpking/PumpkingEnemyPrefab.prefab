@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884139702188758689}
-  - component: {fileID: 2318540433417717283}
+  - component: {fileID: 2053697279359867585}
+  - component: {fileID: 3432916870992414923}
   m_Layer: 0
-  m_Name: PumpkinEnemyPrefab
+  m_Name: PumpkingEnemyPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +34,7 @@ Transform:
   - {fileID: 2834982533994165543}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2318540433417717283
+--- !u!114 &2053697279359867585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,12 +43,53 @@ MonoBehaviour:
   m_GameObject: {fileID: 1458013370352884220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f68ac7f0646b9c743a300ed18bc7daac, type: 3}
+  m_Script: {fileID: 11500000, guid: 8d53ced58369c462988074ee18873aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 24
+  density: 1
+  moveSpeed: 6
+  attackRange: 3
+  attackSpeed: 2
+  attackDamage: 2
   dropPrefabs:
   - {fileID: 5428936690741754182, guid: 5a747517db82a4b42acfc5aa21e42294, type: 3}
   - {fileID: 5428936690741754182, guid: e9b1eb4535f48b74e9a8ff31e243278c, type: 3}
+--- !u!58 &3432916870992414923
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458013370352884220}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.8}
+  serializedVersion: 2
+  m_Radius: 1.2
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,7 +117,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.35, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 884139702188758689}
@@ -122,7 +164,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -1228619612, guid: c6b92f52945e1c74a955a7cb0a382e96, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.40392157, g: 0, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

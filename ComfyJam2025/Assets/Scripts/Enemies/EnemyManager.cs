@@ -2,15 +2,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[System.Serializable]
+public struct EnemySpawnEntry
+{
+    public GameObject prefab;
+    [Range(0f, 1f)]
+    public float spawnProbability;
+}
+
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager instance;
 
-    public List<GameObject> enemyPrefabs;
+    [Header("Enemy Spawn Settings")]
+    public List<EnemySpawnEntry> enemyPrefabs = new List<EnemySpawnEntry>();
 
     // Simplistic 'spawn every x' enemies
     private float enemySpawnTimer = 0;
-    private float ENEMY_SPAWN_RATE = 2f;
+    [SerializeField] private float ENEMY_SPAWN_RATE = 2f;
 
     private static HashSet<EnemyBase> enemies = new HashSet<EnemyBase>();
     void Awake()
@@ -47,6 +56,9 @@ public class EnemyManager : MonoBehaviour
 
     private void SpawnRandomEnemy()
     {
+        // Choose an enemy prefab based on weighted probabilities
+        GameObject chosenPrefab = GetWeightedRandomEnemy();
+
         // Generate random spot 0.5 unit within the border
         float width = 2 * GameplayStatics.SCREEN_WIDTH - 1;
         float height = 2 * GameplayStatics.SCREEN_HEIGHT - 1;
@@ -67,7 +79,26 @@ public class EnemyManager : MonoBehaviour
                 randVal % height - height / 2);
         }
         DebugManager.DisplayDebug(spawnPos.ToString());
-        Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity);
+        Instantiate(chosenPrefab, spawnPos, Quaternion.identity);
+    }
+
+    private GameObject GetWeightedRandomEnemy()
+    {
+        float totalWeight = enemyPrefabs.Sum(e => Mathf.Max(e.spawnProbability, 0f));
+        if (totalWeight <= 0f)
+            return enemyPrefabs[0].prefab; // fallback
+
+        float roll = Random.value * totalWeight;
+        float cumulative = 0f;
+
+        foreach (var entry in enemyPrefabs)
+        {
+            cumulative += Mathf.Max(entry.spawnProbability, 0f);
+            if (roll <= cumulative)
+                return entry.prefab;
+        }
+
+        return enemyPrefabs.Last().prefab; // fallback
     }
 
     public static void RegisterEnemy(EnemyBase newEnemy)
@@ -85,17 +116,34 @@ public class EnemyManager : MonoBehaviour
 
     public static EnemyBase GetClosestEnemy(Vector3 position, float cutoffDistance = Mathf.Infinity)
     {
+        if (enemies == null || enemies.Count == 0)
+            return null;
+
         EnemyBase result = null;
         float closest = cutoffDistance * cutoffDistance;
         // TODO: Reduce the calculations on this somehow, for large numbers
-        foreach (EnemyBase enemy in enemies)
+        foreach (var enemy in enemies.ToArray())
         {
+            if (enemy == null) // destroyed object
+            {
+                enemies.Remove(enemy);
+                continue;
+            }
+
+            try
+            {
             float candDistance = (position - enemy.transform.position).sqrMagnitude;
             if (candDistance < closest)
             {
                 closest = candDistance;
                 result = enemy;
             }
+            }
+            catch (MissingReferenceException)
+            {
+                enemies.Remove(enemy);
+            }
+
         }
         return result;
     }

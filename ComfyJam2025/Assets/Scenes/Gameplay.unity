@@ -214,7 +214,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefabs:
-  - {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
+  - prefab: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
+    spawnProbability: 0.683
+  - prefab: {fileID: 1458013370352884220, guid: aae9abc371d6647bc974ff96b9aa79d1, type: 3}
+    spawnProbability: 0.413
+  ENEMY_SPAWN_RATE: 0.4
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,62 +364,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: itemSprites.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: itemSprites.Array.data[0]
-      value: 
-      objectReference: {fileID: 21300000, guid: 5806832fc57567147bd30b0965ee3750, type: 3}
-    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: itemSprites.Array.data[1]
-      value: 
-      objectReference: {fileID: -858227669, guid: cce4501c9c0cd294d9808d49f80ecc04, type: 3}
-    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: itemSprites.Array.data[2]
-      value: 
-      objectReference: {fileID: 21300000, guid: 647acade3edcdcc40b5994e0538d8a73, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[0]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 6a10d8e78d625ac42b5ec00e3b1a66b5, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[1]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 27119189ed139774a9130abebbab7938, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[2]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: e292cd596e9802c4681b1a8ffb130fce, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[3]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 10d799ac5d3adf64fa799a0e8a49ea57, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[4]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: a2df5d4d8939ae24f90e64a5ae204e2a, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[5]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 8fd0f83bdf86fc74f8360362ec121f05, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[6]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 2fa2e9384501c094c9947c8e2179f3b6, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[7]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: 27f6c4660d93c7a4792711056c18ce76, type: 3}
-    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spellPrefabs.Array.data[8]
-      value: 
-      objectReference: {fileID: 2276436687671920102, guid: adf262017e06b994785b04ca7188b7ad, type: 3}
     - target: {fileID: 866704262789863740, guid: a4910cd88b73cc243856f3d6aaa0793a, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
@@ -472,6 +420,62 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 5806832fc57567147bd30b0965ee3750, type: 3}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: -858227669, guid: cce4501c9c0cd294d9808d49f80ecc04, type: 3}
+    - target: {fileID: -4702958375105354812, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: itemSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 647acade3edcdcc40b5994e0538d8a73, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 6a10d8e78d625ac42b5ec00e3b1a66b5, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 27119189ed139774a9130abebbab7938, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: e292cd596e9802c4681b1a8ffb130fce, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 10d799ac5d3adf64fa799a0e8a49ea57, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: a2df5d4d8939ae24f90e64a5ae204e2a, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[5]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 8fd0f83bdf86fc74f8360362ec121f05, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[6]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 2fa2e9384501c094c9947c8e2179f3b6, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[7]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: 27f6c4660d93c7a4792711056c18ce76, type: 3}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spellPrefabs.Array.data[8]
+      value: 
+      objectReference: {fileID: 2276436687671920102, guid: adf262017e06b994785b04ca7188b7ad, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

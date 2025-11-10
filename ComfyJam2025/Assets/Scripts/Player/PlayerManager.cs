@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour
     public static PlayerManager instance;
 
     public PlayerState playerState = PlayerState.Idle;
+    public float health { get; protected set; } = 10;
 
     private const float ZAP_RADIUS = 4;
     private CraftingManager craftingManager;
@@ -262,4 +263,17 @@ public class PlayerManager : MonoBehaviour
 
         spellBuffer = 0.2f;
     }
+
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+        Logger.Log($"Player took {amount} damage. Health now: {health}", LogLevel.info);
+
+        if (health <= 0)
+        {
+            // Handle player death here later
+            Logger.Log("Player has died.", LogLevel.warn);
+        }
+    }
+
 }
