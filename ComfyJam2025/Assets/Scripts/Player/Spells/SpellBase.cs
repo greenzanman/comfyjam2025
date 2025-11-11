@@ -7,13 +7,20 @@ public enum DamageType
 {
     None,
     Fire,
-    Ice
+    Ice,
+    Disintegrate
 }
 
-public class SpellBase : MonoBehaviour
+public abstract class SpellBase : MonoBehaviour
 {
+    public SpellType spellType;
     private void Start()
     {
     }
 
+    // Display aiming indicators for spell
+    public abstract void Aim();
+
+    // Actually cast
+    public abstract void Cast();
 }

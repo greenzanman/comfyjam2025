@@ -44,6 +44,8 @@ public class DebugManager : MonoBehaviour
         {
             GUI.Label(new Rect(20, 20, 500, 100), debugMessage);
         }
+        GUI.Label(new Rect(20, 40, 500, 100), $"Current state: {PlayerManager.instance.playerState}");
+        GUI.Label(new Rect(20, 60, 500, 100), $"Current time dilation: {GameManager.GetTimeDilation()}");
     }
 
 

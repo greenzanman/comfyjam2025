@@ -15,7 +15,7 @@ public enum LogLevel
 public static class Logger
 {
 
-    private static LogLevel logLevel = LogLevel.debug;
+    private static LogLevel logLevel = LogLevel.info;
 
     /// <summary>
     /// Displays a given message if its severity level is at least the log level.
@@ -29,5 +29,13 @@ public static class Logger
             if (level >= LogLevel.error) Debug.LogError(message);
             else Debug.Log(message);
         }
+
+        // Kill on fatal: only in editor
+#if UNITY_EDITOR
+        if (level == LogLevel.fatal)
+        {
+            Application.Quit();
+        }
+#endif
     }
 }

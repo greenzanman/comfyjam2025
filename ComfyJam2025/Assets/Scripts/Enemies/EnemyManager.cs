@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -44,6 +45,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Register some console variables
 		DebugManager.RegisterConsoleVar("DrawEnemyHealth", 1);
+		DebugManager.RegisterConsoleVar("DrawEnemyPos", 1);
     }
 
     private void Update()
@@ -183,4 +185,9 @@ public class EnemyManager : MonoBehaviour
         return result;
     }
 
+    // TODO: Move this into being delegate based
+    public static List<EnemyBase> GetEnemies()
+    {
+        return enemies.ToList();
+    }
 }
