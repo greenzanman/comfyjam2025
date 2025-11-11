@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 using UnityEngine.Events;
 
 public enum PlayerState
@@ -10,13 +11,6 @@ public enum PlayerState
     Idle, // No spell ready, clicking zaps, can craft?
     Crafting,   // Crafting screen is up
     Casting,    // Spell is ready, cannot craft
-}
-
-public enum ItemType
-{
-    Stem = 0, // TODO: HACKY ENUMS
-    Rind = 1,
-    Feather = 2,
 }
 
 public enum SpellType
@@ -52,25 +46,27 @@ public class PlayerManager : MonoBehaviour
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
     [HideInInspector] public UnityEvent<ItemType> OnItemChange; // for inventory ui
 
+    [SerializeField] private float spellLocationOffset = 3f; 
+
+    [Header("TEMP VFX")]
+    public List<VisualEffect> vfxs;
+    private const string VFX_EVENT_NAME = "OnAbilityCasted";
+
     public List<GameObject> spellPrefabs;
     private Dictionary<SpellType, GameObject> spellPrefabMapping; // Internal mapping of prefabs for each spell
 
     // Small buffer to prevent accidentally doubleclicking
     private float spellBuffer = 0;
     private SpellBase currentSpell;
+    
     private void Awake()
     {
         if (instance == null)
             instance = this;
 
-        Logger.Log("PlayerManager registered", LogLevel.info);
-    }
-
-    private void Start()
-    {
+        //Logger.Log("PlayerManager registered", LogLevel.info);
         craftingManager = GetComponentInChildren<CraftingManager>();
-        if (craftingManager == null)
-        {
+        if (craftingManager == null) {
             Logger.Log("Failed to find crafting manager attached to player manager.", LogLevel.fatal);
         }
         craftingManager.gameObject.SetActive(false);
@@ -202,6 +198,9 @@ public class PlayerManager : MonoBehaviour
             EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), ZAP_RADIUS);
             if (closestEnemy)
             {
+                VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
+                randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/spellLocationOffset), 0f);
+                randomVfx.SendEvent(VFX_EVENT_NAME);
                 closestEnemy.TakeDamage(1);
             }
         } // Casting spell

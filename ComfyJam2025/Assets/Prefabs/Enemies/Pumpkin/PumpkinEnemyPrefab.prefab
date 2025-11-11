@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2318540433417717283}
   m_Layer: 0
   m_Name: PumpkinEnemyPrefab
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -45,9 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f68ac7f0646b9c743a300ed18bc7daac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropPrefabs:
-  - {fileID: 5428936690741754182, guid: 5a747517db82a4b42acfc5aa21e42294, type: 3}
-  - {fileID: 5428936690741754182, guid: e9b1eb4535f48b74e9a8ff31e243278c, type: 3}
+  maxHealth: 4
+  itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
+  possibleDrops:
+  - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
+  - {fileID: 11400000, guid: 8d588d7984fee804889d6c88cc5d5e32, type: 2}
+  - {fileID: 11400000, guid: 34ba3d8ab842c614eaf220a294f2731a, type: 2}
+  - {fileID: 11400000, guid: adddcf9a937b40c42a65f5ff0f6a58a0, type: 2}
+  - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
+  - {fileID: 11400000, guid: add44db8d0f82b04bb2be7bad22a0dd0, type: 2}
+  - {fileID: 11400000, guid: d44dfe2c4d58cea42acbfeef5e239408, type: 2}
+  - {fileID: 11400000, guid: f35eb1d086340a246826f690cf9cfa2a, type: 2}
+  - {fileID: 11400000, guid: 43877c6de96e4f7438f21adc9b221ed2, type: 2}
+  - {fileID: 11400000, guid: 93aed01010ed3aa41af1878930550515, type: 2}
+  moveSpeed: 2
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0
@@ -74,7 +85,7 @@ Transform:
   m_GameObject: {fileID: 2079076722295693627}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.35, z: 0}
+  m_LocalPosition: {x: 0, y: -1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

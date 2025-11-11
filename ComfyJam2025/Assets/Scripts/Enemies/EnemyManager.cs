@@ -1,16 +1,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
+    [SerializeField] private Camera cam;
     public static EnemyManager instance;
 
     public List<GameObject> enemyPrefabs;
 
     // Simplistic 'spawn every x' enemies
     private float enemySpawnTimer = 0;
-    private float ENEMY_SPAWN_RATE = 2f;
+    private float waveTimerElapsedTime = 0;
+    [SerializeField] private float enemySpawnInterval = 4f;
+
+    [Header("TIMER")]
+    [SerializeField] private float spawnTimePerWave = 20f;
+    [SerializeField] private float waveDowntime = 5f;
+    [SerializeField] private TextMeshProUGUI waveTimerText;
+    [SerializeField] private TextMeshProUGUI waveStateText;
+    [SerializeField] private ParticleSystem enemyWavePS;
+
+    [Header("DEBUG")]
+    public bool canSpawn = true;
+
+    public enum WaveState {
+        SPAWNING_ENEMIES,
+        DOWNTIME
+    }
+
+    private WaveState waveState;
 
     private static HashSet<EnemyBase> enemies = new HashSet<EnemyBase>();
     void Awake()
@@ -18,7 +38,7 @@ public class EnemyManager : MonoBehaviour
         if (instance == null)
             instance = this;
 
-        Logger.Log("EnemyManager registered", LogLevel.info);
+        //Logger.Log("EnemyManager registered", LogLevel.info);
     }
 
     private void Start()
@@ -30,7 +50,50 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
-        HandleEnemySpawning();
+        if (!canSpawn) return;
+
+        switch(waveState) {
+            case WaveState.SPAWNING_ENEMIES:
+                enemyWavePS.Play();
+                HandleEnemySpawning();
+                break;
+            case WaveState.DOWNTIME:
+                enemyWavePS.Stop();
+                HandleWaveDownTime();
+                break;
+        }
+        DisplayWaveTimer();
+    }
+    private void DisplayWaveTimer() {
+        float upperLimitTime = 0f;
+        waveTimerText.text = 0f.ToString("0:00");
+
+        if (waveState == WaveState.SPAWNING_ENEMIES) {
+            upperLimitTime = spawnTimePerWave;
+            waveStateText.text = "protect mama!";
+        }
+        else if (waveState == WaveState.DOWNTIME) {
+            upperLimitTime = waveDowntime;
+            waveStateText.text = "gather your spells.";
+        }
+
+        if (upperLimitTime - waveTimerElapsedTime <= 10f) {
+            waveTimerText.color = Color.red;
+        }
+        else {
+            waveTimerText.color = Color.green;
+        }
+        upperLimitTime += 0.35f;
+        waveTimerText.text = (upperLimitTime - waveTimerElapsedTime).ToString("0 : 00");
+    }
+    private void HandleWaveDownTime() {
+        float deltaTime = GameManager.GetDeltaTime();
+        waveTimerElapsedTime += deltaTime;
+
+        if (waveTimerElapsedTime >= waveDowntime) {
+            waveTimerElapsedTime = 0f;
+            waveState = WaveState.SPAWNING_ENEMIES;
+        }
     }
 
     private void HandleEnemySpawning()
@@ -38,9 +101,17 @@ public class EnemyManager : MonoBehaviour
         float deltaTime = GameManager.GetDeltaTime();
 
         enemySpawnTimer -= deltaTime;
+        waveTimerElapsedTime += deltaTime;
+
+        if (waveTimerElapsedTime >= spawnTimePerWave) {
+            waveTimerElapsedTime = 0f;
+            waveState = WaveState.DOWNTIME;
+            return;
+        }
+        
         if (enemySpawnTimer < 0)
         {
-            enemySpawnTimer += ENEMY_SPAWN_RATE;
+            enemySpawnTimer += enemySpawnInterval;
             SpawnRandomEnemy();
         }
     }
@@ -48,8 +119,9 @@ public class EnemyManager : MonoBehaviour
     private void SpawnRandomEnemy()
     {
         // Generate random spot 0.5 unit within the border
-        float width = 2 * GameplayStatics.SCREEN_WIDTH - 1;
-        float height = 2 * GameplayStatics.SCREEN_HEIGHT - 1;
+        float aspect = Screen.width / Screen.height;
+        float width = 4.0f * cam.orthographicSize * aspect;
+        float height = 2.0f * cam.orthographicSize * 1.25f;
         float randVal = Random.value * 2 * (width + height);
 
         Vector3 spawnPos;
@@ -69,7 +141,6 @@ public class EnemyManager : MonoBehaviour
         DebugManager.DisplayDebug(spawnPos.ToString());
         Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity);
     }
-
     public static void RegisterEnemy(EnemyBase newEnemy)
     {
         enemies.Add(newEnemy);
@@ -93,6 +164,20 @@ public class EnemyManager : MonoBehaviour
             float candDistance = (position - enemy.transform.position).sqrMagnitude;
             if (candDistance < closest)
             {
+                closest = candDistance;
+                result = enemy;
+            }
+        }
+        return result;
+    }
+    public static EnemyBase GetClosestEnemyExcludingSelf(EnemyBase self, Vector3 position, float cutoffDistance = Mathf.Infinity) {
+        EnemyBase result = null;
+        float closest = cutoffDistance * cutoffDistance;
+        // TODO: Reduce the calculations on this somehow, for large numbers
+        foreach (EnemyBase enemy in enemies) {
+            if (enemy == self) continue;
+            float candDistance = (position - enemy.transform.position).sqrMagnitude;
+            if (candDistance < closest) {
                 closest = candDistance;
                 result = enemy;
             }

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyBase : MonoBehaviour
 {
     public float health { get; protected set; }
 
-    [SerializeField] protected float maxHealth = 4;
+    [field: SerializeField] protected float maxHealth = 4;
     protected DamageType killingType = DamageType.None;
 
     private CenterStation centerStation;
@@ -24,6 +25,10 @@ public class EnemyBase : MonoBehaviour
     private const float WIND_RATIO = 9;
     private float burnTimer = 0;
     [SerializeField] private float density = 1;
+
+    [Header("DROPS")]
+    [SerializeField] private GameObject itemDropBasePrefab;
+    public List<ItemData> possibleDrops;
 
     private bool isDead = false;
     private void Start()
@@ -149,10 +154,48 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void Die()
     {
+        // Find random drop
+        if (possibleDrops.Count > 0) {
+            DetermineDroppedItem();
+        }
+
         // Inform manager
         EnemyManager.DeregisterEnemy(this);
 
         Destroy(gameObject);
+    }
+    private void DetermineDroppedItem() {
+        float weight = CalculateDropWeight(out ItemData maximumChanceItem);
+        Random.InitState(Random.Range(1000, 9999));
+        float chance = Random.Range(0f, weight);
+        ItemData selectedItem = maximumChanceItem;
+
+        foreach (ItemData item in possibleDrops) {
+            float dropChance = item.dropChance;
+            Debug.Log($"chance: {chance} > weight: {weight} | dropped: {dropChance}");
+            if (chance < dropChance) {
+                selectedItem = item;
+                break;
+            }
+            chance -= dropChance;
+        }
+
+        // if no item selected, drop highest chance
+        GameObject drop = Instantiate(itemDropBasePrefab, transform.position, Quaternion.identity);
+        drop.GetComponentInChildren<SpriteRenderer>().sprite = selectedItem.itemSprite;
+        drop.GetComponent<EnemyDropBase>().itemType = selectedItem.itemType;
+    }
+    private float CalculateDropWeight(out ItemData maximumChanceItem) {
+        float weight = 0f;
+        maximumChanceItem = possibleDrops[0];
+        foreach (ItemData itemData in possibleDrops) {
+            if (itemData.dropChance > maximumChanceItem.dropChance) {
+                maximumChanceItem = itemData;
+            }
+            weight += itemData.dropChance;
+        }
+
+        return weight;
     }
 
     private void OnGUI()

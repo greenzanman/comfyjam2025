@@ -7,6 +7,7 @@ public class ItemData : ScriptableObject
 {
     [Header("DATA")]
     public ItemType itemType;
+    [Range(0f,1f)] public float dropChance = 0f;
 
     [Header("VISUALS")]
     public Sprite itemSprite;

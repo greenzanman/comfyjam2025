@@ -1,0 +1,89 @@
+using com.cyborgAssets.inspectorButtonPro;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.VFX;
+
+public class ChainLightningVFX : MonoBehaviour
+{
+    [SerializeField] private Vector3 mainTargetPos;
+    [SerializeField] private GameObject lineRendererPrefab;
+    [SerializeField] private VisualEffect sparkVFXPrefab;
+    [SerializeField] private float chainRange = 5f;
+    [SerializeField] private float delayPerChain = 0.1f;
+    [SerializeField] private float chainDuration = 0.5f;
+
+    private bool isActive;
+    private float elapsedTime = 0f;
+    private const string VFX_EVENT_NAME = "OnAbilityCasted";
+    public List<EnemyBase> enemiesInChain;
+    
+    [Header("DEBUG")]
+    public bool destroyChains = true;
+    public bool clickToTest = false;
+
+    private void Update() {
+        if (!clickToTest) return;
+
+        if(Input.GetMouseButtonDown(0)) {
+            EnemyBase closestEnemyToClick = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), 2f);
+            if (closestEnemyToClick) ActivateChain(closestEnemyToClick.transform.position, chainRange);
+        }
+    }
+
+    public void ActivateChain(Vector3 mainPos, float chainRange) {
+        this.mainTargetPos = mainPos;
+        this.chainRange = chainRange;
+        isActive = true;
+        elapsedTime = 0f;
+        enemiesInChain.Clear();
+        DelayedChainEffect();
+    }
+    private void DelayedChainEffect() {
+        if (isActive) {
+            StartCoroutine(ChainedLightning(mainTargetPos));
+        }
+    }   
+    private IEnumerator ChainedLightning(Vector3 startTarget) {
+
+        if (isActive && elapsedTime < chainDuration) {
+            elapsedTime += Time.deltaTime + delayPerChain;
+            
+            EnemyBase closestEnemy = EnemyManager.GetClosestEnemyExcludingSelf(EnemyManager.GetClosestEnemy(startTarget, chainRange), startTarget, chainRange);
+            
+            if (closestEnemy != null) {
+                SpawnRenderer(startTarget, closestEnemy.transform.position);
+                enemiesInChain.Add(closestEnemy);
+                yield return new WaitForSeconds(delayPerChain);
+
+                if (elapsedTime >= chainDuration) yield break;
+                if (!closestEnemy) yield break;
+
+                EnemyBase nextClosestEnemy = EnemyManager.GetClosestEnemyExcludingSelf(EnemyManager.GetClosestEnemy(closestEnemy.transform.position, chainRange), closestEnemy.transform.position, chainRange);
+                
+                if (!nextClosestEnemy) yield break;
+
+                if (!enemiesInChain.Contains(nextClosestEnemy)) {
+                    StartCoroutine(ChainedLightning(closestEnemy.transform.position));
+                }
+            }
+            else {
+                SpawnRenderer(startTarget, startTarget); // if self
+                isActive = false;
+            }
+        }        
+    }
+    private void SpawnRenderer(Vector3 startPos, Vector3 endPos) {
+        GameObject lr = Instantiate(lineRendererPrefab);
+        if (destroyChains) lr.GetComponent<DelayedDeath>().DeathDelay = chainDuration;
+        else lr.GetComponent<DelayedDeath>().CanDie = false;
+
+        lr.GetComponent<LineRendererController>().SetPosition(startPos, endPos);
+        VisualEffect vfx = Instantiate(sparkVFXPrefab);
+        VisualEffect vfx2 = Instantiate(sparkVFXPrefab);
+        vfx.transform.position = startPos;
+        vfx2.transform.position = endPos;
+        vfx.SendEvent(VFX_EVENT_NAME);
+        vfx2.SendEvent(VFX_EVENT_NAME);
+    }
+}

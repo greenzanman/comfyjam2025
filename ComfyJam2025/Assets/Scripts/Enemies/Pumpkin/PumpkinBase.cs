@@ -4,14 +4,11 @@ using UnityEngine;
 
 public class PumpkinBase : EnemyBase
 {
-    private float moveSpeed = 1f;
-
-    public List<GameObject> dropPrefabs;
-
+    [SerializeField] private float moveSpeed = 0.5f;
    
     protected override void InitializeEnemy()
     {
-        Logger.Log($"Initializing {name}", LogLevel.debug);
+        //Logger.Log($"Initializing {name}", LogLevel.debug);
         //maxHealth = 10;
         health = maxHealth;
     }
