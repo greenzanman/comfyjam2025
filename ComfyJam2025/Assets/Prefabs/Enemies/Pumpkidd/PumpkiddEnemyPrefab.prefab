@@ -56,7 +56,7 @@ MonoBehaviour:
   - {fileID: 5428936690741754182, guid: 5a747517db82a4b42acfc5aa21e42294, type: 3}
   - {fileID: 5428936690741754182, guid: e9b1eb4535f48b74e9a8ff31e243278c, type: 3}
   groupRadius: 12
-  cohesionStrength: 1
+  cohesionStrength: 0.8
   separationStrength: 0.3
 --- !u!58 &6162708959796837245
 CircleCollider2D:
