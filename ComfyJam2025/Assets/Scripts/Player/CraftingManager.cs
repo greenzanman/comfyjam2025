@@ -139,6 +139,18 @@ public class CraftingManager : MonoBehaviour
                     break;
                 }
             }
+
+            foreach (CraftingSlot slot in craftingSlots)
+            {
+                if (slot.hasItem && utils.FlatSqrDistance(slot.transform.position, mousePos) < 9)
+                {
+                    heldItem = craftingItems[slot.itemType];
+                    PlayerManager.AddItem(slot.itemType);
+
+                    slot.ClearSprite();
+                    break;
+                }
+            }
         }
         if (Input.GetMouseButtonUp(0))
         {
@@ -168,12 +180,11 @@ public class CraftingManager : MonoBehaviour
 
     private void UpdateSlot(CraftingSlot slot, CraftingItem addedItem)
     {
-        // TODO: They're gone for good once placed?
         // Add back item it it held one
-        // if (slot.hasItem)
-        // {
-        //     PlayerManager.AddItem(slot.itemType);
-        // }
+        if (slot.hasItem)
+        {
+            PlayerManager.AddItem(slot.itemType);
+        }
 
 
         slot.SetSprite(GameManager.GetSprite(addedItem.GetItemType()));
