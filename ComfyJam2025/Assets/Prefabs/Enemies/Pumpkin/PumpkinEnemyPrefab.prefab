@@ -46,18 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 4
+  density: 1
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
-  possibleDrops:
-  - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
-  - {fileID: 11400000, guid: 8d588d7984fee804889d6c88cc5d5e32, type: 2}
-  - {fileID: 11400000, guid: 34ba3d8ab842c614eaf220a294f2731a, type: 2}
-  - {fileID: 11400000, guid: adddcf9a937b40c42a65f5ff0f6a58a0, type: 2}
-  - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
-  - {fileID: 11400000, guid: add44db8d0f82b04bb2be7bad22a0dd0, type: 2}
-  - {fileID: 11400000, guid: d44dfe2c4d58cea42acbfeef5e239408, type: 2}
-  - {fileID: 11400000, guid: f35eb1d086340a246826f690cf9cfa2a, type: 2}
-  - {fileID: 11400000, guid: 43877c6de96e4f7438f21adc9b221ed2, type: 2}
-  - {fileID: 11400000, guid: 93aed01010ed3aa41af1878930550515, type: 2}
+  possibleDrops: []
   moveSpeed: 2
 --- !u!1 &2079076722295693627
 GameObject:
