@@ -172,7 +172,7 @@ public class EnemyBase : MonoBehaviour
 
         foreach (ItemData item in possibleDrops) {
             float dropChance = item.dropChance;
-            Debug.Log($"chance: {chance} > weight: {weight} | dropped: {dropChance}");
+            Logger.Log($"chance: {chance} > weight: {weight} | dropped: {dropChance}", LogLevel.debug);
             if (chance < dropChance) {
                 selectedItem = item;
                 break;

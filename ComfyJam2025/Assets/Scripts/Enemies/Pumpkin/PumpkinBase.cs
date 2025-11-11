@@ -22,14 +22,14 @@ public class PumpkinBase : EnemyBase
         }
     }
 
-    protected override void Die()
-    {
-        // Find random drop
-        if (killingType != DamageType.Disintegrate && dropPrefabs.Count > 0)
-        {
-            Instantiate(dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
-                transform.position, Quaternion.identity);
-        }
-        base.Die();
-    }
+//     protected override void Die()
+//     {
+//         // Find random drop
+//         if (killingType != DamageType.Disintegrate && dropPrefabs.Count > 0)
+//         {
+//             Instantiate(dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
+//                 transform.position, Quaternion.identity);
+//         }
+//         base.Die();
+//     }
 }

@@ -13,7 +13,7 @@ public class InventoryUI : MonoBehaviour
     private bool isOpen = false;
 
     private void Start() {
-        PlayerManager.instance.OnItemChange.AddListener(UpdateUI);
+        //PlayerManager.instance.OnItemChange.AddListener(UpdateUI);
     }
 
     public void ToggleInventory() {

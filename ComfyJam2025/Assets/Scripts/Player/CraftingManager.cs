@@ -7,6 +7,7 @@ using UnityEngine;
 public class CraftingManager : MonoBehaviour
 {
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
+        /*
         ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.BurnCircle),
         ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall),
         ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze),
@@ -17,6 +18,7 @@ public class CraftingManager : MonoBehaviour
         ( ItemType.Feather, ItemType.Rind, ItemType.Rind, SpellType.ZapSpell),
         ( ItemType.Feather, ItemType.Rind, ItemType.Stem, SpellType.Sunbeam),
         ( ItemType.Feather, ItemType.Stem, ItemType.Stem, SpellType.BlowerSpell),
+        */
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
@@ -114,7 +116,7 @@ public class CraftingManager : MonoBehaviour
         foreach (ItemType itemType in itemCounts.Keys)
         {
 
-            craftingItems[itemType].SetPosition(new Vector2(2 + 5 * pos, 5 + (int)(pos / 5) * 3));
+            craftingItems[itemType].SetPosition(new Vector2(2 + 5 * (pos % 5), 4 + (int)(pos / 5) * 6));
             craftingItems[itemType].SetCount(itemCounts[itemType]);
             if (heldItem != null && heldItem.GetItemType() == itemType)
                 craftingItems[itemType].SetCount(itemCounts[itemType] - 1);

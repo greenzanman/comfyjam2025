@@ -5,7 +5,10 @@ using UnityEngine;
 public class EnemyDropBase : MonoBehaviour
 {
     public ItemType itemType;
+    [SerializeField] private float bounceHeight = 0.05f;
+    [SerializeField] private float bounceDuration = 0.5f;
 
+    private Vector3 originalPosition;
     private enum DropState
     {
         dropping,
@@ -18,11 +21,14 @@ public class EnemyDropBase : MonoBehaviour
     private float age = 0;
     private float lifetime = 15;
     private Vector2 startPos;
-    private float bumpHeight = 1;
+    private float bumpHeight = 2;
     private float bumpWidth;
     
     private void Start()
     {
+        bounceHeight = Mathf.Clamp(bounceHeight, 0.1f, 5.0f);
+        bounceDuration = Mathf.Clamp(bounceDuration, 0.1f, 5.0f);
+
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         startPos = transform.position;
@@ -44,9 +50,18 @@ public class EnemyDropBase : MonoBehaviour
                 transform.position = startPos + new Vector2(bumpWidth * age,
                     bumpHeight * (1 - (2 * age - 1) * (2 * age - 1)));
                 if (age >= 1)
+                {
                     dropState = DropState.dropped;
+                    originalPosition = transform.position;
+                }
                 break;
             case DropState.dropped:
+                // Calculate bounce height based on time and bounce duration
+                float currentHeight = bounceHeight * Mathf.Sin(Mathf.PI * (age - 1) / bounceDuration);
+
+                // Update position with bounce height
+                transform.position = originalPosition + new Vector3(0, currentHeight, 0);
+
                 if (age > lifetime)
                     Destroy(gameObject);
                 break;
@@ -74,17 +89,4 @@ public class EnemyDropBase : MonoBehaviour
     {
         PlayerManager.AddItem(itemType);
     }
-}
-public enum ItemType {
-    NONE,
-    RIND,
-    GREEN_LEAF,
-    ORANGE_LEAF,
-    RED_MUSH,
-    BLUE_MUSH,
-    GREEN_MUSH,
-    SUNFLOWER,
-    ANTLER,
-    ACORN,
-    FEATHER
 }
