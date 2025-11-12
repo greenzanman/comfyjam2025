@@ -18,4 +18,29 @@ public class utils
     {
         return new Vector2(firstVec.x - secondVec.x, firstVec.y - secondVec.y).sqrMagnitude;
     }
+        public static Vector2 MoveTowardsOffset(Vector2 start, Vector2 goal, float buffer, float rate, float delta, bool orCloser = true)
+    {
+        float dist = (goal - start).magnitude;
+        if (orCloser)
+        {
+            if (dist - buffer < 0)
+            {
+                return start;
+            }
+            if (dist - buffer < rate * delta)
+            {
+                // Return the spot a distance 'buffer' away
+                return goal + (start - goal) / dist * buffer;
+            }
+            return start + (goal - start) / dist * rate * delta;
+        }
+        else
+        {
+            if (Mathf.Abs(dist - buffer) < rate * delta)
+            {
+                return goal - (goal - start) / dist * buffer;
+            }
+            return start + (goal - start) / dist * rate * delta * Mathf.Sign(dist);
+        }
+    }
 }

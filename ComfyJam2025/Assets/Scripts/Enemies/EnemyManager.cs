@@ -52,7 +52,8 @@ public class EnemyManager : MonoBehaviour
     {
         if (!canSpawn) return;
 
-        switch(waveState) {
+        switch (waveState)
+        {
             case WaveState.SPAWNING_ENEMIES:
                 //enemyWavePS.Play();
                 HandleEnemySpawning();
@@ -63,7 +64,23 @@ public class EnemyManager : MonoBehaviour
                 break;
         }
         DisplayWaveTimer();
+
+        // Hacks
+#if UNITY_EDITOR
+        EnemyHacks();
+#endif
     }
+
+    private void EnemyHacks()
+    {
+        // Spawn Gravy
+        if (Input.GetKeyDown(KeyCode.G))
+        {        
+            Instantiate(enemyPrefabs[1], GameManager.GetMousePos(), Quaternion.identity);
+        }
+    }
+
+
     private void DisplayWaveTimer() {
         float upperLimitTime = 0f;
         waveTimerText.text = 0f.ToString("0:00");
