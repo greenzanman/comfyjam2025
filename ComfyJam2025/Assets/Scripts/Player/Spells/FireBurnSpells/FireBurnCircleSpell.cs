@@ -22,6 +22,8 @@ public class FireBurnCircleSpell : SpellBase
 
     public override void Cast()
     {
+        Logger.Log("Casting FireBurnCircleSpell", LogLevel.debug);
+
         // Damage all enemies
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
         {

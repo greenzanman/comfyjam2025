@@ -40,7 +40,7 @@ public class EnemyBase : MonoBehaviour
         return;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         tintColor = Color.white;
         if (windDuration > 0)
@@ -107,6 +107,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Burn(float burnDuration)
     {
+        Logger.Log("BURNING! Burn called on " + name, LogLevel.debug);
         burnTimer = Mathf.Max(burnTimer, burnDuration);
     }
 

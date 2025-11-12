@@ -17,6 +17,8 @@ public class TestSpell : SpellBase
 
     public override void Cast()
     {
+        Logger.Log("Casting TestSpell", LogLevel.debug);
+
         // Damage all enemies
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
         {
