@@ -76,7 +76,6 @@ public class EnemyDropBase : MonoBehaviour
     }
 }
 public enum ItemType {
-    NONE,
     RIND,
     GREEN_LEAF,
     ORANGE_LEAF,

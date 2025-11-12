@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class CraftingManager : MonoBehaviour
 {
-    private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes/* = {
+    private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes
+        = { (ItemType.RIND, ItemType.RIND, ItemType.RIND, SpellType.CircleFreeze) };
+        /* = {
         ( ItemType.Rind, ItemType.Stem, ItemType.Stem, SpellType.BurnCircle),
         ( ItemType.Rind, ItemType.Rind, ItemType.Rind, SpellType.FireWall),
         ( ItemType.Stem, ItemType.Stem, ItemType.Stem, SpellType.CircleFreeze),
@@ -17,7 +19,7 @@ public class CraftingManager : MonoBehaviour
         ( ItemType.Feather, ItemType.Rind, ItemType.Rind, SpellType.ZapSpell),
         ( ItemType.Feather, ItemType.Rind, ItemType.Stem, SpellType.Sunbeam),
         ( ItemType.Feather, ItemType.Stem, ItemType.Stem, SpellType.BlowerSpell),
-    }*/;
+    }*/
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
     {
@@ -39,6 +41,7 @@ public class CraftingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         // Create each item display
         foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
         {
@@ -63,6 +66,8 @@ public class CraftingManager : MonoBehaviour
         craftingSlots.Add(transform.Find("CraftingSlot1").GetComponent<CraftingSlot>());
         craftingSlots.Add(transform.Find("CraftingSlot2").GetComponent<CraftingSlot>());
         craftingSlots.Add(transform.Find("CraftingSlot3").GetComponent<CraftingSlot>());
+
+        if (spellRecipes.Length <= 0) return;
 
         // Fill spell dict
         spellDict = new Dictionary<int, SpellType>();
