@@ -5,7 +5,7 @@ using TMPro;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField] private Camera cam;
+    //[SerializeField] private Camera cam;
     public static EnemyManager instance;
 
     public List<GameObject> enemyPrefabs;
@@ -52,18 +52,35 @@ public class EnemyManager : MonoBehaviour
     {
         if (!canSpawn) return;
 
-        switch(waveState) {
+        switch (waveState)
+        {
             case WaveState.SPAWNING_ENEMIES:
-                enemyWavePS.Play();
+                //enemyWavePS.Play();
                 HandleEnemySpawning();
                 break;
             case WaveState.DOWNTIME:
-                enemyWavePS.Stop();
+                //enemyWavePS.Stop();
                 HandleWaveDownTime();
                 break;
         }
         DisplayWaveTimer();
+
+        // Hacks
+#if UNITY_EDITOR
+        EnemyHacks();
+#endif
     }
+
+    private void EnemyHacks()
+    {
+        // Spawn Gravy
+        if (Input.GetKeyDown(KeyCode.G))
+        {        
+            Instantiate(enemyPrefabs[1], GameManager.GetMousePos(), Quaternion.identity);
+        }
+    }
+
+
     private void DisplayWaveTimer() {
         float upperLimitTime = 0f;
         waveTimerText.text = 0f.ToString("0:00");
@@ -120,8 +137,8 @@ public class EnemyManager : MonoBehaviour
     {
         // Generate random spot 0.5 unit within the border
         float aspect = Screen.width / Screen.height;
-        float width = 4.0f * cam.orthographicSize * aspect;
-        float height = 2.0f * cam.orthographicSize * 1.25f;
+        float width = 4.0f * Camera.main.orthographicSize * aspect;
+        float height = 2.0f * Camera.main.orthographicSize * 1.25f;
         float randVal = Random.value * 2 * (width + height);
 
         Vector3 spawnPos;

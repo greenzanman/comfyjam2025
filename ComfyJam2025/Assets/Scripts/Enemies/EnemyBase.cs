@@ -12,26 +12,26 @@ public class EnemyBase : MonoBehaviour
     [field: SerializeField] protected float maxHealth = 4;
     protected DamageType killingType = DamageType.None;
 
-    private CenterStation centerStation;
+    protected CenterStation centerStation;
 
-    private Color HEALTH_COLOR = new Color(1, 0, 0, 0.5f);
-    private Color POS_COLOR = new Color(0, 0, 1, 0.3f);
-    private Color tintColor;
-    private Color currentTint = Color.white;
+    protected Color HEALTH_COLOR = new Color(1, 0, 0, 0.5f);
+    protected Color POS_COLOR = new Color(0, 0, 1, 0.3f);
+    protected Color tintColor = Color.white;
+    protected Color currentTint = Color.white;
     private float freezeTimer = 0;
-    private const float MELT_DAMAGE = 2;
-    private Vector2 windDirection;
-    private float windDuration;
-    private const float WIND_RATIO = 9;
-    private float burnTimer = 0;
-    [SerializeField] private float density = 1;
+    protected const float MELT_DAMAGE = 2;
+    protected Vector2 windDirection;
+    protected float windDuration;
+    protected const float WIND_RATIO = 9;
+    protected float burnTimer = 0;
+    [SerializeField] protected float density = 1;
 
     [Header("DROPS")]
-    [SerializeField] private GameObject itemDropBasePrefab;
+    [SerializeField] protected GameObject itemDropBasePrefab;
     public List<ItemData> possibleDrops;
 
-    private bool isDead = false;
-    private void Start()
+    protected bool isDead = false;
+    protected void Start()
     {
         // Register with manager
         EnemyManager.RegisterEnemy(this);
@@ -46,9 +46,8 @@ public class EnemyBase : MonoBehaviour
         return;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
-        tintColor = Color.white;
         if (windDuration > 0)
         {
             windDuration -= GameManager.GetDeltaTime();
@@ -84,6 +83,7 @@ public class EnemyBase : MonoBehaviour
                 renderer.color = currentTint;
             }
         }
+        tintColor = Color.white;
 
         // Do death all at the same time
         if (isDead)
@@ -109,6 +109,11 @@ public class EnemyBase : MonoBehaviour
         {
             freezeTimer = freezeDuration;
         }
+    }
+
+    public bool IsFrozen()
+    {
+        return freezeTimer > 0;
     }
 
     public virtual void Blow(Vector2 windDirection, float windDuration)
@@ -146,6 +151,11 @@ public class EnemyBase : MonoBehaviour
         return transform.position;
     }
 
+    public virtual void SetPosition(Vector2 newPosition)
+    {
+        transform.position = newPosition;
+    }
+
     // Contains majority of ai thoughts for a given enemy, overrided for a given unit
     protected virtual void Think()
     {
@@ -164,7 +174,7 @@ public class EnemyBase : MonoBehaviour
 
         Destroy(gameObject);
     }
-    private void DetermineDroppedItem() {
+    protected void DetermineDroppedItem() {
         float weight = CalculateDropWeight(out ItemData maximumChanceItem);
         Random.InitState(Random.Range(1000, 9999));
         float chance = Random.Range(0f, weight);
@@ -172,7 +182,7 @@ public class EnemyBase : MonoBehaviour
 
         foreach (ItemData item in possibleDrops) {
             float dropChance = item.dropChance;
-            Debug.Log($"chance: {chance} > weight: {weight} | dropped: {dropChance}");
+            Logger.Log($"chance: {chance} > weight: {weight} | dropped: {dropChance}", LogLevel.debug);
             if (chance < dropChance) {
                 selectedItem = item;
                 break;
@@ -185,7 +195,7 @@ public class EnemyBase : MonoBehaviour
         drop.GetComponentInChildren<SpriteRenderer>().sprite = selectedItem.itemSprite;
         drop.GetComponent<EnemyDropBase>().itemType = selectedItem.itemType;
     }
-    private float CalculateDropWeight(out ItemData maximumChanceItem) {
+    protected float CalculateDropWeight(out ItemData maximumChanceItem) {
         float weight = 0f;
         maximumChanceItem = possibleDrops[0];
         foreach (ItemData itemData in possibleDrops) {
@@ -198,7 +208,7 @@ public class EnemyBase : MonoBehaviour
         return weight;
     }
 
-    private void OnGUI()
+    protected void OnGUI()
     {
         if (DebugManager.GetConsoleVar("DrawEnemyHealth") == 1)
         { 

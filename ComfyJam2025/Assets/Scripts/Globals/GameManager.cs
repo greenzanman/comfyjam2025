@@ -16,14 +16,6 @@ public class GameManager : MonoBehaviour
     {
         if (instance == null)
             instance = this;
-
-        // Check itemTextures validity
-        if (itemSprites.Count != Enum.GetNames(typeof(ItemType)).Length)
-        {
-            Logger.Log("Item textures not properly assigned for all items", LogLevel.fatal);
-        }
-
-        Logger.Log("GameManager registered", LogLevel.info);
     }
 
     void Update()
@@ -34,7 +26,7 @@ public class GameManager : MonoBehaviour
 
     public static Sprite GetSprite(ItemType itemType)
     {
-        return instance.itemSprites[(int)itemType];
+        return PlayerManager.instance.GetSprite(itemType);
     }
 
     public static float GetTimeDilation()

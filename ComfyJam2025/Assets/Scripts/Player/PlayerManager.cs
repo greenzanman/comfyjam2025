@@ -13,6 +13,20 @@ public enum PlayerState
     Casting,    // Spell is ready, cannot craft
 }
 
+public enum ItemType {
+    RIND = 0,
+    GREEN_LEAF = 1,
+    ORANGE_LEAF = 2,
+    RED_MUSH = 3,
+    BLUE_MUSH = 4,
+    GREEN_MUSH = 5,
+    SUNFLOWER = 6,
+    ANTLER = 7,
+    ACORN = 8,
+    FEATHER = 9,
+}
+
+
 public enum SpellType
 {
     Dud = -1,
@@ -43,8 +57,8 @@ public class PlayerManager : MonoBehaviour
     private Transform craftingButton;
 
     public List<ItemData> possibleItems;
+    private Dictionary<ItemType, Sprite> itemSprites = new Dictionary<ItemType, Sprite>();
     public Dictionary<ItemType, int> inventory = new Dictionary<ItemType, int>();
-    [HideInInspector] public UnityEvent<ItemType> OnItemChange; // for inventory ui
 
     [SerializeField] private float spellLocationOffset = 3f; 
 
@@ -89,22 +103,36 @@ public class PlayerManager : MonoBehaviour
             }
             if (spellPrefabMapping.ContainsKey(spellInfo.spellType))
             {
-                
+
                 Logger.Log($"Recieved duplicates for spell type {spellInfo.spellType}", LogLevel.error);
                 continue;
             }
             spellPrefabMapping.Add(spellInfo.spellType, spellPrefab);
-        }    
+        }
+
+        foreach (ItemData itemData in possibleItems)
+        {
+            itemSprites[itemData.itemType] = itemData.itemSprite;
+        }
+
         // Initialize inventory set
         // InitializeItems();
         
     }
-    private void InitializeItems() {
-        foreach (ItemData itemData in possibleItems) {
+    private void InitializeItems()
+    {
+        foreach (ItemData itemData in possibleItems)
+        {
             inventory.Add(itemData.itemType, 0);
             //instance.OnItemChange.Invoke(itemData.itemType);
         }
     }
+
+    public Sprite GetSprite(ItemType itemType)
+    {
+        return itemSprites[itemType];
+    }
+
     // Increase inventory amount of one item by 1
     public static void AddItem(ItemType itemType) {
 

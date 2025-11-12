@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7eb8ca1de860118469a5bc5e7dddda9e, type: 3}
   m_Name: Pumpkin Rind
   m_EditorClassIdentifier: 
-  itemType: 1
+  itemType: 0
   dropChance: 0.75
   itemSprite: {fileID: -45436861, guid: 15f8ed86c434ee24b9cac4884b0dc5fe, type: 3}
