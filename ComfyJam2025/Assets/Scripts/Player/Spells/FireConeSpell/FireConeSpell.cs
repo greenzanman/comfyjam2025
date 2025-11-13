@@ -6,12 +6,10 @@ using UnityEngine;
 public class FireConeSpell : SpellBase
 {
     private PolygonCollider2D coneCollider;
-    private Transform AimHighlight;
     [SerializeField] private float damage = 5;
+
     public void Start()
     {
-        AimHighlight = transform.Find("AimingRect");
-
         coneCollider = GetComponentInChildren<PolygonCollider2D>();
     }
     public override void Aim()
@@ -33,10 +31,10 @@ public class FireConeSpell : SpellBase
         {
             if (coneCollider.OverlapPoint(enemy.GetPosition()))
             {
+                PlayVFX(enemy.transform.position);
                 enemy.TakeDamage(damage, DamageType.Fire);
             }
         }
-        // Create firewall
-        Destroy(gameObject);
+        delayedDeath.StartDelayedDeath();
     }
 }

@@ -7,6 +7,7 @@ public class SunbeamSpell : SpellBase
 {
     public GameObject SunbeamPrefab;
     private Transform AimHighlight;
+
     public void Start()
     {
         AimHighlight = transform.Find("AimingCircle");

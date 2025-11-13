@@ -304,6 +304,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftingItemPrefab: {fileID: 2275308839964380121, guid: f8c09638da85a4c4491b370dbe007a31, type: 3}
+  initialStartingPos: 0
+  rows: 4
+  columns: 1
+  moveUp: -6
 --- !u!1 &7865691987550077267
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,10 +400,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6630681657042558505}
     m_Modifications:
-    - target: {fileID: 6629731924300159276, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9098049179131142585, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -474,10 +474,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6630681657042558505}
     m_Modifications:
-    - target: {fileID: 6629731924300159276, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9098049179131142585, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
       propertyPath: m_LocalScale.x
       value: 3
@@ -552,10 +548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6630681657042558505}
     m_Modifications:
-    - target: {fileID: 6629731924300159276, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
-      propertyPath: m_SortingOrder
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 9098049179131142585, guid: 60a0e976b7f23994d9102d9601449856, type: 3}
       propertyPath: m_LocalPosition.x
       value: 12.33

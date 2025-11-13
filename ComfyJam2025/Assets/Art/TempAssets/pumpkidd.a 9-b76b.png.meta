@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cce4501c9c0cd294d9808d49f80ecc04
+guid: 2a39390c96076c94785cb13bc6a5ee6d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,55 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TempPumpkinRind_0
+      name: pumpkidd.a 9-b76b_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 3
-        width: 24
-        height: 26
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0222adc54eee5044d972f8b1e7eed22a
-      internalID: -858227669
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: TempPumpkinRind_1
-      rect:
-        serializedVersion: 2
-        x: 33
+        x: 0
         y: 0
-        width: 30
-        height: 32
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0bcc0beba834ba040b62a5717cf724d5
-      internalID: 914090077
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: emptyItem
-      rect:
-        serializedVersion: 2
-        x: 63
-        y: 0
-        width: 28
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +124,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e660b41298a880c438b9497b7afedcf0
-      internalID: -2095668233
+      spriteID: c05d656405aa0a142b1a4b923fd0b19b
+      internalID: -1818587931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkidd.a 9-b76b_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f1906d459b9fc245a5bc248a9e232d3
+      internalID: -362105645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pumpkidd.a 9-b76b_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e9e6bed66ae67349956693b0b59a69e
+      internalID: -242250578
       vertices: []
       indices: 
       edges: []
@@ -183,9 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      TempPumpkinRind_0: -858227669
-      TempPumpkinRind_1: 914090077
-      emptyItem: -2095668233
+      pumpkidd.a 9-b76b_0: -1818587931
+      pumpkidd.a 9-b76b_1: -362105645
+      pumpkidd.a 9-b76b_2: -242250578
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

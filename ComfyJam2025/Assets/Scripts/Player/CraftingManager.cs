@@ -7,16 +7,33 @@ using UnityEngine;
 public class CraftingManager : MonoBehaviour
 {
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
-        ( ItemType.RIND, ItemType.ANTLER, ItemType.ANTLER, SpellType.BurnCircle),
-        ( ItemType.RIND, ItemType.RIND, ItemType.RIND, SpellType.FireWall),
-        ( ItemType.ANTLER, ItemType.ANTLER, ItemType.ANTLER, SpellType.CircleFreeze),
-        ( ItemType.RIND, ItemType.ANTLER, ItemType.RIND, SpellType.FireCone),
-        ( ItemType.FEATHER, ItemType.FEATHER, ItemType.FEATHER, SpellType.Graveyard),
-        ( ItemType.FEATHER, ItemType.FEATHER, ItemType.ANTLER, SpellType.WindPush),
-        ( ItemType.FEATHER, ItemType.FEATHER, ItemType.RIND, SpellType.WindRotate),
-        ( ItemType.FEATHER, ItemType.RIND, ItemType.RIND, SpellType.ZapSpell),
-        ( ItemType.FEATHER, ItemType.RIND, ItemType.ANTLER, SpellType.Sunbeam),
-        ( ItemType.FEATHER, ItemType.ANTLER, ItemType.ANTLER, SpellType.BlowerSpell),
+
+        ( ItemType.RIND, ItemType.RIND, ItemType.RIND, SpellType.Dud),
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.ACORN, SpellType.ZapSpell),
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, SpellType.WindPush),
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RED_MUSH, SpellType.Sunbeam),
+
+
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.GREEN_LEAF, SpellType.FireWall),
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.RED_MUSH, SpellType.Sunbeam),
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.RIND, SpellType.Graveyard),
+
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.ACORN, SpellType.WindRotate),
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.FireWall),
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RIND, SpellType.Sunbeam),
+
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.ACORN, SpellType.ZapSpell),
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.GREEN_LEAF, SpellType.FireCone),
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RIND, SpellType.WindPush),
+
+        ( ItemType.RIND, ItemType.RIND, ItemType.ACORN, SpellType.Dud),
+        ( ItemType.RIND, ItemType.RIND, ItemType.GREEN_LEAF, SpellType.FireWall),
+        ( ItemType.RIND, ItemType.RIND, ItemType.RED_MUSH, SpellType.FireCone),
+
+        ( ItemType.RIND, ItemType.ACORN, ItemType.RED_MUSH, SpellType.BlowerSpell),
+        ( ItemType.RIND, ItemType.ACORN, ItemType.GREEN_LEAF, SpellType.CircleFreeze),
+        ( ItemType.ACORN, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.BurnCircle),
+        ( ItemType.RIND, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.ZapSpell),
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)
@@ -36,15 +53,19 @@ public class CraftingManager : MonoBehaviour
 
     private List<CraftingSlot> craftingSlots = new List<CraftingSlot>();
 
-    // Start is called before the first frame update
+    [Header("ITEM SLOT VISUAL POSITION")]
+    [SerializeField] private float initialStartingPos = 0;
+    [SerializeField] private float rows = 4;
+    [SerializeField] private float columns = 1;
+    [SerializeField] private float moveUp = -6;
+
     void Start()
     {
 
         // Create each item display
         foreach (ItemType itemType in Enum.GetValues(typeof(ItemType)))
         {
-            GameObject newItem = Instantiate(craftingItemPrefab,
-                OFFSCREEN, Quaternion.identity);
+            GameObject newItem = Instantiate(craftingItemPrefab, OFFSCREEN, Quaternion.identity);
             newItem.transform.SetParent(transform);
 
             CraftingItem craftingComponent = newItem.GetComponent<CraftingItem>();
@@ -86,21 +107,10 @@ public class CraftingManager : MonoBehaviour
         DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        // Place inventory items along the screen
         PlaceInventory();
-
         DragInventory();
-    }
-
-    // Calculates and places initial positions of the inventory
-    private void PlaceItems()
-    {
-        float screenHeight = Camera.main.orthographicSize;
-        float screenWidth = screenHeight * Camera.main.aspect;
-        Logger.Log(screenWidth.ToString(), LogLevel.error);
     }
 
     private void PlaceInventory()
@@ -113,11 +123,11 @@ public class CraftingManager : MonoBehaviour
 
         // Then, place player known items
         Dictionary<ItemType, int> itemCounts = PlayerManager.instance.inventory;
-        int pos = 0;
+        float pos = initialStartingPos;
         foreach (ItemType itemType in itemCounts.Keys)
         {
 
-            craftingItems[itemType].SetPosition(new Vector2(2 + 5 * (pos % 5), 4 + (int)(pos / 5) * 6));
+            craftingItems[itemType].SetPosition(new Vector2(rows + columns * (pos % columns), rows*2 + (int)(pos / columns) * moveUp));
             craftingItems[itemType].SetCount(itemCounts[itemType]);
             if (heldItem != null && heldItem.GetItemType() == itemType)
                 craftingItems[itemType].SetCount(itemCounts[itemType] - 1);
@@ -128,7 +138,6 @@ public class CraftingManager : MonoBehaviour
     private void DragInventory()
     {
         Vector2 mousePos = GameManager.GetMousePos();
-        // Clicking down
         if (Input.GetMouseButtonDown(0))
         {
             // TODO: heldItem should be separate from item Display

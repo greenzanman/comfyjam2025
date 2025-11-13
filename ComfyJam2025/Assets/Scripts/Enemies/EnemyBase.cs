@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
-using System.Linq;
+using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -26,6 +26,8 @@ public class EnemyBase : MonoBehaviour
     protected float burnTimer = 0;
     [SerializeField] protected float density = 1;
 
+    [SerializeField] private Slider hpSlider;
+
     [Header("DROPS")]
     [SerializeField] protected GameObject itemDropBasePrefab;
     public List<ItemData> possibleDrops;
@@ -38,11 +40,12 @@ public class EnemyBase : MonoBehaviour
 
         // Initialize values
         InitializeEnemy();
+        hpSlider.maxValue = maxHealth;
+        hpSlider.value = health;
     }
 
     protected virtual void InitializeEnemy()
     {
-        Logger.Log($"InitializeEnemy not implemented for {name}", LogLevel.error);
         return;
     }
 
@@ -138,12 +141,11 @@ public class EnemyBase : MonoBehaviour
         }
 
         health -= damageAmount;
-        if (health <= 0)
-        {
+        hpSlider.value = health;
+        if (health <= 0) {
             killingType = damageType;
             isDead = true;
         }
-
     }
 
     public virtual Vector2 GetPosition()
@@ -207,7 +209,7 @@ public class EnemyBase : MonoBehaviour
 
         return weight;
     }
-
+    /*
     protected void OnGUI()
     {
         if (DebugManager.GetConsoleVar("DrawEnemyHealth") == 1)
@@ -226,5 +228,5 @@ public class EnemyBase : MonoBehaviour
             EditorGUI.DrawRect(new Rect(screenPos.x -5, screenPos.y - 5,
                 10, 10), POS_COLOR);
         }
-    }
+    }*/
 }

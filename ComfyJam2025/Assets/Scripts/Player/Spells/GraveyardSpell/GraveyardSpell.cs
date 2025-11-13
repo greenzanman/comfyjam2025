@@ -5,7 +5,6 @@ using UnityEngine;
 public class GraveyardSpell : SpellBase
 {
     public GameObject GraveyardPrefab;
-
     private Transform AimHighlight;
     public void Start()
     {
@@ -18,8 +17,8 @@ public class GraveyardSpell : SpellBase
 
     public override void Cast()
     {
+        PlayVFX(AimHighlight.position);
         // Create graveyard
         Instantiate(GraveyardPrefab, AimHighlight.position, Quaternion.identity);
-        Destroy(gameObject);
     }
 }

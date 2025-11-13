@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6694303232104439135}
   - component: {fileID: 8965297213050815202}
+  - component: {fileID: -6977410888312924434}
   m_Layer: 0
   m_Name: FireConeSpell
   m_TagString: Untagged
@@ -46,6 +47,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellType: 3
+  spellVFX: {fileID: 7388187904791305177, guid: 6a1a32e9f3fb4d74b8c3e1ffefd21357, type: 3}
+  secondaryVFX: {fileID: 0}
+  delayedDeath: {fileID: -6977410888312924434}
+  damage: 5
+--- !u!114 &-6977410888312924434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276436687671920102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DeathDelay>k__BackingField: 0.75
+  <DieOnStart>k__BackingField: 0
 --- !u!1 &4772311350531900987
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,9 +92,9 @@ Transform:
   m_GameObject: {fileID: 4772311350531900987}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 29, y: 0, z: 0}
-  m_LocalScale: {x: 16, y: 50, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 13.55, y: 0.1, z: 0}
+  m_LocalScale: {x: 1.7698424, y: 4.824104, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6694303232104439135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -120,8 +139,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: b7b84caefd77b1f49a20674d8eda83a8, type: 3}
-  m_Color: {r: 1, g: 0.44576946, b: 0, a: 0.32941177}
+  m_Sprite: {fileID: 21300000, guid: 4c3550e14259b7b48900664bd40b5eba, type: 3}
+  m_Color: {r: 0.87843144, g: 0.427451, b: 0.20392159, a: 0.5921569}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -166,8 +185,8 @@ PolygonCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5, y: 5}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -175,7 +194,12 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
+    - - {x: 1.1736932, y: 2.2650843}
+      - {x: 0.00000087171793, y: 2.5814824}
+      - {x: -1.1304001, y: 2.1599505}
+      - {x: -1.8710794, y: 0.4806329}
+      - {x: -2.3708503, y: -1.7518842}
+      - {x: 0.018201604, y: -2.1328382}
+      - {x: 2.3053045, y: -1.7717453}
+      - {x: 1.9663415, y: 0.51575685}
   m_UseDelaunayMesh: 0

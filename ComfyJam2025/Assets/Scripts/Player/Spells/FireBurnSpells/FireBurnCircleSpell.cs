@@ -12,8 +12,6 @@ public class FireBurnCircleSpell : SpellBase
     public void Start()
     {
         AimHighlight = transform.Find("AimingCircle");
-
-        AimHighlight.localScale = new Vector3(2 * radius - 0.5f, 2 * radius - 0.5f, 1);
     }
     public override void Aim()
     {
@@ -27,11 +25,11 @@ public class FireBurnCircleSpell : SpellBase
         {
             if (utils.FlatSqrDistance(enemy.transform.position, GameManager.GetMousePos()) < radius * radius)
             {
+                PlayVFX(enemy.transform.position);
                 enemy.TakeDamage(damage);
                 enemy.Burn(burnDuration);
             }
         }
-
-        Destroy(gameObject);
+        delayedDeath.StartDelayedDeath();
     }
 }

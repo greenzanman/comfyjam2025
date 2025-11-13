@@ -22,7 +22,7 @@ public class FireWallSpell : SpellBase
     public override void Cast()
     {
         // Create firewall
+        PlayVFX(AimHighlight.position);
         Instantiate(FireWallPrefab, AimHighlight.position, AimHighlight.rotation);
-        Destroy(gameObject);
     }
 }

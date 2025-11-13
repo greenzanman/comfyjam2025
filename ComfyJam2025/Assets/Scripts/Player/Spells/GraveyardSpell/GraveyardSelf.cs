@@ -10,12 +10,7 @@ public class GraveyardSelf : MonoBehaviour
 
     private float gremlinTimer = 0;
     private const float TARGET_RADIUS = 15;
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
+    
     void Update()
     {
         age += GameManager.GetDeltaTime();
@@ -30,7 +25,7 @@ public class GraveyardSelf : MonoBehaviour
             if (closestEnemy)
             {
                 // Spawn dude
-                gremlinTimer += 2f;
+                gremlinTimer += 1f;
 
                 Vector2 spawnPos = Random.insideUnitCircle * 2;
                 GameObject gremlinObject = Instantiate(gremlinPrefab, transform.position + new Vector3(spawnPos.x, spawnPos.y, 0), Quaternion.identity);

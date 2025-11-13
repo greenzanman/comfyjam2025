@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3896597472752279355
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7357409188322874907}
+  - component: {fileID: 6658180113244502905}
+  m_Layer: 0
+  m_Name: Chain Lightning
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7357409188322874907
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896597472752279355}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.345556, y: -1.7570896, z: 23.745619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6658180113244502905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3896597472752279355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969176250ea9e0f41b05d3985b06802f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTargetPos: {x: 0, y: 0, z: 0}
+  lineRendererPrefab: {fileID: 8915985053810828754, guid: 1bc90a42e7583414ea1df3259e93d964, type: 3}
+  sparkVFXPrefab: {fileID: 8353316759040001425, guid: 81b36ef7bf60c0440a933ee647f31615, type: 3}
+  chainRange: 20
+  delayPerChain: 0.1
+  chainDuration: 0.5
+  enemiesInChain: []
+  destroyChains: 1
+  clickToTest: 0

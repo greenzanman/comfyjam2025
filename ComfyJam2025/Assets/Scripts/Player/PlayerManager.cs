@@ -52,7 +52,7 @@ public class PlayerManager : MonoBehaviour
     private const float ZAP_RADIUS = 4;
     private CraftingManager craftingManager;
     private Vector2 CRAFTING_POSITION = new Vector2(22, -17);
-    private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -16);
+    private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -16.5f);
     private int CRAFTING_WIDTH = 4;
     private Transform craftingButton;
 
@@ -72,6 +72,7 @@ public class PlayerManager : MonoBehaviour
     // Small buffer to prevent accidentally doubleclicking
     private float spellBuffer = 0;
     private SpellBase currentSpell;
+    [SerializeField] private GameObject recipeButton;
     
     private void Awake()
     {
@@ -84,6 +85,7 @@ public class PlayerManager : MonoBehaviour
             Logger.Log("Failed to find crafting manager attached to player manager.", LogLevel.fatal);
         }
         craftingManager.gameObject.SetActive(false);
+        recipeButton.SetActive(false);
 
         craftingButton = transform.Find("InventoryButton");
         if (craftingButton == null)
@@ -113,19 +115,7 @@ public class PlayerManager : MonoBehaviour
         foreach (ItemData itemData in possibleItems)
         {
             itemSprites[itemData.itemType] = itemData.itemSprite;
-        }
-
-        // Initialize inventory set
-        // InitializeItems();
-        
-    }
-    private void InitializeItems()
-    {
-        foreach (ItemData itemData in possibleItems)
-        {
-            inventory.Add(itemData.itemType, 0);
-            //instance.OnItemChange.Invoke(itemData.itemType);
-        }
+        }        
     }
 
     public Sprite GetSprite(ItemType itemType)
@@ -262,11 +252,13 @@ public class PlayerManager : MonoBehaviour
         {
             playerState = PlayerState.Crafting;
             craftingManager.gameObject.SetActive(true);
+            recipeButton.SetActive(state);
         }
         else if (playerState == PlayerState.Crafting && !state)
         {
             playerState = PlayerState.Idle;
             craftingManager.gameObject.SetActive(false);
+            recipeButton.SetActive(state);
         }
         else
         {

@@ -13,13 +13,15 @@ public class Blower : MonoBehaviour
     float age = 0;
     SpriteRenderer spriteRenderer;
     [SerializeField] private float targetRadius = 6;
-    // Start is called before the first frame update
+    [SerializeField] private float windStrength = 4f;
+
+
     void Start()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         // Bouncing
@@ -54,7 +56,7 @@ public class Blower : MonoBehaviour
             if (utils.FlatSqrDistance(transform.position, target.GetPosition()) < 1)
             {
                 // TODO: Play animation
-                target.Blow(windDirection, 0.75f);
+                target.Blow(windDirection, windStrength);
                 patience = 1f;
                 target = null;
             }

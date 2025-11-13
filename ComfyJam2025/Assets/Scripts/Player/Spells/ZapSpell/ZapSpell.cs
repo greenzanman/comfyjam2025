@@ -8,6 +8,9 @@ public class ZapSpell : SpellBase
     [SerializeField] private float snapDistance = 4;
     private Transform AimHighlight;
     private EnemyBase closestEnemy;
+
+    private List<EnemyBase> enemiesInRange = new List<EnemyBase>();
+
     public void Start()
     {
         AimHighlight = transform.Find("AimingCircle");
@@ -27,11 +30,12 @@ public class ZapSpell : SpellBase
     public override void Cast()
     {
         // Damage all enemies
+        
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
         {
             if (utils.FlatSqrDistance(enemy.transform.position, AimHighlight.position) < 81)
             {
-                enemy.TakeDamage(damage);
+                enemiesInRange.Add(enemy);
                 if (closestEnemy != null)
                 {
                     enemy.CopyState(closestEnemy);
@@ -39,6 +43,12 @@ public class ZapSpell : SpellBase
             }
         }
 
-        Destroy(gameObject);
+        ChainLightningVFX chainLightningVFX = FindObjectOfType<ChainLightningVFX>();
+        chainLightningVFX.ActivateChain(enemiesInRange);
+        foreach (EnemyBase enemy in enemiesInRange) {
+            enemy.TakeDamage(damage);
+        }
+
+        delayedDeath.StartDelayedDeath();
     }
 }

@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDropBase : MonoBehaviour
-{
+public class EnemyDropBase : MonoBehaviour {
     public ItemType itemType;
     [SerializeField] private float bounceHeight = 0.05f;
     [SerializeField] private float bounceDuration = 0.5f;
 
     private Vector3 originalPosition;
-    private enum DropState
-    {
+    private enum DropState {
         dropping,
         dropped,
         picking
@@ -21,11 +19,10 @@ public class EnemyDropBase : MonoBehaviour
     private float age = 0;
     private float lifetime = 15;
     private Vector2 startPos;
-    private float bumpHeight = 2;
+    private float bumpHeight = 1;
     private float bumpWidth;
-    
-    private void Start()
-    {
+
+    private void Start() {
         bounceHeight = Mathf.Clamp(bounceHeight, 0.1f, 5.0f);
         bounceDuration = Mathf.Clamp(bounceDuration, 0.1f, 5.0f);
 
@@ -35,8 +32,7 @@ public class EnemyDropBase : MonoBehaviour
         bumpWidth = Random.value * 2 - 1;
     }
 
-    private void Update()
-    {
+    private void Update() {
         // Simple lifetime for drops
         age += GameManager.GetDeltaTime();
         if (age >= lifetime - 2) // alpha changes
@@ -44,13 +40,11 @@ public class EnemyDropBase : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, 0.3f + 0.7f * ((int)(age * 2) % 2));
         }
 
-        switch (dropState)
-        {
+        switch (dropState) {
             case DropState.dropping:
                 transform.position = startPos + new Vector2(bumpWidth * age,
-                    bumpHeight * (1 - (2 * age - 1) * (2 * age - 1)));
-                if (age >= 1)
-                {
+                    bumpHeight * (2 - (2.5f * age - 1) * (3 * age - 1)));
+                if (age >= 1) {
                     dropState = DropState.dropped;
                     originalPosition = transform.position;
                 }
@@ -66,18 +60,16 @@ public class EnemyDropBase : MonoBehaviour
                     Destroy(gameObject);
                 break;
             case DropState.picking:
-                spriteRenderer.color = new Color(1, 1, 1, 1 - 2 * age);
-                transform.position += Vector3.up * GameManager.GetDeltaTime() * 2;
+                spriteRenderer.color = new Color(1, 1, 1, 1 - 4 * age);
+                transform.position += Vector3.up * GameManager.GetDeltaTime() * 7;
                 if (age >= 0.5)
                     Destroy(gameObject);
                 break;
         }
 
         // TODO: Make this not suck
-        if (Input.GetMouseButtonDown(0) && dropState != DropState.picking)
-        {
-            if ((GameManager.GetMousePos() - transform.position).sqrMagnitude < 4)
-            {
+        if (Input.GetMouseButtonDown(0) && dropState != DropState.picking) {
+            if ((GameManager.GetMousePos() - transform.position).sqrMagnitude < 4) {
                 Pickup();
                 dropState = DropState.picking;
                 age = 0;
@@ -85,20 +77,7 @@ public class EnemyDropBase : MonoBehaviour
         }
     }
 
-    protected virtual void Pickup()
-    {
+    protected virtual void Pickup() {
         PlayerManager.AddItem(itemType);
     }
-}
-public enum ItemType {
-    RIND,
-    GREEN_LEAF,
-    ORANGE_LEAF,
-    RED_MUSH,
-    BLUE_MUSH,
-    GREEN_MUSH,
-    SUNFLOWER,
-    ANTLER,
-    ACORN,
-    FEATHER
 }
