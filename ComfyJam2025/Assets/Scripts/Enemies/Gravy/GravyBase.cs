@@ -9,6 +9,7 @@ public class GravyBase : EnemyBase
     [SerializeField] private float healRate = 1f;
 
     [SerializeField] private float auraSize = 4;
+    [SerializeField] private List<Sprite> sprites;
     private enum GravyState
     {
         Normal,
@@ -20,16 +21,18 @@ public class GravyBase : EnemyBase
 
     private GravyState gravyState = GravyState.Normal;
     private SpriteRenderer aura;
+    private SpriteRenderer mainSprite;
     private float auraTimer = 0;
+    private float spriteTimer = 0;
 
     protected Color BURN_AURA = new Color(0, 1, 0, 0.3f);
     protected Color FREEZE_AURA = new Color(0, 0, 0, 0.3f);
     protected Color EMPTY_AURA = new Color(0, 0, 0, 0);
     protected override void InitializeEnemy()
     {
-        //Logger.Log($"Initializing {name}", LogLevel.debug);
-        //maxHealth = 10;
         health = maxHealth;
+
+        mainSprite = transform.Find("Visual").GetComponent<SpriteRenderer>();
 
         aura = transform.Find("AuraSprite").GetComponent<SpriteRenderer>();
         if (aura == null)
@@ -43,6 +46,9 @@ public class GravyBase : EnemyBase
     {
         CenterStation target = GameManager.centerStation;
 
+        mainSprite.flipX = GetPosition().x < target.transform.position.x;
+        spriteTimer += GameManager.GetDeltaTime();
+
         switch (gravyState)
         {
             case GravyState.Normal:
@@ -52,6 +58,8 @@ public class GravyBase : EnemyBase
                         target.transform.position, moveSpeed * GameManager.GetDeltaTime());
                 }
                 aura.color = EMPTY_AURA;
+
+                mainSprite.sprite = sprites[(int)(spriteTimer * 10) % 5 + 8];
                 break;
             case GravyState.Burn:
                 foreach (EnemyBase enemy in EnemyManager.GetEnemies())
@@ -62,6 +70,7 @@ public class GravyBase : EnemyBase
                         enemy.TakeDamage(GameManager.GetDeltaTime() * -healRate);
                     }
                 }
+                mainSprite.sprite = sprites[(int)(spriteTimer * 10) % 8 + 13];
 
                 // TODO: Heal mother
                 TakeDamage(GameManager.GetDeltaTime() * healthDrain);
@@ -70,7 +79,8 @@ public class GravyBase : EnemyBase
             case GravyState.Freeze:
                 foreach (EnemyBase enemy in EnemyManager.GetEnemies())
                 {
-                    if (enemy == this) continue;
+                    // Gravy monsters aren't healed by this
+                    if (enemy is GravyBase) continue;
                     float dist = utils.FlatSqrDistance(GetPosition(), enemy.GetPosition());
                     if (dist > 1 && dist < auraSize * auraSize)
                     {
@@ -78,6 +88,12 @@ public class GravyBase : EnemyBase
                             1, enemy.IsFrozen() ? 4f : 1.5f, GameManager.GetDeltaTime()));
                     }
                 }
+                if (target != null)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position,
+                        target.transform.position, moveSpeed / 6 * GameManager.GetDeltaTime());
+                }
+                mainSprite.sprite = sprites[(int)(spriteTimer * 10) % 8];
                 aura.color = FREEZE_AURA;
                 break;
         }
@@ -89,20 +105,10 @@ public class GravyBase : EnemyBase
         }
     }
 
-    protected override void Update()
+    // Does not use renderer color
+    public override void SetRendererColor( Color color )
     {
-        if (gravyState == GravyState.Burn)
-        {
-            tintColor.r = 0;
-            tintColor.b = 0;
-        }
-        if (gravyState == GravyState.Freeze)
-        {
-            tintColor.r = 0;
-            tintColor.b = 0;
-            tintColor.g = 0;
-        }
-        base.Update();
+        return;
     }
 
     public override void Freeze(float freezeDuration)
@@ -117,14 +123,4 @@ public class GravyBase : EnemyBase
         auraTimer = auraDuration;
     }
 
-//     protected override void Die()
-//     {
-//         // Find random drop
-//         if (killingType != DamageType.Disintegrate && dropPrefabs.Count > 0)
-//         {
-//             Instantiate(dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
-//                 transform.position, Quaternion.identity);
-//         }
-//         base.Die();
-//     }
 }

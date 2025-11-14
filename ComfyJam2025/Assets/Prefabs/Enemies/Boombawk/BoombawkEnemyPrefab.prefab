@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884139702188758689}
-  - component: {fileID: 4378229421034090284}
+  - component: {fileID: 5901692666606379661}
   m_Layer: 0
-  m_Name: GravyEnemyPrefab
+  m_Name: BoombawkEnemyPrefab
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 3387886069253653342}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4378229421034090284
+--- !u!114 &5901692666606379661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,42 +43,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1458013370352884220}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0eaed008dd4c9cf4e946bc1e274ceb31, type: 3}
+  m_Script: {fileID: 11500000, guid: d1330eb44109bfc49a358c456270f6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 9
+  maxHealth: 10
   density: 2
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
-  - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
-  - {fileID: 11400000, guid: 34ba3d8ab842c614eaf220a294f2731a, type: 2}
-  moveSpeed: 1.25
-  healthDrain: 0.5
-  healRate: 1
-  auraSize: 10
+  - {fileID: 11400000, guid: adddcf9a937b40c42a65f5ff0f6a58a0, type: 2}
+  moveSpeed: 0.5
+  boomDamage: 10
+  boomRadius: 8
+  fuseTime: 3
   sprites:
-  - {fileID: 1463224080, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: -469126905, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: -1662967049, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: 277354014, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: 445593106, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: -1321572811, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: -995485991, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: 1102229404, guid: f43250218b0536643a4de5e0e46f0dd4, type: 3}
-  - {fileID: -678827750, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
-  - {fileID: -2019629722, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
-  - {fileID: -1260766051, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
-  - {fileID: -1555828195, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
-  - {fileID: -1074394944, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
-  - {fileID: 1182764541, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: -1587246629, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: -914899475, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: -223281124, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: 2146073663, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: 1526452776, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: 766637241, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  - {fileID: -456099477, guid: 4f46b2c32d0bfc549af81fb857094dee, type: 3}
-  auraDuration: 5
+  - {fileID: -9160944, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: 1447911799, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: -1943594011, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: -933878614, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: 671897668, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: -1746646909, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
+  - {fileID: -1973332085, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: -1615802579, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: 261827205, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: 859269730, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: 1964368372, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: -632835036, guid: ea80985d43f43bd4ba3c2f0e6344e731, type: 3}
+  - {fileID: -144720471, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
+  - {fileID: 781693444, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
+  - {fileID: -1573697382, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
+  - {fileID: -1904279654, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
+  - {fileID: -1240139372, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
+  - {fileID: 2095423357, guid: 4e3d5da76533f78408ab8c5e554b7db1, type: 3}
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0
@@ -105,8 +100,8 @@ Transform:
   m_GameObject: {fileID: 2079076722295693627}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.29, y: 1.65, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 884139702188758689}
@@ -152,7 +147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -678827750, guid: 7fbbe71d1ee2d674ea9bb6c7873327f3, type: 3}
+  m_Sprite: {fileID: -9160944, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,7 +169,7 @@ GameObject:
   - component: {fileID: 3387886069253653342}
   - component: {fileID: 5052062535356179420}
   m_Layer: 0
-  m_Name: AuraSprite
+  m_Name: PreviewAura
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

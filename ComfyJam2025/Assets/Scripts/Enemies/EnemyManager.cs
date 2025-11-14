@@ -78,6 +78,11 @@ public class EnemyManager : MonoBehaviour
         {        
             Instantiate(enemyPrefabs[1], GameManager.GetMousePos(), Quaternion.identity);
         }
+        // Spawn boombawk
+        if (Input.GetKeyDown(KeyCode.F))
+        {        
+            Instantiate(enemyPrefabs[2], GameManager.GetMousePos(), Quaternion.identity);
+        }
     }
 
 

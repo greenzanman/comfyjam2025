@@ -78,10 +78,7 @@ public class EnemyBase : MonoBehaviour
         if (currentTint != tintColor)
         {
             currentTint = tintColor;
-            foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
-            {
-                renderer.color = currentTint;
-            }
+            SetRendererColor(currentTint);
         }
         tintColor = Color.white;
 
@@ -89,6 +86,14 @@ public class EnemyBase : MonoBehaviour
         if (isDead)
         {
             Die();
+        }
+    }
+
+    public virtual void SetRendererColor( Color color )
+    {
+        foreach (SpriteRenderer renderer in GetComponentsInChildren<SpriteRenderer>())
+        {
+            renderer.color = color;
         }
     }
 
