@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6694303232104439135}
   - component: {fileID: 1870127328446704777}
+  - component: {fileID: 4324535174400270630}
   m_Layer: 0
   m_Name: CircleBurnSpell
   m_TagString: Untagged
@@ -46,8 +47,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellType: 7
-  damage: 1
+  spellVFX: {fileID: 7388187904791305177, guid: 4f7bbcc54eeb70047a648a8525786836, type: 3}
+  secondaryVFX: {fileID: 7388187904791305177, guid: 81ea2b6808c93ae4eb4b6fac8f94aafd, type: 3}
+  delayedDeath: {fileID: 4324535174400270630}
+  damage: 2
   burnDuration: 6
+  radius: 5
+--- !u!114 &4324535174400270630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276436687671920102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DeathDelay>k__BackingField: 5
+  <DieOnStart>k__BackingField: 0
 --- !u!1 &6584817889895743445
 GameObject:
   m_ObjectHideFlags: 0
@@ -75,8 +94,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.5, y: 13.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 0.14814815}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6694303232104439135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -121,8 +140,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 954d8a5ada68266438d41ea959bb7af0, type: 3}
-  m_Color: {r: 1, g: 0.51182795, b: 0, a: 0.25490198}
+  m_Sprite: {fileID: 21300000, guid: 4c3550e14259b7b48900664bd40b5eba, type: 3}
+  m_Color: {r: 1, g: 0.51182795, b: 0, a: 0.77254903}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

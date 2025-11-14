@@ -7,6 +7,8 @@ public class WindClockwiseSpell : SpellBase
 {
     private BoxCollider2D windCollider;
     private Transform AimHighlight;
+    [SerializeField] private float windStrength = 4f;
+
     public void Start()
     {
         AimHighlight = transform.Find("AimingRect");
@@ -25,13 +27,12 @@ public class WindClockwiseSpell : SpellBase
         Vector2 windDirection = GameManager.GetMousePos().normalized;
         windDirection = new Vector2(windDirection.y, -windDirection.x);
         // Push enemies
-        foreach (EnemyBase enemy in EnemyManager.GetEnemies())
-        {
-            if (windCollider.OverlapPoint(enemy.GetPosition()))
-            {
-                enemy.Blow(windDirection, 0.75f);
+        foreach (EnemyBase enemy in EnemyManager.GetEnemies()) {
+
+            if (windCollider.OverlapPoint(enemy.GetPosition())) {
+                PlayVFX(enemy.transform.position);
+                enemy.Blow(windDirection, windStrength);
             }
         }
-        Destroy(gameObject);
     }
 }

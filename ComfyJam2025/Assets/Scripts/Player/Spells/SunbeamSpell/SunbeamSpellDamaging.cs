@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class SunbeamSpellDamaging : MonoBehaviour
 {
@@ -8,13 +9,18 @@ public class SunbeamSpellDamaging : MonoBehaviour
     [SerializeField] private float moveSpeed = 20;
     private float age = 0;
     [SerializeField] private float damagePerSecond = 10;
-    // Start is called before the first frame update
+
+    [SerializeField] private VisualEffect spellVFX;
+    [SerializeField] private VisualEffect secondaryVFX;
+    private const string VFX_EVENT_NAME = "OnAbilityCasted";
+    private float vfxDelay = 0.2f;
+
+
     void Start()
     {
         beamCollider = GetComponentInChildren<CircleCollider2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Destroy after a time
@@ -33,8 +39,21 @@ public class SunbeamSpellDamaging : MonoBehaviour
         {
             if (beamCollider.OverlapPoint(enemy.GetPosition()))
             {
+                if (GameManager.GetDeltaTime() >= vfxDelay && GameManager.GetDeltaTime() <= vfxDelay + 0.1f) PlayVFX(enemy.transform.position, enemy.transform);
                 enemy.TakeDamage(damagePerSecond * GameManager.GetDeltaTime(), DamageType.Disintegrate);
             }
+        }
+    }
+    protected virtual void PlayVFX(Vector3 targetPosition, Transform secondaryTransformTarget = null) {
+        if (spellVFX) {
+            VisualEffect vfx = Instantiate(spellVFX);
+            vfx.transform.position = targetPosition;
+            vfx.SendEvent(VFX_EVENT_NAME);
+        }
+        if (secondaryVFX) { 
+            VisualEffect vfx2 = Instantiate(secondaryVFX, secondaryTransformTarget);
+            vfx2.transform.position = targetPosition;
+            vfx2.SendEvent(VFX_EVENT_NAME);
         }
     }
 }

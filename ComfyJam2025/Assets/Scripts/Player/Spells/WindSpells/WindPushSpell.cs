@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -7,6 +6,8 @@ public class WindPushSpell : SpellBase
 {
     private BoxCollider2D windCollider;
     private Transform AimHighlight;
+    [SerializeField] private float windStrength = 6f;
+
     public void Start()
     {
         AimHighlight = transform.Find("AimingRect");
@@ -28,9 +29,9 @@ public class WindPushSpell : SpellBase
         {
             if (windCollider.OverlapPoint(enemy.GetPosition()))
             {
-                enemy.Blow(windDirection, 0.5f);
+                PlayVFX(enemy.transform.position);
+                enemy.Blow(windDirection, windStrength);
             }
         }
-        Destroy(gameObject);
     }
 }

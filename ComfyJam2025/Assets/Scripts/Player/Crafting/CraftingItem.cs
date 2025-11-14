@@ -9,17 +9,11 @@ public class CraftingItem : MonoBehaviour
     TextMeshProUGUI text;
     Transform dragComponent;
     private ItemType itemType;
-    // Start is called before the first frame update
+
     void Start()
     {
         text = GetComponentInChildren<TextMeshProUGUI>();
         dragComponent = transform.Find("DragComponent");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     public void SetSprite(Sprite newSprite)

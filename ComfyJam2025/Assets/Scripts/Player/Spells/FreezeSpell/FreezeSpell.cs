@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FreezeSpell : SpellBase
 {
-    private const float DAMAGE_RADIUS = 5;
+    private const float DAMAGE_RADIUS = 6;
     [SerializeField] private float freezeDuration = 8;
     [SerializeField] private float damage = 2;
     private Transform AimHighlight;
@@ -32,9 +32,10 @@ public class FreezeSpell : SpellBase
         // TODO: Fix this workaround for affecting hashset during iteration
         foreach (EnemyBase enemy in hitEnemies)
         {
+            PlayVFX(enemy.transform.position, false, enemy.transform);
             enemy.TakeDamage(damage);
             enemy.Freeze(freezeDuration);
         }
-        Destroy(gameObject);
+        delayedDeath.StartDelayedDeath();
     }
 }

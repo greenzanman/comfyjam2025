@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6694303232104439135}
   - component: {fileID: 106525680135829861}
+  - component: {fileID: -7071170008645043484}
   m_Layer: 0
   m_Name: FreezeSpell
   m_TagString: Untagged
@@ -46,6 +47,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellType: 2
+  spellVFX: {fileID: 7388187904791305177, guid: af1bd056a7528b24da0118bdca481778, type: 3}
+  secondaryVFX: {fileID: 7388187904791305177, guid: 3d3230e1446813a48ad058fd0f7c2a66, type: 3}
+  delayedDeath: {fileID: -7071170008645043484}
+  freezeDuration: 8
+  damage: 1
+--- !u!114 &-7071170008645043484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276436687671920102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DeathDelay>k__BackingField: 2
+  <DieOnStart>k__BackingField: 0
 --- !u!1 &6584817889895743445
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,8 +93,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 9.5, y: 9.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2.5, y: 2.5, z: 0.2631579}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6694303232104439135}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,8 +139,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 954d8a5ada68266438d41ea959bb7af0, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.95634055, a: 0.25490198}
+  m_Sprite: {fileID: 21300000, guid: ebc4895d4f6f83d49aadad5b474e8dbd, type: 3}
+  m_Color: {r: 0.5529412, g: 0.8228461, b: 0.972549, a: 0.64705884}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

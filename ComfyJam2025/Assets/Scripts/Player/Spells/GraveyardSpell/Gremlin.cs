@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class Gremlin : MonoBehaviour
 {
-    float moveSpeed = 2;
+    float moveSpeed = 4f;
     float patience = 0.5f;
     public EnemyBase target;
     float age = 0;
     SpriteRenderer spriteRenderer;
-    [SerializeField] private float damage = 2;
+    [SerializeField] private float damage = 2.5f;
     int tries = 5;
     // Start is called before the first frame update
     void Start()

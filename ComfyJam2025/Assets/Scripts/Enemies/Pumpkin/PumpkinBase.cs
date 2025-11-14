@@ -5,16 +5,18 @@ using UnityEngine;
 public class PumpkinBase : EnemyBase
 {
     [SerializeField] private float moveSpeed = 0.5f;
-   
+    [SerializeField] private float range = 2f;
+
     protected override void InitializeEnemy()
     {
-        //Logger.Log($"Initializing {name}", LogLevel.debug);
-        //maxHealth = 10;
         health = maxHealth;
     }
     protected override void Think()
     {
         CenterStation target = GameManager.centerStation;
+
+        if (Vector3.Distance(transform.position, target.transform.position) <= range) return;
+
         if (target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position,
@@ -22,14 +24,8 @@ public class PumpkinBase : EnemyBase
         }
     }
 
-//     protected override void Die()
-//     {
-//         // Find random drop
-//         if (killingType != DamageType.Disintegrate && dropPrefabs.Count > 0)
-//         {
-//             Instantiate(dropPrefabs[(int)(UnityEngine.Random.value * dropPrefabs.Count)],
-//                 transform.position, Quaternion.identity);
-//         }
-//         base.Die();
-//     }
+    protected override void Die()
+    {
+        base.Die();
+    }
 }

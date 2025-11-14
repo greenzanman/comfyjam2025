@@ -12,7 +12,6 @@ public class CraftingSlot : MonoBehaviour
     Sprite emptySprite;
     public bool hasItem = false;
 
-    // Start is called before the first frame update
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -21,24 +20,15 @@ public class CraftingSlot : MonoBehaviour
         hasItem = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void SetSprite(Sprite newSprite)
     {
         spriteRenderer.sprite = newSprite;
-        // Hacky fix
-        transform.localScale = Vector3.one * 2;
         hasItem = true;
     }
 
     public void ClearSprite()
     {
         spriteRenderer.sprite = emptySprite;
-        transform.localScale = new Vector3(3, 3, 3);
 
         hasItem = false;
     }

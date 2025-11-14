@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6694303232104439135}
   - component: {fileID: 4807189588892980397}
+  - component: {fileID: -8479844919015399801}
   m_Layer: 0
   m_Name: GraveyardSpell
   m_TagString: Untagged
@@ -46,7 +47,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spellType: 4
+  spellVFX: {fileID: 7388187904791305177, guid: 0d5f8b4b6f279554ba4b6cd4238a79b6, type: 3}
+  secondaryVFX: {fileID: 0}
+  delayedDeath: {fileID: -8479844919015399801}
   GraveyardPrefab: {fileID: 2276436687671920102, guid: 989a877dca4b46742a78bf054b4b8f11, type: 3}
+--- !u!114 &-8479844919015399801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2276436687671920102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <DeathDelay>k__BackingField: 0.5
+  <DieOnStart>k__BackingField: 0
 --- !u!1 &3665489878152811209
 GameObject:
   m_ObjectHideFlags: 0
@@ -73,9 +91,9 @@ Transform:
   m_GameObject: {fileID: 3665489878152811209}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 15, y: 15, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.02, y: 0.07, z: 0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 0.1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 478763866204490088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -120,8 +138,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 954d8a5ada68266438d41ea959bb7af0, type: 3}
-  m_Color: {r: 0.2867924, g: 0.2867924, b: 0.2867924, a: 0.13725491}
+  m_Sprite: {fileID: 21300000, guid: 02c30fa0cbdc7c5459eec215dad7bdeb, type: 3}
+  m_Color: {r: 0.16470589, g: 0.21176472, b: 0.21176472, a: 0.39215687}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -158,8 +176,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.25, y: 1.25, z: 0.625}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7982940581109357811}
   m_Father: {fileID: 6694303232104439135}
@@ -205,8 +223,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 954d8a5ada68266438d41ea959bb7af0, type: 3}
-  m_Color: {r: 0.2867924, g: 0.2867924, b: 0.2867924, a: 0.25490198}
+  m_Sprite: {fileID: 21300000, guid: 977c8eb5d9be37642b7f08ca1235b841, type: 3}
+  m_Color: {r: 0.2509804, g: 0.054901965, b: 0.89019614, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
