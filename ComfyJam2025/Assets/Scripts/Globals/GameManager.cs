@@ -55,4 +55,12 @@ public class GameManager : MonoBehaviour
     {
         return instance.mousePos;
     }
+
+    public static (float, float) GetScreenDimensions()
+    {
+        float aspect = Screen.width / Screen.height;
+        float width = 4.0f * Camera.main.orthographicSize * aspect;
+        float height = 2.0f * Camera.main.orthographicSize * 1.25f;
+        return (width, height);
+    }
 }

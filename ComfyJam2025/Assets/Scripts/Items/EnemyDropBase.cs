@@ -16,7 +16,9 @@ public class EnemyDropBase : MonoBehaviour {
 
     private DropState dropState = DropState.dropping;
     private SpriteRenderer spriteRenderer;
-    private float age = 0;
+    public float age = 0;
+    // If this wasn't produced by a deer
+    public bool isOriginal = true;
     private float lifetime = 15;
     private Vector2 startPos;
     private float bumpHeight = 1;
@@ -29,7 +31,7 @@ public class EnemyDropBase : MonoBehaviour {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
 
         startPos = transform.position;
-        bumpWidth = Random.value * 2 - 1;
+        bumpWidth = Random.value * 6 - 3;
     }
 
     private void Update() {

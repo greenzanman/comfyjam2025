@@ -446,13 +446,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1787905891}
     - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: spawnTimePerWave
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: waves.Array.data[0].enemiesInWave.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: waves.Array.data[0].<InitialEnemyCount>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: waves.Array.data[0].<InitialEnemyPrefab>k__BackingField
       value: 
-      objectReference: {fileID: 1458013370352884220, guid: bda9cfc879a7a3a4bb5ce3f6b1d83590, type: 3}
+      objectReference: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
+    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: waves.Array.data[0].enemiesInWave.Array.data[0].<EnemyPrefab>k__BackingField
+      value: 
+      objectReference: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: waves.Array.data[0].enemiesInWave.Array.data[0].<SpawnChance>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: waves.Array.data[0].enemiesInWave.Array.data[1].<EnemyPrefab>k__BackingField
       value: 
