@@ -6,6 +6,7 @@ public class ZapSpell : SpellBase
 {
     [SerializeField] private float damage = 1;
     [SerializeField] private float snapDistance = 4;
+    [SerializeField] private AudioSource _zappySource;
     private Transform AimHighlight;
     private EnemyBase closestEnemy;
 
@@ -29,6 +30,10 @@ public class ZapSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.Zappy);
+
+
         // Damage all enemies
         
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())

@@ -2,10 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// SPELL SFX METHODS NOT DEFINED HERE, SHOULD BE MADE AND CALLED IN SPELL SCRIPT
-// - but the audio sources are defined here, so that all sounds can assign in one place in inspector 
-
-
 // so apparentyly PlayOneShot (diff than Play) allows for playing multiple sounds of same audiosource, 
 
 public enum MusicTrack
@@ -15,6 +11,18 @@ public enum MusicTrack
     DramaticTheme,
     MediumBattle,
     IntenseBattle,
+}
+
+public enum SpellSound
+{
+    FreezeStart,
+    FreezeEnd,
+    Zappy,
+    Sunbeam,
+    FireWall,
+    FireBoom,
+    Summon,
+    FreezeFlare
 }
 
 public class AudioManager : MonoBehaviour
@@ -41,7 +49,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _freezeEndSource;
     [SerializeField] private AudioSource _zappySource;
     [SerializeField] private AudioSource _sunbeamSource;
-    [SerializeField] private AudioSource _fireSource;
+    [SerializeField] private AudioSource _fireWallSource;
+    [SerializeField] private AudioSource _fireBoomSource;
+    [SerializeField] private AudioSource _summonSource;
     [SerializeField] private AudioSource _freezeFlareSource;
 
 
@@ -81,7 +91,8 @@ public class AudioManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Play music track, and fade out the old one.
+    /// Play music track, and fade out the old one. 
+    ///  - pass in a MusicTrack enum like PlayMusic(MusicTrack.MediumBattle);
     /// </summary>
     /// <param name="muffleOn">True to toggle on the muffled filter, False to remove it.</param>
     public void PlayMusic(MusicTrack musicTrack)
@@ -223,7 +234,7 @@ public class AudioManager : MonoBehaviour
     // - with slight random pitch variation
     private IEnumerator PlayEnemyHitCoroutine()
     {
-        float delay = Random.Range(0f, 0.2f);
+        float delay = Random.Range(0f, 0.05f);
         yield return new WaitForSeconds(delay);
 
         AudioClip clip = _enemyHitClips[Random.Range(0, _enemyHitClips.Length)];
@@ -264,6 +275,38 @@ public class AudioManager : MonoBehaviour
     }
 
 
+    public void PlaySpellSound(SpellSound sound)
+    {
+        switch (sound)
+        {
+            case SpellSound.FreezeStart:
+                _freezeStartSource.Play();
+                break;
+            case SpellSound.FreezeEnd:
+                _freezeEndSource.Play();
+                break;
+            case SpellSound.Zappy:
+                _zappySource.Play();
+                break;
+            case SpellSound.Sunbeam:
+                _sunbeamSource.Play();
+                break;
+            case SpellSound.FireWall:
+                _fireWallSource.Play();
+                break;
+            case SpellSound.FireBoom:
+                _fireBoomSource.Play();
+                break;
+            case SpellSound.Summon:
+                _summonSource.Play();
+                break;
+            case SpellSound.FreezeFlare:
+                _freezeFlareSource.Play();
+                break;
+        }
+    }
+
+
 
     // UI SOUNDS
     public void PlayUIBlink()
@@ -273,6 +316,6 @@ public class AudioManager : MonoBehaviour
 
     public void PlayUIHover()
     {
-        _uiHoverSource.PlayOneShot(_uiHoverSource.clip);
+        _uiHoverSource.Play();
     }
 }

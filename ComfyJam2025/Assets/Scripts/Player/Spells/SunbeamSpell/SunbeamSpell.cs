@@ -20,6 +20,9 @@ public class SunbeamSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.Sunbeam);
+
         // Create firewall
         Instantiate(SunbeamPrefab, AimHighlight.position, AimHighlight.rotation);
         Destroy(gameObject);

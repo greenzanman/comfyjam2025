@@ -17,6 +17,9 @@ public class GraveyardSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.Summon);
+
         PlayVFX(AimHighlight.position);
         // Create graveyard
         Instantiate(GraveyardPrefab, AimHighlight.position, Quaternion.identity);

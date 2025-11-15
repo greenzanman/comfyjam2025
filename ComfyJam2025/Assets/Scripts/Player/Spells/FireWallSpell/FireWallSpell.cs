@@ -21,6 +21,9 @@ public class FireWallSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.FireWall);
+
         // Create firewall
         PlayVFX(AimHighlight.position);
         Instantiate(FireWallPrefab, AimHighlight.position, AimHighlight.rotation);

@@ -108,11 +108,17 @@ public class EnemyManager : MonoBehaviour
         switch (waveState)
         {
             case WaveState.SPAWNING_ENEMIES:
+                // Tell AudioManager to play battle music
+                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle);
+
                 enemyWavePS.Play();
                 HandleEnemySpawning();
                 currentWavesUpdated = false;
                 break;
             case WaveState.DOWNTIME:
+                // Tell AudioManager to play NOTHING
+                AudioManager.instance.PlayMusic(MusicTrack.None);
+
                 enemyWavePS.Stop();
                 HandleWaveDownTime();
                 if (!currentWavesUpdated) {
@@ -124,6 +130,9 @@ public class EnemyManager : MonoBehaviour
                 }
                 break;
             case WaveState.GAME_END:
+                // Tell AudioManager to play calm theme
+                AudioManager.instance.PlayMusic(MusicTrack.CalmTheme);
+                
                 KillAllRemainingEnemies();
                 break;
         }
