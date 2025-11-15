@@ -215,7 +215,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -165, y: -26}
+  m_AnchoredPosition: {x: -165, y: -35}
   m_SizeDelta: {x: 843.95996, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5079746536718122259
@@ -6156,16 +6156,14 @@ MonoBehaviour:
   - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 8eb9ecb7e41a3ad4a96dff18943426ce, type: 3}
     <InitialEnemyCount>k__BackingField: 5
     enemiesInWave:
-    - {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
-  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
-    <InitialEnemyCount>k__BackingField: 3
-    enemiesInWave:
-    - {fileID: 1458013370352884220, guid: 8eb9ecb7e41a3ad4a96dff18943426ce, type: 3}
-    - {fileID: 1458013370352884220, guid: d4143f7a05ad54b4b996f3d994d0879f, type: 3}
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
+      <SpawnChance>k__BackingField: 0.5
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: d4143f7a05ad54b4b996f3d994d0879f, type: 3}
+      <SpawnChance>k__BackingField: 0.75
   enemySpawnInterval: 1
-  finalDeathVFX: {fileID: 2901130629565202010, guid: 4c6ca25f8938e8a47a8221492f7d60a5, type: 3}
   spawnTimePerWave: 30
   waveDowntime: 10
+  finalDeathVFX: {fileID: 2901130629565202010, guid: 4c6ca25f8938e8a47a8221492f7d60a5, type: 3}
   waveTimerText: {fileID: 4033830755577731194}
   waveStateText: {fileID: 7441040288244668751}
   currentWaveText: {fileID: 1829147068986484922}

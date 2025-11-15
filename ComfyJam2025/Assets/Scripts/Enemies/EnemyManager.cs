@@ -12,35 +12,56 @@ public class EnemyManager : MonoBehaviour
 
     [Serializable]
     public class Wave {
+        
+        [Serializable]
+        public class EnemiesInWave {
+            [field: SerializeField] public GameObject EnemyPrefab { get; set; }
+            [field: SerializeField] public float SpawnChance { get; set; } = 0.5f;
+
+        }
+
         [field: SerializeField] public GameObject InitialEnemyPrefab { get; set; }
         [field: SerializeField] public int InitialEnemyCount { get; set; } = 0;
 
-        public List<GameObject> enemiesInWave;
+        public List<EnemiesInWave> enemiesInWave;
         public int InitialEnemiesSpawned { get; set; } = 0;
 
         public EnemyBase SpawnEnemy(Vector3 spawnPosition, bool initial) {
-            EnemyBase enemy;
+            EnemyBase enemy = null;
 
             if (InitialEnemiesSpawned < InitialEnemyCount && initial && InitialEnemyPrefab != null) {
                 enemy = Instantiate(InitialEnemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyBase>();
                 InitialEnemiesSpawned++;
             }
             else {
-                int randomIndex = UnityEngine.Random.Range(0, enemiesInWave.Count);
-                enemy = Instantiate(enemiesInWave[randomIndex], spawnPosition, Quaternion.identity).GetComponent<EnemyBase>();
-            }
+                float chance = UnityEngine.Random.Range(0, GetEnemyWeights());
 
+                foreach (EnemiesInWave enemies in enemiesInWave) {
+                    if (enemies.SpawnChance >= chance) {
+                        return Instantiate(enemies.EnemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyBase>();
+                    }
+                    chance -= enemies.SpawnChance;
+                }
+            }
             return enemy;
+        }
+        private float GetEnemyWeights() {
+            float weight = 0;
+
+            foreach (EnemiesInWave enemy in enemiesInWave) {
+                weight += enemy.SpawnChance;
+            }
+            return weight;
         }
     }
 
     public List<Wave> waves;   
     [SerializeField] private float enemySpawnInterval = 4f;
-    [SerializeField] private VisualEffect finalDeathVFX;
-
-    [Header("TIMER")]
     [SerializeField] private float spawnTimePerWave = 20f;
     [SerializeField] private float waveDowntime = 5f;
+    [SerializeField] private VisualEffect finalDeathVFX;
+
+    [Header("TIMER UI")]    
     [SerializeField] private TextMeshProUGUI waveTimerText;
     [SerializeField] private TextMeshProUGUI waveStateText;
     [SerializeField] private TextMeshProUGUI currentWaveText;
