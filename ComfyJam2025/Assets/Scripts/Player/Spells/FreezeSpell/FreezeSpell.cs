@@ -19,6 +19,9 @@ public class FreezeSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.FreezeStart);
+
         List<EnemyBase> hitEnemies = new List<EnemyBase>();
         // Damage all enemies
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())

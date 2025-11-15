@@ -24,6 +24,9 @@ public class BlowersSpell : SpellBase
 
     public override void Cast()
     {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.Summon);
+
         // Create graveyard
         GameObject blowersPrefab = Instantiate(BlowersPrefab, AimHighlight.position, Quaternion.identity);
         Vector2 windDirection = GameManager.GetMousePos().normalized;

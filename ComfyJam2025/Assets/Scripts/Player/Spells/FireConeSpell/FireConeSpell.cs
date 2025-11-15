@@ -26,7 +26,10 @@ public class FireConeSpell : SpellBase
     }
 
     public override void Cast()
-    {        
+    {
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.FireBoom);
+
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
         {
             if (coneCollider.OverlapPoint(enemy.GetPosition()))

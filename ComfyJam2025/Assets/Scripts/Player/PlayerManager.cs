@@ -187,10 +187,16 @@ public class PlayerManager : MonoBehaviour
         if ((playerState == PlayerState.Idle || playerState == PlayerState.Crafting) &&
             IsMouseOnInventoryButton())
         {
+            // Tell AudioManager to play ui hover sfx
+            AudioManager.instance.PlayUIHover();
+
             craftingButton.position = CRAFTING_POSITION_BUMP;
 
             if (Input.GetMouseButtonDown(0))
             {
+                // Tell AudioManager to play ui blink sfx
+                AudioManager.instance.PlayUIBlink();
+
                 if (playerState == PlayerState.Idle)
                 {
                     SetCraftingState(true);
@@ -250,12 +256,16 @@ public class PlayerManager : MonoBehaviour
     {
         if (playerState == PlayerState.Idle && state)
         {
+            // Tell AudioManager to muffle music
+            AudioManager.instance.ToggleMusicMuffled(true);
             playerState = PlayerState.Crafting;
             craftingManager.gameObject.SetActive(true);
             recipeButton.SetActive(state);
         }
         else if (playerState == PlayerState.Crafting && !state)
         {
+            // Tell AudioManager to unmuffle music
+            AudioManager.instance.ToggleMusicMuffled(false);
             playerState = PlayerState.Idle;
             craftingManager.gameObject.SetActive(false);
             recipeButton.SetActive(state);

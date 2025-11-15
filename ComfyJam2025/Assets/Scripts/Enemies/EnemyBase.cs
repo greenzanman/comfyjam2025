@@ -151,6 +151,9 @@ public class EnemyBase : MonoBehaviour
             killingType = damageType;
             isDead = true;
         }
+
+        // Tell AudioManager to play enemy hit sound
+        AudioManager.instance.PlayEnemyHit();
     }
 
     public virtual Vector2 GetPosition()
@@ -178,6 +181,9 @@ public class EnemyBase : MonoBehaviour
 
         // Inform manager
         EnemyManager.DeregisterEnemy(this);
+
+        // Tell AudioManager to play enemy death sound
+        AudioManager.instance.PlayEnemyDeath();
 
         Destroy(gameObject);
     }
