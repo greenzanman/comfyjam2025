@@ -137,16 +137,16 @@ public class EnemyManager : MonoBehaviour
 
     private void EnemyHacks()
     {
-        // Spawn Gravy
-        if (Input.GetKeyDown(KeyCode.G))
-        {        
-            Instantiate(waves[UnityEngine.Random.Range(0, waves.Count)].SpawnEnemy(Vector3.zero, false), GameManager.GetMousePos(), Quaternion.identity);
-        }
-        // Spawn boombawk
-        if (Input.GetKeyDown(KeyCode.F))
-        {        
-            Instantiate(enemyPrefabs[2], GameManager.GetMousePos(), Quaternion.identity);
-        }
+        // // Spawn Gravy
+        // if (Input.GetKeyDown(KeyCode.G))
+        // {        
+        //     Instantiate(waves[UnityEngine.Random.Range(0, waves.Count)].SpawnEnemy(Vector3.zero, false), GameManager.GetMousePos(), Quaternion.identity);
+        // }
+        // // Spawn boombawk
+        // if (Input.GetKeyDown(KeyCode.F))
+        // {        
+        //     Instantiate(enemyPrefabs[2], GameManager.GetMousePos(), Quaternion.identity);
+        // }
     }
     private void KillAllRemainingEnemies() {
 
