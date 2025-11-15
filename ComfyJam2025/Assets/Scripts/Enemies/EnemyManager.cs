@@ -1,33 +1,86 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.VFX;
 using TMPro;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
     //[SerializeField] private Camera cam;
     public static EnemyManager instance;
 
-    public List<GameObject> enemyPrefabs;
+    [Serializable]
+    public class Wave {
+        
+        [Serializable]
+        public class EnemiesInWave {
+            [field: SerializeField] public GameObject EnemyPrefab { get; set; }
+            [field: SerializeField] public float SpawnChance { get; set; } = 0.5f;
 
-    // Simplistic 'spawn every x' enemies
-    private float enemySpawnTimer = 0;
-    private float waveTimerElapsedTime = 0;
+        }
+
+        [field: SerializeField] public GameObject InitialEnemyPrefab { get; set; }
+        [field: SerializeField] public int InitialEnemyCount { get; set; } = 0;
+
+        public List<EnemiesInWave> enemiesInWave;
+        public int InitialEnemiesSpawned { get; set; } = 0;
+
+        public EnemyBase SpawnEnemy(Vector3 spawnPosition, bool initial) {
+            EnemyBase enemy = null;
+
+            if (InitialEnemiesSpawned < InitialEnemyCount && initial && InitialEnemyPrefab != null) {
+                enemy = Instantiate(InitialEnemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyBase>();
+                InitialEnemiesSpawned++;
+            }
+            else {
+                float chance = UnityEngine.Random.Range(0, GetEnemyWeights());
+
+                foreach (EnemiesInWave enemies in enemiesInWave) {
+                    if (enemies.SpawnChance >= chance) {
+                        return Instantiate(enemies.EnemyPrefab, spawnPosition, Quaternion.identity).GetComponent<EnemyBase>();
+                    }
+                    chance -= enemies.SpawnChance;
+                }
+            }
+            return enemy;
+        }
+        private float GetEnemyWeights() {
+            float weight = 0;
+
+            foreach (EnemiesInWave enemy in enemiesInWave) {
+                weight += enemy.SpawnChance;
+            }
+            return weight;
+        }
+    }
+
+    public List<Wave> waves;   
     [SerializeField] private float enemySpawnInterval = 4f;
-
-    [Header("TIMER")]
     [SerializeField] private float spawnTimePerWave = 20f;
     [SerializeField] private float waveDowntime = 5f;
+    [SerializeField] private VisualEffect finalDeathVFX;
+
+    [Header("TIMER UI")]    
     [SerializeField] private TextMeshProUGUI waveTimerText;
     [SerializeField] private TextMeshProUGUI waveStateText;
+    [SerializeField] private TextMeshProUGUI currentWaveText;
     [SerializeField] private ParticleSystem enemyWavePS;
+    [SerializeField] private Color enemySpawningStateColor;
+    [SerializeField] private Color downTimeStateColor;
 
     [Header("DEBUG")]
     public bool canSpawn = true;
 
+    private float enemySpawnTimer = 0;
+    private float waveTimerElapsedTime = 0;
+    private int currentWave = 0;
+    private bool currentWavesUpdated = false;
+
     public enum WaveState {
         SPAWNING_ENEMIES,
-        DOWNTIME
+        DOWNTIME,
+        GAME_END
     }
 
     private WaveState waveState;
@@ -55,15 +108,26 @@ public class EnemyManager : MonoBehaviour
         switch (waveState)
         {
             case WaveState.SPAWNING_ENEMIES:
-                //enemyWavePS.Play();
+                enemyWavePS.Play();
                 HandleEnemySpawning();
+                currentWavesUpdated = false;
                 break;
             case WaveState.DOWNTIME:
-                //enemyWavePS.Stop();
+                enemyWavePS.Stop();
                 HandleWaveDownTime();
+                if (!currentWavesUpdated) {
+                    currentWavesUpdated = true;
+                    currentWave++;
+                    if (currentWave >= waves.Count) {
+                        waveState = WaveState.GAME_END;
+                    }
+                }
+                break;
+            case WaveState.GAME_END:
+                KillAllRemainingEnemies();
                 break;
         }
-        DisplayWaveTimer();
+        DisplayWaveStats();
 
         // Hacks
 #if UNITY_EDITOR
@@ -76,7 +140,7 @@ public class EnemyManager : MonoBehaviour
         // Spawn Gravy
         if (Input.GetKeyDown(KeyCode.G))
         {        
-            Instantiate(enemyPrefabs[1], GameManager.GetMousePos(), Quaternion.identity);
+            Instantiate(waves[UnityEngine.Random.Range(0, waves.Count)].SpawnEnemy(Vector3.zero, false), GameManager.GetMousePos(), Quaternion.identity);
         }
         // Spawn boombawk
         if (Input.GetKeyDown(KeyCode.F))
@@ -84,18 +148,37 @@ public class EnemyManager : MonoBehaviour
             Instantiate(enemyPrefabs[2], GameManager.GetMousePos(), Quaternion.identity);
         }
     }
+    private void KillAllRemainingEnemies() {
 
+        if (enemies.Count <= 0) return;
 
-    private void DisplayWaveTimer() {
+        foreach (EnemyBase enemy in enemies) {
+            if (enemy == null) continue;
+            Instantiate(finalDeathVFX, enemy.transform.position, Quaternion.identity).SendEvent("OnAbilityCasted");
+            Destroy(enemy.gameObject);
+        }
+    }
+    private void DisplayWaveStats() {
+
+        if (waveState == WaveState.GAME_END) {
+            waveStateText.text = "The End";
+            waveTimerText.text = "";
+            currentWaveText.text = "";
+            waveStateText.color = Color.white;
+            return;
+        }
+
         float upperLimitTime = 0f;
         waveTimerText.text = 0f.ToString("0:00");
 
         if (waveState == WaveState.SPAWNING_ENEMIES) {
             upperLimitTime = spawnTimePerWave;
+            waveStateText.color = enemySpawningStateColor;
             waveStateText.text = "protect mama!";
         }
         else if (waveState == WaveState.DOWNTIME) {
             upperLimitTime = waveDowntime;
+            waveStateText.color = downTimeStateColor;
             waveStateText.text = "gather your spells.";
         }
 
@@ -107,6 +190,10 @@ public class EnemyManager : MonoBehaviour
         }
         upperLimitTime += 0.35f;
         waveTimerText.text = (upperLimitTime - waveTimerElapsedTime).ToString("0 : 00");
+        
+        if (waveState == WaveState.SPAWNING_ENEMIES) {
+            currentWaveText.text = $"Wave: {currentWave+1}/{waves.Count}";
+        }
     }
     private void HandleWaveDownTime() {
         float deltaTime = GameManager.GetDeltaTime();
@@ -144,7 +231,7 @@ public class EnemyManager : MonoBehaviour
         float aspect = Screen.width / Screen.height;
         float width = 4.0f * Camera.main.orthographicSize * aspect;
         float height = 2.0f * Camera.main.orthographicSize * 1.25f;
-        float randVal = Random.value * 2 * (width + height);
+        float randVal = UnityEngine.Random.value * 2 * (width + height);
 
         Vector3 spawnPos;
 
@@ -160,8 +247,8 @@ public class EnemyManager : MonoBehaviour
             spawnPos = new Vector2((Mathf.Floor(randVal / height) * 2 - 1) * width / 2,
                 randVal % height - height / 2);
         }
-        DebugManager.DisplayDebug(spawnPos.ToString());
-        Instantiate(enemyPrefabs[0], spawnPos, Quaternion.identity);
+        //DebugManager.DisplayDebug(spawnPos.ToString());
+        waves[currentWave].SpawnEnemy(spawnPos, true);
     }
     public static void RegisterEnemy(EnemyBase newEnemy)
     {
