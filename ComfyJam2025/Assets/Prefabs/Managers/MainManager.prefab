@@ -6154,15 +6154,59 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waves:
-  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 8eb9ecb7e41a3ad4a96dff18943426ce, type: 3}
+  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
     <InitialEnemyCount>k__BackingField: 5
     enemiesInWave:
-    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+      <SpawnChance>k__BackingField: 0.3
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+      <SpawnChance>k__BackingField: 0.05
+  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+    <InitialEnemyCount>k__BackingField: 2
+    enemiesInWave:
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
       <SpawnChance>k__BackingField: 0.5
-    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: d4143f7a05ad54b4b996f3d994d0879f, type: 3}
-      <SpawnChance>k__BackingField: 0.75
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 65d83620edabe2749a7bebbbbff8af1c, type: 3}
+      <SpawnChance>k__BackingField: 0.1
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+      <SpawnChance>k__BackingField: 0.09
+  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+    <InitialEnemyCount>k__BackingField: 5
+    enemiesInWave:
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+      <SpawnChance>k__BackingField: 0.5
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 65d83620edabe2749a7bebbbbff8af1c, type: 3}
+      <SpawnChance>k__BackingField: 0.2
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ca0597500192b24459afc28260422c6e, type: 3}
+      <SpawnChance>k__BackingField: 0.1
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+      <SpawnChance>k__BackingField: 0.09
+  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+    <InitialEnemyCount>k__BackingField: 7
+    enemiesInWave:
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+      <SpawnChance>k__BackingField: 0.4
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 65d83620edabe2749a7bebbbbff8af1c, type: 3}
+      <SpawnChance>k__BackingField: 0.3
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: bda9cfc879a7a3a4bb5ce3f6b1d83590, type: 3}
+      <SpawnChance>k__BackingField: 0.1
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+      <SpawnChance>k__BackingField: 0.09
+  - <InitialEnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+    <InitialEnemyCount>k__BackingField: 10
+    enemiesInWave:
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ac7c54766e1cb6e459c8939fb7a56375, type: 3}
+      <SpawnChance>k__BackingField: 0.5
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: 65d83620edabe2749a7bebbbbff8af1c, type: 3}
+      <SpawnChance>k__BackingField: 0.25
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: ca0597500192b24459afc28260422c6e, type: 3}
+      <SpawnChance>k__BackingField: 0.12
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: bda9cfc879a7a3a4bb5ce3f6b1d83590, type: 3}
+      <SpawnChance>k__BackingField: 0.1
+    - <EnemyPrefab>k__BackingField: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
+      <SpawnChance>k__BackingField: 0.09
   enemySpawnInterval: 1
-  spawnTimePerWave: 30
+  spawnTimePerWave: 40
   waveDowntime: 10
   finalDeathVFX: {fileID: 2901130629565202010, guid: 4c6ca25f8938e8a47a8221492f7d60a5, type: 3}
   waveTimerText: {fileID: 4033830755577731194}

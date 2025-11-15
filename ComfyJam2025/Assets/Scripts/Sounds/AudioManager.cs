@@ -66,6 +66,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private int _maxSimultaneousDeathSounds = 5;
     private int _currentDeathSoundsPlaying = 0;
 
+    [SerializeField] private float _hitSoundCooldown = 0.3f; 
+    private float _lastHitSoundTime;
+
 
     [Header("Meow SFX")]
     [SerializeField] private AudioSource _meowSource;
@@ -95,7 +98,7 @@ public class AudioManager : MonoBehaviour
     ///  - pass in a MusicTrack enum like PlayMusic(MusicTrack.MediumBattle);
     /// </summary>
     /// <param name="muffleOn">True to toggle on the muffled filter, False to remove it.</param>
-    public void PlayMusic(MusicTrack musicTrack)
+    public void PlayMusic(MusicTrack musicTrack, float targetVolume = 0.5f)
     {
         AudioSource trackToPlay = null;
         switch (musicTrack)
@@ -127,7 +130,7 @@ public class AudioManager : MonoBehaviour
         if (_currentMusicTrack != null && !_currentMusicTrack.isPlaying)
         {
             _currentMusicTrack.volume = 0.0f;
-            StartCoroutine(FadeTrack(_currentMusicTrack, true));  // fade in
+            StartCoroutine(FadeTrack(_currentMusicTrack, true, targetVolume));  // fade in
         }
 
     }
@@ -228,7 +231,11 @@ public class AudioManager : MonoBehaviour
     // PLAY ENEMY HIT SOUND
     public void PlayEnemyHit()
     {
-        StartCoroutine(PlayEnemyHitCoroutine());
+        if (Time.time > _lastHitSoundTime + _hitSoundCooldown)
+        {
+            StartCoroutine(PlayEnemyHitCoroutine());
+            _lastHitSoundTime = Time.time;
+        }
     }
     // - with slight random delay
     // - with slight random pitch variation

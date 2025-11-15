@@ -436,35 +436,7 @@ PrefabInstance:
     - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: enemyWavePS
       value: 
-      objectReference: {fileID: 1787905891}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: spawnTimePerWave
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].enemiesInWave.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].<InitialEnemyCount>k__BackingField
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].<InitialEnemyPrefab>k__BackingField
-      value: 
-      objectReference: {fileID: 1458013370352884220, guid: c1f162473d5d6a747b6a033504beebad, type: 3}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].enemiesInWave.Array.data[0].<EnemyPrefab>k__BackingField
-      value: 
-      objectReference: {fileID: 1458013370352884220, guid: a88bac8b87a997d43a7f1c7662104d55, type: 3}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].enemiesInWave.Array.data[0].<SpawnChance>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: waves.Array.data[0].enemiesInWave.Array.data[1].<EnemyPrefab>k__BackingField
-      value: 
-      objectReference: {fileID: 1458013370352884220, guid: ca0597500192b24459afc28260422c6e, type: 3}
+      objectReference: {fileID: 1715864765}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1300,6 +1272,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bc040c146ef3734ca5675941b517922, type: 3}
+--- !u!198 &1715864765 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6158889156518093912, guid: 8ee00217086b3b340b245b07503e4d90, type: 3}
+  m_PrefabInstance: {fileID: 438779349}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

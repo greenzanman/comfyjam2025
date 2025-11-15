@@ -329,7 +329,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -2683,7 +2683,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2e071cd71c149814aa665ef709ef6b1d, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 63e51cdd8477d9046ac7f06460df5fe7, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3561,27 +3561,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mediumBattleMusic: {fileID: 459736137771705487}
   _intenseBattleMusic: {fileID: 459736137771705487}
-  _musicFadeDuration: 1
+  _musicFadeDuration: 0.5
   _calmThemeMusic: {fileID: 6177855057233927228}
   _dramaticThemeMusic: {fileID: 8931235938038554968}
   _freezeStartSource: {fileID: 1615682797222485859}
   _freezeEndSource: {fileID: 7358132525913784504}
-  _zappySource: {fileID: 0}
-  _sunbeamSource: {fileID: 0}
-  _fireWallSource: {fileID: 0}
-  _fireBoomSource: {fileID: 0}
-  _summonSource: {fileID: 0}
-  _freezeFlareSource: {fileID: 0}
+  _zappySource: {fileID: 7661764945867215092}
+  _sunbeamSource: {fileID: 6118754165868836141}
+  _fireWallSource: {fileID: 2640585081248210927}
+  _fireBoomSource: {fileID: 2866232530621532769}
+  _summonSource: {fileID: 7751695017018990998}
+  _freezeFlareSource: {fileID: 7751695017018990998}
   _enemySFXPlayer: {fileID: 5050625234763178349}
   _enemyDeathClips:
   - {fileID: 8300000, guid: 94f119db4f5d6304d9e51f547191f993, type: 3}
   - {fileID: 8300000, guid: 193ccb436151b324cb9ed77201abc97d, type: 3}
   - {fileID: 8300000, guid: 1ea40febb5642d14380553ed0bf0b304, type: 3}
   _enemyHitClips:
-  - {fileID: 8300000, guid: 2e071cd71c149814aa665ef709ef6b1d, type: 3}
-  _enemyBurnLoopSource: {fileID: 0}
+  - {fileID: 8300000, guid: 63e51cdd8477d9046ac7f06460df5fe7, type: 3}
+  _enemyBurnLoopSource: {fileID: 9175062057335663861}
   _enemyFrozenLoopSource: {fileID: 0}
   _maxSimultaneousDeathSounds: 5
-  _meowSource: {fileID: 0}
+  _meowSource: {fileID: 7751695017018990998}
   _uiBlinkSource: {fileID: 3387832610205865055}
   _uiHoverSource: {fileID: 927685145146497841}

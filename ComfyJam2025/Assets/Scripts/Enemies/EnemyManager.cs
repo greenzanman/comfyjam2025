@@ -109,7 +109,7 @@ public class EnemyManager : MonoBehaviour
         {
             case WaveState.SPAWNING_ENEMIES:
                 // Tell AudioManager to play battle music
-                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle);
+                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle, 0.3f);
 
                 enemyWavePS.Play();
                 HandleEnemySpawning();
