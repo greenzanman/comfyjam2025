@@ -566,6 +566,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7461083859134127162, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8255100275055822238, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
