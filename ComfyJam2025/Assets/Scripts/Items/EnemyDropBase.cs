@@ -82,4 +82,12 @@ public class EnemyDropBase : MonoBehaviour {
     protected virtual void Pickup() {
         PlayerManager.AddItem(itemType);
     }
+
+    void OnMouseOver() {
+        if (dropState != DropState.picking && age > 0.1f) {
+            Pickup();
+            dropState = DropState.picking;
+            age = 0;
+        }
+    }
 }
