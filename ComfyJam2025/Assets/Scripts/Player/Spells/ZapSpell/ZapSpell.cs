@@ -35,25 +35,27 @@ public class ZapSpell : SpellBase
 
 
         // Damage all enemies
-        
-        foreach (EnemyBase enemy in EnemyManager.GetEnemies())
-        {
-            if (utils.FlatSqrDistance(enemy.transform.position, AimHighlight.position) < 81)
-            {
-                enemiesInRange.Add(enemy);
-                if (closestEnemy != null)
-                {
-                    enemy.CopyState(closestEnemy);
-                }
-            }
-        }
 
+        /* foreach (EnemyBase enemy in EnemyManager.GetEnemies())
+         {
+             if (utils.FlatSqrDistance(enemy.transform.position, AimHighlight.position) < 81)
+             {
+                 enemiesInRange.Add(enemy);
+                 if (closestEnemy != null)
+                 {
+                     enemy.CopyState(closestEnemy);
+                 }
+             }
+         }
+
+         ChainLightningVFX chainLightningVFX = FindObjectOfType<ChainLightningVFX>();
+         chainLightningVFX.ActivateChain(enemiesInRange);
+         foreach (EnemyBase enemy in enemiesInRange) {
+             enemy.TakeDamage(damage);
+         }*/
         ChainLightningVFX chainLightningVFX = FindObjectOfType<ChainLightningVFX>();
-        chainLightningVFX.ActivateChain(enemiesInRange);
-        foreach (EnemyBase enemy in enemiesInRange) {
-            enemy.TakeDamage(damage);
-        }
-
+        chainLightningVFX.ActivateChain(closestEnemy.transform.position, damage);
+        closestEnemy.TakeDamage(damage);
         delayedDeath.StartDelayedDeath();
     }
 }

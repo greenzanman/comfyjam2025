@@ -47,16 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1330eb44109bfc49a358c456270f6c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 7
   density: 2
   hpSlider: {fileID: 1129447655149329367}
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
-  - {fileID: 11400000, guid: adddcf9a937b40c42a65f5ff0f6a58a0, type: 2}
-  moveSpeed: 0.5
+  - {fileID: 11400000, guid: 43877c6de96e4f7438f21adc9b221ed2, type: 2}
+  moveSpeed: 3
   boomDamage: 10
-  boomRadius: 8
-  fuseTime: 3
+  boomRadius: 3
+  fuseTime: 2
   sprites:
   - {fileID: -9160944, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
   - {fileID: 1447911799, guid: bc96a87ace0dc03468ced32473e51b85, type: 3}
@@ -103,8 +103,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 2, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 884139702188758689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -186,9 +186,9 @@ Transform:
   m_GameObject: {fileID: 2600942041473443113}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.14, y: 0.65, z: 0}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 884139702188758689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -233,8 +233,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: 954d8a5ada68266438d41ea959bb7af0, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Sprite: {fileID: 21300000, guid: c4bbce1194501ce479501b619b616167, type: 3}
+  m_Color: {r: 0.5137255, g: 0.22352943, b: 0.1137255, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -335,6 +335,10 @@ PrefabInstance:
     - target: {fileID: 4277925423240033492, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602157664284497953, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.44
       objectReference: {fileID: 0}
     - target: {fileID: 6907139910454528044, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchorMax.x

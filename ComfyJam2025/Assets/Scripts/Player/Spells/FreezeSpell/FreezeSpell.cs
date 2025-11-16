@@ -19,9 +19,6 @@ public class FreezeSpell : SpellBase
 
     public override void Cast()
     {
-        // Tell AudioManager to play spell sfx
-        AudioManager.instance.PlaySpellSound(SpellSound.FreezeStart);
-
         List<EnemyBase> hitEnemies = new List<EnemyBase>();
         // Damage all enemies
         foreach (EnemyBase enemy in EnemyManager.GetEnemies())
@@ -32,13 +29,16 @@ public class FreezeSpell : SpellBase
             }
         }
 
+        // Tell AudioManager to play spell sfx
+        AudioManager.instance.PlaySpellSound(SpellSound.FreezeStart);
+
         // TODO: Fix this workaround for affecting hashset during iteration
         foreach (EnemyBase enemy in hitEnemies)
         {
-            PlayVFX(enemy.transform.position, false, enemy.transform);
+            PlayVFX(enemy.transform.position);
+            PlaySecondaryVFX(enemy.transform);
             enemy.TakeDamage(damage);
             enemy.Freeze(freezeDuration);
         }
-        delayedDeath.StartDelayedDeath();
     }
 }

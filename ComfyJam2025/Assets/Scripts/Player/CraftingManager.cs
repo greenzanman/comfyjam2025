@@ -26,7 +26,7 @@ public class CraftingManager : MonoBehaviour
         ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.GREEN_LEAF, SpellType.FireCone),
         ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RIND, SpellType.WindPush),
 
-        ( ItemType.RIND, ItemType.RIND, ItemType.ACORN, SpellType.Dud),
+        ( ItemType.RIND, ItemType.RIND, ItemType.ACORN, SpellType.CircleFreeze),
         ( ItemType.RIND, ItemType.RIND, ItemType.GREEN_LEAF, SpellType.FireWall),
         ( ItemType.RIND, ItemType.RIND, ItemType.RED_MUSH, SpellType.FireCone),
 
@@ -104,7 +104,7 @@ public class CraftingManager : MonoBehaviour
         }
 
         // Register some console variables
-        DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
+        //DebugManager.RegisterConsoleVar("DrawInventoryHitbox", 0);
     }
 
     void Update()

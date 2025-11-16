@@ -64,7 +64,7 @@ public class Pumpkidd : EnemyBase
                 transform.position = newPos;
         
                 spriteRenderer.sprite = sprites[(int)(spriteTimer * 5) % 3];
-            spriteRenderer.flipX = moveDir.x > 0;
+            spriteRenderer.flipX = moveDir.x < 0;
         }
 
     }

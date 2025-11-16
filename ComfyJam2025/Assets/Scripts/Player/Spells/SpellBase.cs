@@ -36,16 +36,24 @@ public abstract class SpellBase : MonoBehaviour
             vfx.SendEvent(VFX_EVENT_NAME);
         }
         if (secondaryVFX != null && canCastSpell) {
-            StartCoroutine(DelayCastSecondaryVF(targetPosition, secondaryTransformTarget));
+            StartCoroutine(DelayCastSecondaryVF(secondaryTransformTarget));
         }
         delayedDeath.StartDelayedDeath();
     }
-    protected IEnumerator DelayCastSecondaryVF(Vector3 targetPosition, Transform secondaryTransformTarget = null) {
+    protected IEnumerator DelayCastSecondaryVF(Transform secondaryTransformTarget = null) {
+        Debug.Log("secondary");
         canCastSpell = false;
         yield return new WaitForSeconds(secondaryVFXcastDelay);
+        if (secondaryTransformTarget == null) yield break;
         VisualEffect vfx2 = Instantiate(secondaryVFX, secondaryTransformTarget);
-        vfx2.transform.position = new Vector3(targetPosition.x, targetPosition.y + (-vfx2.GetVector3("Direction").y / spellLocationOffset), 0f); ;
+        vfx2.transform.position = new Vector3(secondaryTransformTarget.transform.position.x, secondaryTransformTarget.transform.position.y + (-vfx2.GetVector3("Direction").y / spellLocationOffset), 0f);
         vfx2.SendEvent(VFX_EVENT_NAME);
         canCastSpell = true;
+    }
+    protected void PlaySecondaryVFX(Transform secondaryTransformTarget) {
+        if (secondaryTransformTarget == null) return;
+        VisualEffect vfx2 = Instantiate(secondaryVFX, secondaryTransformTarget);
+        vfx2.transform.position = new Vector3(secondaryTransformTarget.transform.position.x, secondaryTransformTarget.transform.position.y + (-vfx2.GetVector3("Direction").y / spellLocationOffset), 0f);
+        vfx2.SendEvent(VFX_EVENT_NAME);
     }
 }

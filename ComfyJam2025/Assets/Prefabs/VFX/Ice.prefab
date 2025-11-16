@@ -58,9 +58,9 @@ VisualEffect:
       - m_Value: 10
         m_Name: Size
         m_Overridden: 0
-      - m_Value: 0.75
+      - m_Value: 8
         m_Name: Lifetime
-        m_Overridden: 0
+        m_Overridden: 1
       - m_Value: 15
         m_Name: BlastSize
         m_Overridden: 0
@@ -142,4 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c1aa003a9d81a40b13db31cc4c8618, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <DeathDelay>k__BackingField: 3
+  <DeathDelay>k__BackingField: 10
+  <DieOnStart>k__BackingField: 1

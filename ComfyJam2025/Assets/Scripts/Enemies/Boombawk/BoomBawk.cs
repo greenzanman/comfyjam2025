@@ -32,7 +32,7 @@ public class Boombawk : EnemyBase
 
         auraTransform = transform.Find("PreviewAura");
         previewAuraSprite = auraTransform.GetComponent<SpriteRenderer>();
-        auraTransform.transform.localScale = new Vector3(boomRadius * 2, boomRadius * 2, 1);
+        auraTransform.transform.localScale = new Vector3(boomRadius, boomRadius * 0.5f, 1);
     }
 
     protected override void Think()

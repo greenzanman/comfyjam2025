@@ -46,23 +46,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac65e3e5e72a0fd41b3d061ede3d18d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 2.5
   density: 0.8
   hpSlider: {fileID: 6194890835287883747}
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
   - {fileID: 11400000, guid: f35eb1d086340a246826f690cf9cfa2a, type: 2}
-  - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
-  - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
   groupRadius: 24
   cohesionStrength: 0.7
   separationStrength: 0.3
-  moveSpeed: 1
-  range: 2
+  moveSpeed: 2
+  range: 4
   sprites:
-  - {fileID: 2052999006, guid: 6739b7ba9c8c3a74fb70b9f2906d4007, type: 3}
   - {fileID: 1668166494, guid: 6739b7ba9c8c3a74fb70b9f2906d4007, type: 3}
   - {fileID: 2142511867, guid: 6739b7ba9c8c3a74fb70b9f2906d4007, type: 3}
+  - {fileID: 2052999006, guid: 6739b7ba9c8c3a74fb70b9f2906d4007, type: 3}
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0

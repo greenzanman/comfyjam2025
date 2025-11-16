@@ -26,6 +26,7 @@ public class FireBurnCircleSpell : SpellBase
             if (utils.FlatSqrDistance(enemy.transform.position, GameManager.GetMousePos()) < radius * radius)
             {
                 PlayVFX(enemy.transform.position);
+                PlaySecondaryVFX(enemy.transform);
                 enemy.TakeDamage(damage);
                 enemy.Burn(burnDuration);
             }

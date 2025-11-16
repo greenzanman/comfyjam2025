@@ -216,7 +216,7 @@ public class PlayerManager : MonoBehaviour
         // Basic zaps
         if (playerState == PlayerState.Idle && Input.GetMouseButtonDown(0))
         {
-            DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
+            //DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
 
             // Find closest enemy within a region
             EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), ZAP_RADIUS);
@@ -237,7 +237,7 @@ public class PlayerManager : MonoBehaviour
             {
                 currentSpell.Cast();
                 playerState = PlayerState.Idle;
-                DebugManager.DisplayDebug("Casting:" + GameManager.GetMousePos().ToString());
+                //DebugManager.DisplayDebug("Casting:" + GameManager.GetMousePos().ToString());
             }
         }
     }

@@ -97,8 +97,8 @@ public class EnemyManager : MonoBehaviour
     private void Start()
     {
         // Register some console variables
-		DebugManager.RegisterConsoleVar("DrawEnemyHealth", 1);
-		DebugManager.RegisterConsoleVar("DrawEnemyPos", 1);
+		//DebugManager.RegisterConsoleVar("DrawEnemyHealth", 1);
+		//DebugManager.RegisterConsoleVar("DrawEnemyPos", 1);
     }
 
     private void Update()
@@ -109,7 +109,7 @@ public class EnemyManager : MonoBehaviour
         {
             case WaveState.SPAWNING_ENEMIES:
                 // Tell AudioManager to play battle music
-                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle, 0.3f);
+                AudioManager.instance.PlayMusic(MusicTrack.IntenseBattle, 0.3f);
 
                 enemyWavePS.Play();
                 HandleEnemySpawning();
@@ -117,7 +117,7 @@ public class EnemyManager : MonoBehaviour
                 break;
             case WaveState.DOWNTIME:
                 // Tell AudioManager to play NOTHING
-                AudioManager.instance.PlayMusic(MusicTrack.None);
+                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle);
 
                 enemyWavePS.Stop();
                 HandleWaveDownTime();
@@ -279,6 +279,7 @@ public class EnemyManager : MonoBehaviour
         // TODO: Reduce the calculations on this somehow, for large numbers
         foreach (EnemyBase enemy in enemies)
         {
+            if (enemy == null) continue;
             float candDistance = (position - enemy.transform.position).sqrMagnitude;
             if (candDistance < closest)
             {

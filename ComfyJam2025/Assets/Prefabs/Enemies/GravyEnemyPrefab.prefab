@@ -53,7 +53,7 @@ MonoBehaviour:
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
   - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
-  - {fileID: 11400000, guid: 34ba3d8ab842c614eaf220a294f2731a, type: 2}
+  - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
   moveSpeed: 1.25
   healthDrain: 0.5
   healRate: 1
@@ -340,6 +340,10 @@ PrefabInstance:
     - target: {fileID: 4277925423240033492, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4602157664284497953, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 2.35
       objectReference: {fileID: 0}
     - target: {fileID: 6907139910454528044, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchorMax.x

@@ -156,6 +156,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy HP Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3429489994006878847, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159101042846760693, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4277925423240033492, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -242,7 +250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4602157664284497953, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.21
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 6907139910454528044, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchorMax.x

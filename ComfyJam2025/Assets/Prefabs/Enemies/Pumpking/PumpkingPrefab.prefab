@@ -52,8 +52,11 @@ MonoBehaviour:
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
   - {fileID: 11400000, guid: f35eb1d086340a246826f690cf9cfa2a, type: 2}
-  moveSpeed: 0.25
-  range: 2
+  - {fileID: 11400000, guid: 6c861c1695fda3c45b95cb39f66e555d, type: 2}
+  - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
+  - {fileID: 11400000, guid: 43877c6de96e4f7438f21adc9b221ed2, type: 2}
+  moveSpeed: 1.5
+  range: 6
   sprites:
   - {fileID: 1498589216, guid: c5d6d8d079bf79b4dba90764da911480, type: 3}
   - {fileID: 1498589216, guid: c5d6d8d079bf79b4dba90764da911480, type: 3}
@@ -91,8 +94,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.95, y: 0.95, z: 0.95}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 884139702188758689}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -250,11 +253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4602157664284497953, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.28
+      value: -0.16
       objectReference: {fileID: 0}
     - target: {fileID: 4602157664284497953, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.21
+      value: 1.21
       objectReference: {fileID: 0}
     - target: {fileID: 6907139910454528044, guid: 009dc1d25d10ccf47802ce14ee5299d4, type: 3}
       propertyPath: m_AnchorMax.x

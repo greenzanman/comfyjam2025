@@ -13,7 +13,9 @@ public class SunbeamSpellDamaging : MonoBehaviour
     [SerializeField] private VisualEffect spellVFX;
     [SerializeField] private VisualEffect secondaryVFX;
     private const string VFX_EVENT_NAME = "OnAbilityCasted";
-    private float vfxDelay = 0.2f;
+    private float vfxDelay = 0.1f;
+    private float currentDelay = 0f;
+    private float spellLocationOffset = 3f;
 
 
     void Start()
@@ -29,6 +31,7 @@ public class SunbeamSpellDamaging : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        currentDelay += Time.deltaTime;
 
         // Follow mouse
         transform.position = Vector3.MoveTowards(transform.position,
@@ -39,7 +42,11 @@ public class SunbeamSpellDamaging : MonoBehaviour
         {
             if (beamCollider.OverlapPoint(enemy.GetPosition()))
             {
-                if (GameManager.GetDeltaTime() >= vfxDelay && GameManager.GetDeltaTime() <= vfxDelay + 0.1f) PlayVFX(enemy.transform.position, enemy.transform);
+                if (currentDelay >= vfxDelay) {
+                    PlayVFX(enemy.transform.position, enemy.transform);
+                    currentDelay = 0f;
+                }
+                
                 enemy.TakeDamage(damagePerSecond * GameManager.GetDeltaTime(), DamageType.Disintegrate);
             }
         }
@@ -47,12 +54,12 @@ public class SunbeamSpellDamaging : MonoBehaviour
     protected virtual void PlayVFX(Vector3 targetPosition, Transform secondaryTransformTarget = null) {
         if (spellVFX) {
             VisualEffect vfx = Instantiate(spellVFX);
-            vfx.transform.position = targetPosition;
+            vfx.transform.position = new Vector3(targetPosition.x, targetPosition.y + (-vfx.GetVector3("Direction").y / spellLocationOffset), 0f); ;
             vfx.SendEvent(VFX_EVENT_NAME);
         }
         if (secondaryVFX) { 
             VisualEffect vfx2 = Instantiate(secondaryVFX, secondaryTransformTarget);
-            vfx2.transform.position = targetPosition;
+            vfx2.transform.position = new Vector3(secondaryTransformTarget.transform.position.x, secondaryTransformTarget.transform.position.y + (-vfx2.GetVector3("Direction").y / spellLocationOffset), 0f); ;
             vfx2.SendEvent(VFX_EVENT_NAME);
         }
     }

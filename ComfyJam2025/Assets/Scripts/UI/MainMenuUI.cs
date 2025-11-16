@@ -16,9 +16,11 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI nextButtonText;
     [SerializeField] private GameObject nextButton;
     [SerializeField] private GameObject prevButton;
+    [SerializeField] private bool hideButtonsOnClamp = true;
+    [SerializeField] private bool switchScenesOnClamp = true;
 
     private GameObject currentPanel;
-    private int currentCutsceneIndex = -1;
+    private int currentCutsceneIndex = 0;
 
     private void Start() {
         currentPanel = initialPanel;
@@ -37,20 +39,24 @@ public class MainMenuUI : MonoBehaviour
     }
     public void ShowNextImage() {
         currentCutsceneIndex++;
-
-        if (currentCutsceneIndex > cutsceneImages.Count - 1) {
+               
+        if (switchScenesOnClamp && currentCutsceneIndex > cutsceneImages.Count - 1) {
             SceneManager.LoadSceneAsync(1, LoadSceneMode.Additive);
-        }
+        }        
 
         currentCutsceneIndex = Mathf.Clamp(currentCutsceneIndex, 0, cutsceneImages.Count-1);
         cutsceneImage.sprite = cutsceneImages[currentCutsceneIndex];
-        
+
+        if (!hideButtonsOnClamp) return;
+
         if (currentCutsceneIndex == 0) {
             prevButton.SetActive(false);
         }
         else {
             prevButton.SetActive(true);
         }
+
+        if (nextButtonText == null) return;
 
         if (currentCutsceneIndex == cutsceneImages.Count - 1) {
             nextButtonText.text = "Start Game";
@@ -63,6 +69,8 @@ public class MainMenuUI : MonoBehaviour
         currentCutsceneIndex--;
         currentCutsceneIndex = Mathf.Clamp(currentCutsceneIndex, 0, cutsceneImages.Count-1);
         cutsceneImage.sprite = cutsceneImages[currentCutsceneIndex];
+
+        if (!hideButtonsOnClamp) return;
 
         if (currentCutsceneIndex == 0) {
             prevButton.SetActive(false);

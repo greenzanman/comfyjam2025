@@ -31,20 +31,20 @@ public class ChainLightningVFX : MonoBehaviour
         }
     }*/
 
-    public void ActivateChain(List<EnemyBase> enemies, float chainRange = -1) {
-        if (chainRange > -1) this.chainRange = chainRange;
+    public void ActivateChain(Vector3 startingTargetPos, float spellDamage) {
+        //if (chainRange > -1) this.chainRange = chainRange;
         //mainTargetPos = mainPos;
         isActive = true;
         elapsedTime = 0f;
         enemiesInChain.Clear();
-        DelayedChainEffect(enemies);
+        DelayedChainEffect(startingTargetPos, spellDamage);
     }
-    private void DelayedChainEffect(List<EnemyBase> enemies) {
+    private void DelayedChainEffect(Vector3 startingTargetPos, float spellDamage) {
         if (isActive) {
-            StartCoroutine(ChainedLightning(enemies));
+            StartCoroutine(ChainedLightning(startingTargetPos, spellDamage));
         }
     }
-    private IEnumerator ChainedLightning(List<EnemyBase> enemies) {
+    /*private IEnumerator ChainedLightning(List<EnemyBase> enemies) {
 
         if (isActive && elapsedTime < chainDuration) {
             elapsedTime += Time.deltaTime + delayPerChain;
@@ -56,9 +56,9 @@ public class ChainLightningVFX : MonoBehaviour
                 yield return new WaitForSeconds(delayPerChain);
             }
         }
-    }
+    }*/
 
-        /*private IEnumerator ChainedLightning(Vector3 startTarget) {
+        private IEnumerator ChainedLightning(Vector3 startTarget, float spellDamage) {
 
             if (isActive && elapsedTime < chainDuration) {
                 elapsedTime += Time.deltaTime + delayPerChain;
@@ -68,6 +68,7 @@ public class ChainLightningVFX : MonoBehaviour
                 if (closestEnemy != null) {
                     SpawnRenderer(startTarget, closestEnemy.transform.position);
                     enemiesInChain.Add(closestEnemy);
+                    closestEnemy.TakeDamage(spellDamage);
                     yield return new WaitForSeconds(delayPerChain);
 
                     if (elapsedTime >= chainDuration) yield break;
@@ -78,7 +79,7 @@ public class ChainLightningVFX : MonoBehaviour
                     if (!nextClosestEnemy) yield break;
 
                     if (!enemiesInChain.Contains(nextClosestEnemy)) {
-                        StartCoroutine(ChainedLightning(closestEnemy.transform.position));
+                        StartCoroutine(ChainedLightning(closestEnemy.transform.position, spellDamage));
                     }
                 }
                 else {
@@ -86,8 +87,8 @@ public class ChainLightningVFX : MonoBehaviour
                     isActive = false;
                 }
             }        
-        }*/
-        private void SpawnRenderer(Vector3 startPos, Vector3 endPos) {
+        }
+    private void SpawnRenderer(Vector3 startPos, Vector3 endPos) {
         GameObject lr = Instantiate(lineRendererPrefab);
         if (destroyChains) lr.GetComponent<DelayedDeath>().DeathDelay = chainDuration;
         else lr.GetComponent<DelayedDeath>().CanDie = false;
