@@ -50,6 +50,9 @@ public class PlayerManager : MonoBehaviour
 
     public PlayerState playerState = PlayerState.Idle;
 
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private SpriteRenderer playerSprite;
+
     private const float ZAP_RADIUS = 4;
     [SerializeField] private float zapCooldown = 0.25f;
     private float zapTimer = 0;
@@ -160,8 +163,22 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
+    private void UpdatePlayerSpriteDirection()
+    {
+        Vector3 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 playerPos = playerSprite.transform.position;
+
+        bool mouseOnRight = mouseWorldPos.x > playerPos.x;
+        if (playerSprite.flipX != mouseOnRight)
+        {
+            playerSprite.flipX = mouseOnRight;
+            playerAnimator.SetTrigger("Flip Trigger");
+        }
+    }
+
     private void Update()
     {
+        UpdatePlayerSpriteDirection();
         HandlePlayerClick();
 
 
@@ -243,6 +260,7 @@ public class PlayerManager : MonoBehaviour
         // Basic zaps
         if (playerState == PlayerState.Idle && Input.GetMouseButtonDown(0) && zapTimer <= 0)
         {
+            playerAnimator.SetTrigger("Cast Trigger");
             //DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
 
             // Find closest enemy within a region
@@ -264,6 +282,7 @@ public class PlayerManager : MonoBehaviour
 
             if (spellBuffer <= 0 && Input.GetMouseButtonDown(0))
             {
+                playerAnimator.SetTrigger("Cast Trigger");
                 currentSpell.Cast();
                 playerState = PlayerState.Idle;
                 //DebugManager.DisplayDebug("Casting:" + GameManager.GetMousePos().ToString());
@@ -287,6 +306,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Tell AudioManager to muffle music
             AudioManager.instance.ToggleMusicMuffled(true);
+            playerAnimator.SetBool("isCrafting", true);
             playerState = PlayerState.Crafting;
             craftingManager.gameObject.SetActive(true);
             recipeButton.SetActive(state);
@@ -295,6 +315,7 @@ public class PlayerManager : MonoBehaviour
         {
             // Tell AudioManager to unmuffle music
             AudioManager.instance.ToggleMusicMuffled(false);
+            playerAnimator.SetBool("isCrafting", false);
             playerState = PlayerState.Idle;
             craftingManager.gameObject.SetActive(false);
             recipeButton.SetActive(state);

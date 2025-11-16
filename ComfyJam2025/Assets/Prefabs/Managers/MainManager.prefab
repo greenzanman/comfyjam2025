@@ -1095,8 +1095,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 621.52, y: -30.99}
-  m_SizeDelta: {x: 598.65, y: 692.13}
+  m_AnchoredPosition: {x: 621.52, y: -25.29}
+  m_SizeDelta: {x: 625, y: 715}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2883079634587610549
 CanvasRenderer:
@@ -6734,6 +6734,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerState: 0
+  playerAnimator: {fileID: 0}
+  playerSprite: {fileID: 0}
   zapCooldown: 0.25
   possibleItems:
   - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
@@ -7509,9 +7511,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialPanel: {fileID: 7822759951167449628}
   cutsceneImages:
-  - {fileID: 21300000, guid: 5667a4b8494de5b4e84990b0a8dac634, type: 3}
   - {fileID: 21300000, guid: 668c075216cb6ae4d910b3eb4644323b, type: 3}
   - {fileID: 21300000, guid: 7081e534a595b724a96d75de2ab1051c, type: 3}
+  - {fileID: 21300000, guid: 5667a4b8494de5b4e84990b0a8dac634, type: 3}
   cutsceneImage: {fileID: 6949126822493009912}
   nextButtonText: {fileID: 0}
   nextButton: {fileID: 5021288329081604983}
