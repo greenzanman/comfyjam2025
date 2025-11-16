@@ -5,7 +5,6 @@ using UnityEngine;
 public class PumpkinBase : EnemyBase
 {
     [SerializeField] private float moveSpeed = 0.5f;
-    [SerializeField] private float range = 2f;
 
     private SpriteRenderer spriteRenderer;
 
@@ -19,10 +18,16 @@ public class PumpkinBase : EnemyBase
     {
         CenterStation target = GameManager.centerStation;
 
-        if (Vector3.Distance(transform.position, target.transform.position) <= range) return;
 
         if (target != null)
         {
+            
+            if (utils.FlatSqrDistance(GetPosition(), target.transform.position) <= contactRange * contactRange)
+            {
+                DealPlayerDamage(contactDamage);
+                return;
+            }
+
             transform.position = Vector3.MoveTowards(transform.position,
                 target.transform.position, moveSpeed * GameManager.GetDeltaTime());
 

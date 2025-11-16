@@ -32,7 +32,8 @@ public class FireWallSpellDamaging : MonoBehaviour
             if (wallCollider.OverlapPoint(enemy.GetPosition()))
             {
                 PlayVFX(enemy.transform.position, enemy.transform);
-                enemy.TakeDamage(damagePerSecond * GameManager.GetDeltaTime(), DamageType.Fire);
+                //enemy.TakeDamage(damagePerSecond * GameManager.GetDeltaTime(), DamageType.Fire);
+                enemy.Burn(0.25f);
             }
         }
     }

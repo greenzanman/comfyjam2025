@@ -5,7 +5,6 @@ using UnityEngine;
 public class Pumpking : EnemyBase
 {
     [SerializeField] private float moveSpeed = 0.5f;
-    [SerializeField] private float range = 2f;
     [SerializeField] private List<Sprite> sprites;
     private SpriteRenderer spriteRenderer;
     
@@ -22,10 +21,14 @@ public class Pumpking : EnemyBase
         CenterStation target = GameManager.centerStation;
         spriteTimer += GameManager.GetDeltaTime();
 
-        if (Vector3.Distance(transform.position, target.transform.position) <= range) return;
-
         if (target != null)
         {
+            if (utils.FlatSqrDistance(GetPosition(), target.transform.position) <= contactRange * contactRange)
+            {
+                DealPlayerDamage(contactDamage);
+                return;
+            }
+
             int spriteIndex = (int)(spriteTimer * 5) % 9;
 
             if (spriteIndex >=4 && spriteIndex <= 8)

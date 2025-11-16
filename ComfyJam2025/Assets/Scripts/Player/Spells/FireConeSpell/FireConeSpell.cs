@@ -6,7 +6,9 @@ using UnityEngine;
 public class FireConeSpell : SpellBase
 {
     private PolygonCollider2D coneCollider;
-    [SerializeField] private float damage = 5;
+    [SerializeField] private float damage = 4;    
+    [SerializeField] private float burnDuration = 1;
+
 
     public void Start()
     {
@@ -36,6 +38,7 @@ public class FireConeSpell : SpellBase
             {
                 PlayVFX(enemy.transform.position);
                 enemy.TakeDamage(damage, DamageType.Fire);
+                enemy.Burn(burnDuration);
             }
         }
         delayedDeath.StartDelayedDeath();

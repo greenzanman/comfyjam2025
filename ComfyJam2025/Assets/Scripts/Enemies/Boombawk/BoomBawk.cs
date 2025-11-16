@@ -58,8 +58,17 @@ public class Boombawk : EnemyBase
     private void Creeping()
     {
         CenterStation target = GameManager.centerStation;
+        SetPreviewVisual(Color.yellow, 0.3f);
+
         if (target != null)
         {
+
+            if (utils.FlatSqrDistance(GetPosition(), target.transform.position) <= contactRange * contactRange)
+            {
+                DealPlayerDamage(contactDamage);
+                return;
+            }
+
             transform.position = Vector3.MoveTowards(transform.position,
                 target.transform.position, moveSpeed * GameManager.GetDeltaTime());
         
@@ -67,8 +76,6 @@ public class Boombawk : EnemyBase
         }
 
         mainSprite.sprite = sprites[(int)(spriteTimer * 10) % 6];
-
-        SetPreviewVisual(Color.yellow, 0.3f);
     }
 
     private void FuseLit()
@@ -119,8 +126,8 @@ public class Boombawk : EnemyBase
         {
             if (utils.FlatSqrDistance(GameManager.centerStation.transform.position, GetPosition()) < boomRadius * boomRadius )
             {
-                // PlayerManager.instance.TakeDamage(boomDamage);
-                Logger.Log($"BOOMBAWK hit Mama! {boomDamage} damage dealt.", LogLevel.info);
+                PlayerManager.instance.TakeDamage(boomDamage / 2);
+                Logger.Log($"BOOMBAWK hit Mama! {boomDamage / 2} damage dealt.", LogLevel.info);
             }
         }
 

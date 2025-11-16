@@ -25,8 +25,8 @@ public class GravyBase : EnemyBase
     private float auraTimer = 0;
     private float spriteTimer = 0;
 
-    protected Color BURN_AURA = new Color(0, 1, 0, 0.3f);
-    protected Color FREEZE_AURA = new Color(0, 0, 0, 0.3f);
+    protected Color BURN_AURA = new Color(0, 1, 0, 0.05f);
+    protected Color FREEZE_AURA = new Color(0, 0, 0, 0.05f);
     protected Color EMPTY_AURA = new Color(0, 0, 0, 0);
     protected override void InitializeEnemy()
     {
@@ -73,6 +73,10 @@ public class GravyBase : EnemyBase
                 mainSprite.sprite = sprites[(int)(spriteTimer * 10) % 8 + 13];
 
                 // TODO: Heal mother
+                if (target != null)
+                    if (utils.FlatSqrDistance(GetPosition(), target.transform.position) < auraSize * auraSize)
+                        PlayerManager.instance.TakeDamage(GameManager.GetDeltaTime() * -healRate);
+                        
                 TakeDamage(GameManager.GetDeltaTime() * healthDrain);
                 aura.color = BURN_AURA;
                 break;
@@ -102,6 +106,15 @@ public class GravyBase : EnemyBase
         if (auraTimer <= 0)
         {
             gravyState = GravyState.Normal;
+        }
+
+        if (target != null)
+        {
+            if (utils.FlatSqrDistance(GetPosition(), target.transform.position) <= contactRange * contactRange)
+            {
+                DealPlayerDamage(contactDamage);
+                return;
+            }
         }
     }
 
