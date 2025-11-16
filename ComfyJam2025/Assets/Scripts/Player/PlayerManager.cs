@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum PlayerState
 {
@@ -50,6 +51,8 @@ public class PlayerManager : MonoBehaviour
     public PlayerState playerState = PlayerState.Idle;
 
     private const float ZAP_RADIUS = 4;
+    [SerializeField] private float zapCooldown = 0.25f;
+    private float zapTimer = 0;
     private CraftingManager craftingManager;
     private Vector2 CRAFTING_POSITION = new Vector2(22, -17);
     private Vector2 CRAFTING_POSITION_BUMP = new Vector2(22, -16.5f);
@@ -72,6 +75,9 @@ public class PlayerManager : MonoBehaviour
     // Small buffer to prevent accidentally doubleclicking
     private float spellBuffer = 0;
     private SpellBase currentSpell;
+    [SerializeField] private Slider hpSlider;
+    [SerializeField] private float maxMamaHealth = 20;
+    private float health;
     [SerializeField] private GameObject recipeButton;
     
     private void Awake()
@@ -116,6 +122,10 @@ public class PlayerManager : MonoBehaviour
         {
             itemSprites[itemData.itemType] = itemData.itemSprite;
         }        
+
+        health = maxMamaHealth;
+        hpSlider.maxValue = maxMamaHealth;
+        hpSlider.value = maxMamaHealth;
     }
 
     public Sprite GetSprite(ItemType itemType)
@@ -158,6 +168,21 @@ public class PlayerManager : MonoBehaviour
 #if UNITY_EDITOR
         PlayerHacks();
 #endif
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+
+        // Prevent overheal
+        health = Mathf.Min(health, maxMamaHealth);
+
+        hpSlider.value = health;
+        if (health <= 0)
+        {
+            Logger.Log("Lose screen should be displayed", LogLevel.fatal);
+        }
+    
     }
 
     private void PlayerHacks()
@@ -213,19 +238,23 @@ public class PlayerManager : MonoBehaviour
             craftingButton.position = CRAFTING_POSITION;
         }
 
+        zapTimer = Mathf.Max(0, zapTimer - GameManager.GetDeltaTime());
+
         // Basic zaps
-        if (playerState == PlayerState.Idle && Input.GetMouseButtonDown(0))
+        if (playerState == PlayerState.Idle && Input.GetMouseButtonDown(0) && zapTimer <= 0)
         {
             DebugManager.DisplayDebug("Strike:" + GameManager.GetMousePos().ToString());
 
             // Find closest enemy within a region
-            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), ZAP_RADIUS);
+            EnemyBase closestEnemy = EnemyManager.GetClosestEnemy(GameManager.GetMousePos(), ZAP_RADIUS, false);
             if (closestEnemy)
             {
                 VisualEffect randomVfx = Instantiate(vfxs[UnityEngine.Random.Range(0, vfxs.Count)]);
                 randomVfx.transform.position = new Vector3(closestEnemy.transform.position.x, closestEnemy.transform.position.y + (-randomVfx.GetVector3("Direction").y/spellLocationOffset), 0f);
                 randomVfx.SendEvent(VFX_EVENT_NAME);
                 closestEnemy.TakeDamage(1);
+
+                zapTimer = zapCooldown;
             }
         } // Casting spell
         else if (playerState == PlayerState.Casting)

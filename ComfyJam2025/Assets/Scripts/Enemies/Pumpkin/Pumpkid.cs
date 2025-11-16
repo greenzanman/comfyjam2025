@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Diagnostics;
 
 public class Pumpkidd : EnemyBase
 {
@@ -9,7 +10,6 @@ public class Pumpkidd : EnemyBase
     [SerializeField] private float cohesionStrength = 0.3f; // how much they pull toward the group center
     [SerializeField] private float separationStrength = 0.2f; // mild push away from others
     [SerializeField] private float moveSpeed = 0.5f;
-    [SerializeField] private float range = 2f;
     [SerializeField] private List<Sprite> sprites;
 
     private SpriteRenderer spriteRenderer;
@@ -24,10 +24,15 @@ public class Pumpkidd : EnemyBase
     {
         CenterStation target = GameManager.centerStation;
 
-        if (Vector3.Distance(transform.position, target.transform.position) <= range) return;
-
         if (target != null)
         {
+
+            if (utils.FlatSqrDistance(GetPosition(), target.transform.position) <= contactRange * contactRange)
+            {
+                DealPlayerDamage(contactDamage);
+                return;
+            }
+
             spriteTimer += GameManager.GetDeltaTime();
 
             Vector2 moveDir = (target.transform.position - transform.position).normalized;

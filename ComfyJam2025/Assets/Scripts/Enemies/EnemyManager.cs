@@ -272,13 +272,15 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    public static EnemyBase GetClosestEnemy(Vector3 position, float cutoffDistance = Mathf.Infinity)
+    public static EnemyBase GetClosestEnemy(Vector3 position, float cutoffDistance = Mathf.Infinity, bool includeDeer = true)
     {
         EnemyBase result = null;
         float closest = cutoffDistance * cutoffDistance;
         // TODO: Reduce the calculations on this somehow, for large numbers
         foreach (EnemyBase enemy in enemies)
         {
+            // Skip over deer
+            if (enemy is Deer && !includeDeer) continue;
             float candDistance = (position - enemy.transform.position).sqrMagnitude;
             if (candDistance < closest)
             {

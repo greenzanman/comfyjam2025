@@ -10,6 +10,8 @@ public class EnemyBase : MonoBehaviour
     public float health { get; protected set; }
 
     [field: SerializeField] protected float maxHealth = 4;
+    [SerializeField] protected float contactDamage = 1;
+    [SerializeField] protected float contactRange = 1f;
     protected DamageType killingType = DamageType.None;
 
     protected CenterStation centerStation;
@@ -175,7 +177,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Die()
     {
         // Find random drop
-        if (possibleDrops.Count > 0) {
+        if (killingType != DamageType.Disintegrate && possibleDrops.Count > 0) {
             DetermineDroppedItem();
         }
 
@@ -219,6 +221,14 @@ public class EnemyBase : MonoBehaviour
         }
 
         return weight;
+    }
+
+    protected void DealPlayerDamage(float damage)
+    {
+        PlayerManager.instance.TakeDamage(damage);
+
+        // TODO: SHould play some kind of effect here
+        TakeDamage(100000, DamageType.Disintegrate);
     }
     /*
     protected void OnGUI()

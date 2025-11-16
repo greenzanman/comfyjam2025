@@ -47,13 +47,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
+  contactDamage: 4
+  contactRange: 4
   density: 4
   hpSlider: {fileID: 6194890835287883747}
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops:
   - {fileID: 11400000, guid: f35eb1d086340a246826f690cf9cfa2a, type: 2}
   moveSpeed: 0.25
-  range: 2
   sprites:
   - {fileID: 1498589216, guid: c5d6d8d079bf79b4dba90764da911480, type: 3}
   - {fileID: 1498589216, guid: c5d6d8d079bf79b4dba90764da911480, type: 3}
