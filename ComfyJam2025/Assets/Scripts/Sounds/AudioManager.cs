@@ -370,9 +370,6 @@ public class AudioManager : MonoBehaviour
     {
         _uiHoverSource.Play();
     }
-    public void PlayPickUp() {
-        _pickUpSource.Play();
-    }
 
     public void PlayMeow()
     {
