@@ -77,6 +77,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _uiBlinkSource;
     [SerializeField] private AudioSource _uiHoverSource;
     [SerializeField] private AudioSource _hitpotionSFX;
+    [SerializeField] private AudioSource _slot1Source;
+    [SerializeField] private AudioSource _slot2Source;
+    [SerializeField] private AudioSource _slot3Source;
+
     
 
     
@@ -337,5 +341,21 @@ public class AudioManager : MonoBehaviour
     public void PlayCutscenePotionHit()
     {
         _hitpotionSFX.Play();
+    }
+
+    public void PlayCraftingSlotSound(int ingredientCount)
+    {
+        switch (ingredientCount)
+        {
+            case 1:
+                _slot1Source.Play();
+                break;
+            case 2:
+                _slot2Source.Play();
+                break;
+            case 3:
+                _slot3Source.Play();
+                break;
+        }
     }
 }

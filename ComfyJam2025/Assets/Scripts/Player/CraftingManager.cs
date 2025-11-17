@@ -201,6 +201,19 @@ public class CraftingManager : MonoBehaviour
         slot.itemType = addedItem.GetItemType();
         // Remove used item
         PlayerManager.RemoveItem(addedItem.GetItemType());
+
+        // play respective slot 1,2,or 3 sound
+        int currentIngredients = 0;
+        foreach (CraftingSlot s in craftingSlots)
+        {
+            if (s.hasItem) 
+            {
+                currentIngredients++;
+            }
+        }
+        AudioManager.instance.PlayCraftingSlotSound(currentIngredients);
+
+
         CheckRecipes();
     }
 
