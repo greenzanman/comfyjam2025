@@ -35,8 +35,13 @@ public class MainMenuUI : MonoBehaviour
 
     private void Start() {
         currentPanel = initialPanel;
-        // Tell AudioManager to play calm theme
+        
+        if (SceneManager.GetActiveScene().name == "MainMenu")
+        {
+            // Tell AudioManager to play calm theme
         AudioManager.instance.PlayMusic(MusicTrack.CalmTheme);
+        }
+        
     }
 
     public void OpenPanel(GameObject goToPanel) {
@@ -58,7 +63,7 @@ public class MainMenuUI : MonoBehaviour
 
         if (currentCutsceneIndex == 14)
         {
-   // Tell AudioManager to play calm theme
+            // Tell AudioManager to play calm theme
             AudioManager.instance.PlayMusic(MusicTrack.DramaticTheme);         
         }
 
@@ -79,7 +84,9 @@ public class MainMenuUI : MonoBehaviour
         // IF END -> start game
         if (currentCutsceneIndex >= cutsceneImages.Count - 1) {
             if (switchScenesOnClamp) {
-                SceneManager.LoadSceneAsync(1, LoadSceneMode.Single); 
+                AudioManager.instance.PlayMusic(MusicTrack.None);
+                SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+                gameObject.SetActive(false);
             }
             return; // FINAL DONE
         }

@@ -11,6 +11,7 @@ public enum MusicTrack
     DramaticTheme,
     MediumBattle,
     IntenseBattle,
+    GameOver,
 }
 
 public enum SpellSound
@@ -35,8 +36,8 @@ public class AudioManager : MonoBehaviour
 
     [Header("Other Music")]
     [SerializeField] private AudioSource _calmThemeMusic;
-    
     [SerializeField] private AudioSource _dramaticThemeMusic;
+    [SerializeField] private AudioSource _gameOverMusic;
 
 
     // setup constants for muffled/lowpass filter to work:
@@ -81,13 +82,19 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _slot2Source;
     [SerializeField] private AudioSource _slot3Source;
 
-    
+    [SerializeField] private AudioSource _itemSFXPlayer;
+    [SerializeField] private AudioClip[] _itemPickupClips;
+
+    [SerializeField] private AudioSource _mamaSFXPlayer;
+    [SerializeField] private AudioClip[] _mamaDamageClips;
 
     
     public static AudioManager instance;
 
     // the single coroutine for the muffled filter transitions
     private Coroutine _filterCoroutine;
+    // dict to track active fades (to fix fucky weirdy)
+    private Dictionary<AudioSource, Coroutine> _activeMusicFades = new Dictionary<AudioSource, Coroutine>();
 
 
     // persist this single AudioManager across scene loads
@@ -103,7 +110,6 @@ public class AudioManager : MonoBehaviour
     /// Play music track, and fade out the old one. 
     ///  - pass in a MusicTrack enum like PlayMusic(MusicTrack.MediumBattle);
     /// </summary>
-    /// <param name="muffleOn">True to toggle on the muffled filter, False to remove it.</param>
     public void PlayMusic(MusicTrack musicTrack, float targetVolume = 0.5f)
     {
         AudioSource trackToPlay = null;
@@ -123,22 +129,43 @@ public class AudioManager : MonoBehaviour
             case MusicTrack.IntenseBattle:
                 trackToPlay = _intenseBattleMusic;
                 break;
+            case MusicTrack.GameOver:
+                trackToPlay = _gameOverMusic;
+                break;
+        }
+
+        // if track already playing, do nothing
+        if (_currentMusicTrack == trackToPlay && trackToPlay != null && trackToPlay.isPlaying)
+        {
+            return; 
         }
 
         // fade out old track
         if (_currentMusicTrack  != null && _currentMusicTrack != trackToPlay)
         {
-            StartCoroutine(FadeTrack(_currentMusicTrack, false));
+            StartFade(_currentMusicTrack, false, targetVolume);
         }
 
         // play new track
         _currentMusicTrack = trackToPlay;
-        if (_currentMusicTrack != null && !_currentMusicTrack.isPlaying)
+        if (_currentMusicTrack != null)
         {
-            _currentMusicTrack.volume = 0.0f;
-            StartCoroutine(FadeTrack(_currentMusicTrack, true, targetVolume));  // fade in
+            StartFade(_currentMusicTrack, true, targetVolume);  // fade in
         }
 
+    }
+
+    private void StartFade(AudioSource track, bool fadeIn, float targetVolume)
+    {
+        if (_activeMusicFades.ContainsKey(track) && _activeMusicFades[track] != null)
+        {
+            StopCoroutine(_activeMusicFades[track]);
+            _activeMusicFades.Remove(track);
+        }
+
+        // start new fade coroutine and store in dict
+        Coroutine newFade = StartCoroutine(FadeTrack(track, fadeIn, targetVolume));
+        _activeMusicFades.Add(track, newFade);
     }
 
     // Helper method to fade in or out a music track
@@ -151,15 +178,18 @@ public class AudioManager : MonoBehaviour
         // for fade in tracks: start playing before fade transition
         if (fadeIn)
         {
+            if (!track.isPlaying) track.volume = 0f; 
             track.Play();
+            startVolume = track.volume;  // incase we interruped a fade
         }
 
         while (time < _musicFadeDuration)
         {
+            time += Time.unscaledDeltaTime;
+
             // transition volume to the final target volume
             track.volume = Mathf.Lerp(startVolume, finalTargetVolume, time / _musicFadeDuration);
             
-            time += Time.deltaTime;
             yield return null; // apparently needed to make while loop do 1 iteration per frame
         }
 
@@ -170,7 +200,12 @@ public class AudioManager : MonoBehaviour
         if (!fadeIn)
         {
             track.Stop();
-            track.volume = startVolume; // Reset volume for next time
+        }
+
+        // remove from dict, since fade is doen
+        if (_activeMusicFades.ContainsKey(track))
+        {
+            _activeMusicFades.Remove(track);
         }
     }
 
@@ -279,8 +314,8 @@ public class AudioManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);  // slight startup random delay
         
-        _enemySFXPlayer.pitch = Random.Range(0.9f, 1.1f);
-        _enemySFXPlayer.PlayOneShot(clip);
+        _enemySFXPlayer.pitch = Random.Range(1.1f, 1.3f);
+        _enemySFXPlayer.PlayOneShot(clip, 0.5f);
 
         yield return new WaitForSeconds(clip.length);
         _currentDeathSoundsPlaying--;
@@ -357,5 +392,40 @@ public class AudioManager : MonoBehaviour
                 _slot3Source.Play();
                 break;
         }
+    }
+
+    // PLAY ITEM PICKUP SOUND
+    public void PlayItemPickup()
+    {
+        StartCoroutine(PlayItemPickupCoroutine());
+    }
+    // - with slight random delay
+    // - with slight random pitch variation
+    private IEnumerator PlayItemPickupCoroutine()
+    {
+        float delay = Random.Range(0f, 0.05f);
+        yield return new WaitForSeconds(delay);
+
+        AudioClip clip = _itemPickupClips[Random.Range(0, _itemPickupClips.Length)];
+        _itemSFXPlayer.pitch = Random.Range(0.9f, 1.1f);
+        _itemSFXPlayer.PlayOneShot(clip, 0.3f);
+    }
+
+
+    // PLAY MAMA DAMAGE SOUND
+    public void PlayMamaDamage()
+    {
+        StartCoroutine(PlayMamaDamageCoroutine());
+    }
+    // - with slight random delay
+    // - with slight random pitch variation
+    private IEnumerator PlayMamaDamageCoroutine()
+    {
+        float delay = Random.Range(0f, 0.05f);
+        yield return new WaitForSeconds(delay);
+
+        AudioClip clip = _mamaDamageClips[Random.Range(0, _mamaDamageClips.Length)];
+        _mamaSFXPlayer.pitch = Random.Range(0.9f, 1.1f);
+        _mamaSFXPlayer.PlayOneShot(clip, 0.1f);
     }
 }

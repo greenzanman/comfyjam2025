@@ -138,6 +138,7 @@ public class PlayerManager : MonoBehaviour
 
     // Increase inventory amount of one item by 1
     public static void AddItem(ItemType itemType) {
+        AudioManager.instance.PlayItemPickup();
 
         if (instance.inventory.ContainsKey(itemType))
         {
@@ -187,11 +188,14 @@ public class PlayerManager : MonoBehaviour
 #endif
     }
 
+
+    // mama takes damage
     public void TakeDamage(float damage)
     {
         health -= damage;
 
         CameraShake.Instance.Shake(0.3f, 0.2f);
+        AudioManager.instance.PlayMamaDamage();
 
         // Prevent overheal
         health = Mathf.Min(health, maxMamaHealth);
@@ -199,7 +203,7 @@ public class PlayerManager : MonoBehaviour
         hpSlider.value = health;
         if (health <= 0)
         {
-            Logger.Log("Lose screen should be displayed", LogLevel.fatal);
+            GameOverManager.instance.TriggerGameOver();
         }
     
     }
@@ -295,11 +299,13 @@ public class PlayerManager : MonoBehaviour
     // If mouse is on the inventory button
     private bool IsMouseOnInventoryButton()
     {
+        float hitboxPadding = 2f;
+
         Vector2 mousePos = GameManager.GetMousePos();
-        return mousePos.x < CRAFTING_POSITION.x + CRAFTING_WIDTH &&
-        mousePos.x > CRAFTING_POSITION.x - CRAFTING_WIDTH &&
-        mousePos.y < CRAFTING_POSITION.y + CRAFTING_WIDTH &&
-        mousePos.y > CRAFTING_POSITION.y - CRAFTING_WIDTH;
+        return mousePos.x < CRAFTING_POSITION.x + CRAFTING_WIDTH + hitboxPadding && 
+        mousePos.x > CRAFTING_POSITION.x - CRAFTING_WIDTH - hitboxPadding &&
+        mousePos.y < CRAFTING_POSITION.y + CRAFTING_WIDTH + hitboxPadding &&
+        mousePos.y > CRAFTING_POSITION.y - CRAFTING_WIDTH - hitboxPadding;
     }
 
     public void SetCraftingState(bool state)

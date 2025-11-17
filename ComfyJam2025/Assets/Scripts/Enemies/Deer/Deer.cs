@@ -54,7 +54,7 @@ public class Deer : EnemyBase
                         pranceDirection.y = -pranceDirection.y;
                 
                 spriteRenderer.flipX = pranceDirection.x > 0;
-                spriteRenderer.sprite = sprites[(int)(spriteTimer * 10) % 6];
+                spriteRenderer.sprite = sprites[(int)(spriteTimer * 10) % 6]; // frames 0-5
                 spriteRenderer.transform.localPosition = new Vector2(0, 2);
 
                 
@@ -90,7 +90,9 @@ public class Deer : EnemyBase
                     hasItem = false;
                     pranceDirection = new Vector2(Random.value > 0.5f ? 1 : -1, Random.value > 0.5f ? 1 : -1);
                 }
-                spriteRenderer.sprite = sprites[6];
+
+                int grazingFrame = 6 + ((int)(spriteTimer * 6) % 2); // frame 6 or 7
+                spriteRenderer.sprite = sprites[grazingFrame];
                 spriteRenderer.transform.localPosition = Vector2.zero;
                 break;
         }

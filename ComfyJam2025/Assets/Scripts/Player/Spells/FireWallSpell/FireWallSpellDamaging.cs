@@ -8,7 +8,7 @@ public class FireWallSpellDamaging : MonoBehaviour
     private BoxCollider2D wallCollider;
     [SerializeField] private float lifetime = 20;
     private float age = 0;
-    [SerializeField] private float damagePerSecond = 1;
+    // [SerializeField] private float damagePerSecond = 1;
 
     [SerializeField] private VisualEffect spellVFX;
     private const string VFX_EVENT_NAME = "OnAbilityCasted";

@@ -96,6 +96,8 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
+        // Tell AudioManager to play battle music
+        AudioManager.instance.PlayMusic(MusicTrack.IntenseBattle, 0.3f);
         // Register some console variables
 		//DebugManager.RegisterConsoleVar("DrawEnemyHealth", 1);
 		//DebugManager.RegisterConsoleVar("DrawEnemyPos", 1);
@@ -108,17 +110,11 @@ public class EnemyManager : MonoBehaviour
         switch (waveState)
         {
             case WaveState.SPAWNING_ENEMIES:
-                // Tell AudioManager to play battle music
-                AudioManager.instance.PlayMusic(MusicTrack.IntenseBattle, 0.3f);
-
                 enemyWavePS.Play();
                 HandleEnemySpawning();
                 currentWavesUpdated = false;
                 break;
             case WaveState.DOWNTIME:
-                // Tell AudioManager to play NOTHING
-                AudioManager.instance.PlayMusic(MusicTrack.MediumBattle);
-
                 enemyWavePS.Stop();
                 HandleWaveDownTime();
                 if (!currentWavesUpdated) {

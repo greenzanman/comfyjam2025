@@ -29,8 +29,12 @@ public class GameManager : MonoBehaviour
         return PlayerManager.instance.GetSprite(itemType);
     }
 
+    public static bool isGameOver = false;
     public static float GetTimeDilation()
     {
+        // if game over, do an immediate slowmo
+        if (isGameOver) return 0.05f;
+
         float baseDilation = 1;
 
         if (Input.GetMouseButton(1))

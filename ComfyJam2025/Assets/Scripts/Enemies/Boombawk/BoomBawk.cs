@@ -105,6 +105,11 @@ public class Boombawk : EnemyBase
         fuseTimer -= GameManager.GetDeltaTime();
         if (fuseTimer <= 0)
         {
+            // more drops if exploded
+            DetermineDroppedItem();
+            DetermineDroppedItem();
+            DetermineDroppedItem();
+            DetermineDroppedItem();
             Die();
         }
     }

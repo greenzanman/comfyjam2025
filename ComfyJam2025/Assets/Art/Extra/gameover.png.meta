@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3cf35cb354284994f8cbe7e48081f8c5
+guid: 8856579c75253d846a76cd3f77ab0fef
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,97 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: deer run-b966_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2219fee2b7a2c2841b0a33e709675dcf
-      internalID: -1935049124
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: deer run-b966_1
-      rect:
-        serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 281a18dd806b3524696a0313b45fcb72
-      internalID: 2087800711
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: deer run-b966_2
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: edbf30b071b5f644a8be27cfbaa115ee
-      internalID: 397457152
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: deer run-b966_3
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 256
-        width: 256
-        height: 256
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f262f2925bb78db4c817fba01ac1cd0a
-      internalID: -264911861
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: deer run-b966_4
+      name: gameover_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 256
+        width: 159
+        height: 93
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -208,20 +124,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7691a4bf48937c74a91ab4b3f9073b42
-      internalID: -703082998
+      spriteID: 4895c6c0791f248458ad32119a19231f
+      internalID: 584276339
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: deer run-b966_5
+      name: gameover_1
       rect:
         serializedVersion: 2
-        x: 256
+        x: 159
         y: 0
-        width: 256
-        height: 256
+        width: 159
+        height: 93
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +145,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c6fd961e22b703749bc8e7e3cca1f4dc
-      internalID: -610454465
+      spriteID: 84ab6d6e7d15489499be3503d765acd0
+      internalID: -1213619937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: gameover_2
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 0
+        width: 159
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d889474e8a5a14a9b53753b1e0ba02
+      internalID: -1127285736
       vertices: []
       indices: 
       edges: []
@@ -246,12 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      deer run-b966_0: -1935049124
-      deer run-b966_1: 2087800711
-      deer run-b966_2: 397457152
-      deer run-b966_3: -264911861
-      deer run-b966_4: -703082998
-      deer run-b966_5: -610454465
+      gameover_0: 584276339
+      gameover_1: -1213619937
+      gameover_2: -1127285736
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

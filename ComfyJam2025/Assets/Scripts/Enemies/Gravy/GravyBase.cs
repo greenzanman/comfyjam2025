@@ -136,4 +136,15 @@ public class GravyBase : EnemyBase
         auraTimer = auraDuration;
     }
 
+    protected override void Die()
+    {
+        if (killingType != DamageType.Disintegrate && possibleDrops.Count > 0) {
+            DetermineDroppedItem();
+            DetermineDroppedItem();
+        }
+        
+        base.Die(); // original drop logic
+        
+    }
+
 }

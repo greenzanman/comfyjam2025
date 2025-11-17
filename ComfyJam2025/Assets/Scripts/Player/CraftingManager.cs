@@ -6,34 +6,44 @@ using UnityEngine;
 
 public class CraftingManager : MonoBehaviour
 {
+    // order does not matter
+    // 20 recipes total
     private (ItemType, ItemType, ItemType, SpellType)[] spellRecipes = {
+        
+        // --- ZAP (Yellow/Purple) ---
+        // 2+ ACORNs
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.ACORN, SpellType.ZapSpell), // 3 Acorns
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.RIND,  SpellType.ZapSpell), // 2 Acorn + Rind
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.GREEN_LEAF, SpellType.ZapSpell), // 2 Acorn + Leaf
+        ( ItemType.ACORN, ItemType.ACORN, ItemType.RED_MUSH, SpellType.ZapSpell), // 2 Acorn + Mush
 
-        ( ItemType.RIND, ItemType.RIND, ItemType.RIND, SpellType.Dud),
-        ( ItemType.ACORN, ItemType.ACORN, ItemType.ACORN, SpellType.ZapSpell),
-        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, SpellType.WindPush),
-        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RED_MUSH, SpellType.Sunbeam),
+        // --- FIRE (Red) ---
+        // majority RED MUSH
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RED_MUSH, SpellType.Sunbeam), // STRONGEST (3 Mush)
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.GREEN_LEAF, SpellType.FireCone), // Medium (2 Mush + Leaf)
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.ACORN, SpellType.FireCone),     // Medium (2 Mush + Acorn)
+        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RIND, SpellType.FireWall),      // Weakest (2 Mush + Rind)
 
+        // --- ICE / WIND (Blue) ---
+        // majority LEAF
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, SpellType.CircleFreeze), // 3 Lead
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RIND, SpellType.WindPush),           // 2 Lead + 1 Rind
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.WindPush),       //  2 Lead + 1 Mush
+        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.ACORN, SpellType.WindPush),          // 2 Lead + 1 AcornLead
+        
+        // --- SUMMON (Green) ---
+        // majority RIND
+        ( ItemType.RIND, ItemType.RIND, ItemType.RIND, SpellType.BlowerSpell), // 3 Leaves (Minions)
+        ( ItemType.RIND, ItemType.RIND, ItemType.GREEN_LEAF, SpellType.Graveyard), // 2 Leaves + 1 Rind graveyard
+        ( ItemType.RIND, ItemType.RIND, ItemType.RED_MUSH, SpellType.Graveyard),   // 2 Leaves + 1 Mush
+        ( ItemType.RIND, ItemType.RIND, ItemType.ACORN, SpellType.Graveyard),      // 2 Leaves + 1 Acorn
 
-        ( ItemType.ACORN, ItemType.ACORN, ItemType.GREEN_LEAF, SpellType.FireWall),
-        ( ItemType.ACORN, ItemType.ACORN, ItemType.RED_MUSH, SpellType.Sunbeam),
-        ( ItemType.ACORN, ItemType.ACORN, ItemType.RIND, SpellType.Graveyard),
-
-        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.ACORN, SpellType.WindRotate),
-        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.FireWall),
-        ( ItemType.GREEN_LEAF, ItemType.GREEN_LEAF, ItemType.RIND, SpellType.Sunbeam),
-
-        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.ACORN, SpellType.ZapSpell),
-        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.GREEN_LEAF, SpellType.FireCone),
-        ( ItemType.RED_MUSH, ItemType.RED_MUSH, ItemType.RIND, SpellType.WindPush),
-
-        ( ItemType.RIND, ItemType.RIND, ItemType.ACORN, SpellType.CircleFreeze),
-        ( ItemType.RIND, ItemType.RIND, ItemType.GREEN_LEAF, SpellType.FireWall),
-        ( ItemType.RIND, ItemType.RIND, ItemType.RED_MUSH, SpellType.FireCone),
-
-        ( ItemType.RIND, ItemType.ACORN, ItemType.RED_MUSH, SpellType.BlowerSpell),
-        ( ItemType.RIND, ItemType.ACORN, ItemType.GREEN_LEAF, SpellType.CircleFreeze),
-        ( ItemType.ACORN, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.BurnCircle),
-        ( ItemType.RIND, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.ZapSpell),
+        // --- THE SOUP (1 of each - No Majority) ---
+        // spells w no majortuy
+        ( ItemType.ACORN, ItemType.GREEN_LEAF, ItemType.RIND, SpellType.ZapSpell), 
+        ( ItemType.ACORN, ItemType.RED_MUSH, ItemType.RIND, SpellType.ZapSpell),
+        ( ItemType.ACORN, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.Graveyard),
+        ( ItemType.RIND, ItemType.GREEN_LEAF, ItemType.RED_MUSH, SpellType.Graveyard),
     };
 
     private int ConvertItemsToInt(ItemType item1, ItemType item2, ItemType item3)

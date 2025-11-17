@@ -47,19 +47,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 0.001
+  contactDamage: 1
+  contactRange: 1
   density: 0.5
   hpSlider: {fileID: 6194890835287883747}
   itemDropBasePrefab: {fileID: 5428936690741754182, guid: 1977b38a4a1d376409342b9514695321, type: 3}
   possibleDrops: []
   moveSpeed: 2.5
   sprites:
-  - {fileID: -1935049124, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: 2087800711, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: 397457152, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: -264911861, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: -703082998, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: -610454465, guid: 3cf35cb354284994f8cbe7e48081f8c5, type: 3}
-  - {fileID: -2089820555, guid: 74205f3f4f4c6994bbe6bc326ca11c77, type: 3}
+  - {fileID: 806695667, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: 667585345, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: -2969183, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: 2106709114, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: -734506829, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: 364982247, guid: bd30c10cc95e45a43b5f0098d965fc16, type: 3}
+  - {fileID: 2124469488, guid: f907989a525f5334ea401462567c92af, type: 3}
+  - {fileID: -391846788, guid: f907989a525f5334ea401462567c92af, type: 3}
 --- !u!1 &2079076722295693627
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +144,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1001 &8480145257085975785
