@@ -222,6 +222,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1418361591937158418}
   - component: {fileID: -3907900566216065506}
+  - component: {fileID: 7144829967888711957}
   m_Layer: 0
   m_Name: CenterStation
   m_TagString: Untagged
@@ -258,3 +259,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe1ce45375cc97a44bcedec4c766c818, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7144829967888711957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8753323515851571010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46d8c45105004934b8a11da0835ba2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _flashColor: {r: 0.9137255, g: 0.043137256, b: 0.37254903, a: 1}
+  flashTime: 0.5
+  spriteRenderers:
+  - {fileID: 6613699775631519622}

@@ -52,6 +52,7 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SpriteRenderer playerSprite;
+    [SerializeField] private DamageFlash damageFlash;
 
     [SerializeField] private Animator mamaAnimator;
     // mamaAnimator.SetTrigger("MamaHurt");
@@ -195,6 +196,8 @@ public class PlayerManager : MonoBehaviour
     // mama takes damage
     public void TakeDamage(float damage)
     {
+        TriggerDamageFlash();
+
         health -= damage;
 
         CameraShake.Instance.Shake(0.3f, 0.2f);
@@ -209,6 +212,9 @@ public class PlayerManager : MonoBehaviour
             GameOverManager.instance.TriggerGameOver();
         }
     
+    }
+    public void TriggerDamageFlash() {
+        damageFlash.TriggerDamageFlash();
     }
 
     private void PlayerHacks()
