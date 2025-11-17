@@ -225,6 +225,7 @@ public class EnemyBase : MonoBehaviour
 
     protected void DealPlayerDamage(float damage)
     {
+        AudioManager.instance.PlayEnemyDamage();
         PlayerManager.instance.TakeDamage(damage);
 
         // TODO: SHould play some kind of effect here
