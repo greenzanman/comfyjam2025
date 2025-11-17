@@ -55,7 +55,6 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private DamageFlash damageFlash;
 
     [SerializeField] private Animator mamaAnimator;
-    // mamaAnimator.SetTrigger("MamaHurt");
 
     private const float ZAP_RADIUS = 4;
     [SerializeField] private float zapCooldown = 0.25f;
@@ -215,6 +214,7 @@ public class PlayerManager : MonoBehaviour
     }
     public void TriggerDamageFlash() {
         damageFlash.TriggerDamageFlash();
+        mamaAnimator.SetTrigger("MamaHurt");
     }
 
     private void PlayerHacks()

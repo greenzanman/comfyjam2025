@@ -183,6 +183,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4976b1d86c0077a419131a49d1e49f30, type: 3}
+--- !u!95 &250761364 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 421344478753682285, guid: 4976b1d86c0077a419131a49d1e49f30, type: 3}
+  m_PrefabInstance: {fileID: 236967385}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &373734436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -502,6 +507,10 @@ PrefabInstance:
       propertyPath: damageFlash
       value: 
       objectReference: {fileID: 1973417169}
+    - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
+      propertyPath: mamaAnimator
+      value: 
+      objectReference: {fileID: 250761364}
     - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: playerSprite
       value: 
