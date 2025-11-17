@@ -1123,7 +1123,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &19794270267660948
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7327,6 +7327,7 @@ MonoBehaviour:
   playerState: 0
   playerAnimator: {fileID: 0}
   playerSprite: {fileID: 0}
+  damageFlash: {fileID: 0}
   zapCooldown: 0.25
   possibleItems:
   - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
