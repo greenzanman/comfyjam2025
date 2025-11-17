@@ -53,6 +53,9 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] private Animator playerAnimator;
     [SerializeField] private SpriteRenderer playerSprite;
 
+    [SerializeField] private Animator mamaAnimator;
+    // mamaAnimator.SetTrigger("MamaHurt");
+
     private const float ZAP_RADIUS = 4;
     [SerializeField] private float zapCooldown = 0.25f;
     private float zapTimer = 0;

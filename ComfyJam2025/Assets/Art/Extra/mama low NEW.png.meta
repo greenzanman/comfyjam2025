@@ -115,8 +115,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 768
-        height: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: de4b15a228085c341937aa4bc7da13fd
-      internalID: 2121308538
+      spriteID: c13937eb3d1031842a8a8d3f645169a6
+      internalID: -974754149
       vertices: []
       indices: 
       edges: []
@@ -134,10 +134,10 @@ TextureImporter:
       name: mama low NEW_1
       rect:
         serializedVersion: 2
-        x: 768
+        x: 256
         y: 0
-        width: 768
-        height: 768
+        width: 256
+        height: 256
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5aa8d52f96a853c489b315d8ced9dd8a
-      internalID: -1056333220
+      spriteID: 454615c2e10b3634fa092bec490a7d76
+      internalID: -756673779
       vertices: []
       indices: 
       edges: []
@@ -162,8 +162,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      mama low NEW_0: 2121308538
-      mama low NEW_1: -1056333220
+      mama low NEW_0: -974754149
+      mama low NEW_1: -756673779
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
