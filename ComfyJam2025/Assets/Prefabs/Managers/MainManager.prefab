@@ -348,7 +348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -233, y: -100.399994}
+  m_AnchoredPosition: {x: -170, y: -70}
   m_SizeDelta: {x: 868.7, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5079746536718122259
@@ -7328,6 +7328,7 @@ MonoBehaviour:
   playerAnimator: {fileID: 0}
   playerSprite: {fileID: 0}
   damageFlash: {fileID: 0}
+  mamaAnimator: {fileID: 0}
   zapCooldown: 0.25
   possibleItems:
   - {fileID: 11400000, guid: 44f7a429519e1b3478ba0c1969326666, type: 2}
@@ -7461,8 +7462,8 @@ MonoBehaviour:
   waveStateText: {fileID: 7441040288244668751}
   currentWaveText: {fileID: 1829147068986484922}
   enemyWavePS: {fileID: 0}
-  enemySpawningStateColor: {r: 0.9411765, g: 1, b: 0, a: 0.3137255}
-  downTimeStateColor: {r: 0.6528447, g: 0.19103774, b: 0.764151, a: 0.3137255}
+  enemySpawningStateColor: {r: 1, g: 0.2901961, b: 0, a: 0.3137255}
+  downTimeStateColor: {r: 0.46666667, g: 1, b: 0.17254902, a: 0.3137255}
   canSpawn: 1
 --- !u!114 &3906303930152645261
 MonoBehaviour:
@@ -7738,7 +7739,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1640.1, y: -165.20001}
+  m_AnchoredPosition: {x: 1703.1001, y: -79.80005}
   m_SizeDelta: {x: 328, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8551230127911738482
@@ -7832,7 +7833,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -31.367424, z: 0, w: 0}
+  m_margin: {x: 0, y: 51.585663, z: 0, w: -55.301975}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

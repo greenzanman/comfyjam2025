@@ -487,22 +487,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 2124266563354638403, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124266563354638403, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124266563354638403, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2124266563354638403, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2338631940048993676, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: damageFlash
       value: 
@@ -583,22 +567,6 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 483576812}
-    - target: {fileID: 7158888947036020327, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7158888947036020327, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7158888947036020327, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7158888947036020327, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7461083859134127162, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: m_Name
       value: MainManager
@@ -607,22 +575,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 8255100275055822238, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8255100275055822238, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8255100275055822238, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8255100275055822238, guid: 89f970acaf2417944812fed182a72e75, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8710182357139095262, guid: 89f970acaf2417944812fed182a72e75, type: 3}
       propertyPath: enemyWavePS
       value: 
