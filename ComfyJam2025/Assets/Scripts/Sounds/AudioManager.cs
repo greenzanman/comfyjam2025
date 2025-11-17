@@ -76,6 +76,8 @@ public class AudioManager : MonoBehaviour
     [Header("UI SFX")]
     [SerializeField] private AudioSource _uiBlinkSource;
     [SerializeField] private AudioSource _uiHoverSource;
+    [SerializeField] private AudioSource _hitpotionSFX;
+    
 
     
     public static AudioManager instance;
@@ -324,5 +326,16 @@ public class AudioManager : MonoBehaviour
     public void PlayUIHover()
     {
         _uiHoverSource.Play();
+    }
+
+    public void PlayMeow()
+    {
+        _meowSource.pitch = Random.Range(0.9f, 1.1f);
+        _meowSource.Play();
+    }
+
+    public void PlayCutscenePotionHit()
+    {
+        _hitpotionSFX.Play();
     }
 }

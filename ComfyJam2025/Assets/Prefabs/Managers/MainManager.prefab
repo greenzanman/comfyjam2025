@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5667a4b8494de5b4e84990b0a8dac634, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 668c075216cb6ae4d910b3eb4644323b, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -7515,6 +7515,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7081e534a595b724a96d75de2ab1051c, type: 3}
   - {fileID: 21300000, guid: 5667a4b8494de5b4e84990b0a8dac634, type: 3}
   cutsceneImage: {fileID: 6949126822493009912}
+  normalFrameSpeed: 0.1
+  slowFrameSpeed: 1
   nextButtonText: {fileID: 0}
   nextButton: {fileID: 5021288329081604983}
   prevButton: {fileID: 36504481619768027}
