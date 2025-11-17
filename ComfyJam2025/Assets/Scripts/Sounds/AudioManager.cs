@@ -61,6 +61,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] _enemyHitClips;  
     [SerializeField] private AudioSource _enemyBurnLoopSource;
     [SerializeField] private AudioSource _enemyFrozenLoopSource;
+    [SerializeField] private AudioSource _enemyDamageSource;
 
     [Header("Enemy Sound Limiting")]
     [SerializeField] private int _maxSimultaneousDeathSounds = 5;
@@ -80,10 +81,9 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource _slot1Source;
     [SerializeField] private AudioSource _slot2Source;
     [SerializeField] private AudioSource _slot3Source;
+    [SerializeField] private AudioSource _pickUpSource;
 
-    
 
-    
     public static AudioManager instance;
 
     // the single coroutine for the muffled filter transitions
@@ -326,10 +326,16 @@ public class AudioManager : MonoBehaviour
     {
         _uiBlinkSource.Play();
     }
+    public void PlayEnemyDamage() {
+        _enemyDamageSource.Play();
+    }
 
     public void PlayUIHover()
     {
         _uiHoverSource.Play();
+    }
+    public void PlayPickUp() {
+        _pickUpSource.Play();
     }
 
     public void PlayMeow()
